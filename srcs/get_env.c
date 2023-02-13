@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:17:11 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/12 18:31:38 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/13 12:42:13 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	skip_token(char *str, int *i)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (!is_white_space(str[*i])
@@ -28,10 +28,10 @@ static int	skip_token(char *str, int *i)
 	return (len);
 }
 
-char *get_env(char *str, int *i)
+char	*get_env(char *str, int *i)
 {
-	int 	begin;
-	int 	len;
+	int		begin;
+	int		len;
 	char	*var_name;
 	char	*var;
 
