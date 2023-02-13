@@ -1,12 +1,12 @@
-SRCS_FILES = main.c \
+LEXER_FILES = main.c \
 			lexer.c \
 			count_token.c \
 			is_white_space.c \
 			get_env.c
 
-SRCS = $(addprefix srcs/, $(SRCS_FILES))
+LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 
-OBJS	= ${SRCS:.c=.o}
+LEXER_OBJS	= ${LEXER:.c=.o}
 
 NAME	= minishell
 
@@ -21,15 +21,15 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 .c.o:
 		${CC} ${CFLAGS} -I includes/ -c $< -o ${<:.c=.o}
 
-${NAME}:	${OBJS}
+${NAME}:	${LEXER_OBJS}
 		make -C libft
-		${CC} -o ${NAME} ${OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
 all:		${NAME} bonus
 
 clean:
 		make clean -C libft
-		${RM} ${OBJS}
+		${RM} ${LEXER_OBJS}
 
 fclean:		clean
 		make fclean -C libft 
