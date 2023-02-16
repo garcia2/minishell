@@ -6,13 +6,13 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:17:11 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/13 12:42:13 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/16 17:51:42 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	skip_token(char *str, int *i)
+static int	skip_token_with_dolar(char *str, int *i)
 {
 	int	len;
 
@@ -20,6 +20,7 @@ static int	skip_token(char *str, int *i)
 	while (!is_white_space(str[*i])
 		&& str[*i] != '\''
 		&& str[*i] != '"'
+		&& str[*i] != '$'
 		&& str[*i] != '\0')
 	{
 		(*i)++;
@@ -35,10 +36,11 @@ char	*get_env(char *str, int *i)
 	char	*var_name;
 	char	*var;
 
+	(*i)++;
 	begin = *i;
-	len = skip_token(str, i);
+	len = skip_token_with_dolar(str, i);
 	if (len == 0)
-		return (NULL);
+		return (ft_strdup(""));
 	var_name = ft_calloc(sizeof(char), len + 1);
 	if (var_name == NULL)
 		return (NULL);
@@ -46,5 +48,8 @@ char	*get_env(char *str, int *i)
 	var = getenv(var_name);
 	printf("var_name = %s\n", var_name);
 	printf("var = %s\n", var);
-	return (free(var_name), var);
+	if (var == NULL)
+		return (free(var_name), ft_strdup(""));
+	else
+		return (free(var_name), ft_strdup(var));
 }

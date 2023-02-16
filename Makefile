@@ -2,7 +2,9 @@ LEXER_FILES = main.c \
 			lexer.c \
 			count_token.c \
 			is_white_space.c \
-			get_env.c
+			get_env.c \
+			replace_env_var.c \
+			skip.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 
