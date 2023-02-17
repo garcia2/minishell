@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:01:20 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/16 18:12:52 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/17 14:35:44 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	copy_env(char	*new_str, char	*str, int *new_i, int *i)
 		return (0);
 	ft_strlcpy(new_str + *new_i, env, ft_strlen(env) + 1);
 	(*new_i) += ft_strlen(env);
+	free(env);
 	return (1);
 }
 
@@ -97,12 +98,10 @@ char	*replace_env_var(char *str)
 	int		new_len;
 
 	new_len = get_new_len(str);
-	printf("len = %d\n", new_len);
-	new_str = ft_calloc(sizeof(char), new_len + 1);
+	new_str = ft_calloc(new_len + 1, sizeof(char));
 	if (new_str == NULL)
 		return (NULL);
 	if (copy_and_replace(new_str, str) == 0)
 		return (free(new_str), NULL);
-	printf("new_str =%s\n", new_str);
 	return (new_str);
 }
