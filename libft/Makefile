@@ -63,15 +63,12 @@ CFLAGS	= -Wall -Wextra -Werror
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJS}
-		mkdir -p objects/
-		mv ${OBJS} objects/
-		ar rc ${NAME} objects/*.o
+		ar rc ${NAME} ${OBJS}
 
 all:		${NAME}
 
 clean:		
-		${RM} objects/*.o
-		rmdir objects/
+		${RM} ${OBJS}
 
 fclean:		clean
 		${RM} ${NAME}

@@ -26,16 +26,13 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 
 ${NAME}:	${LEXER_OBJS}
 		make -C libft
-		mkdir -p objects/
-		mv ${LEXER_OBJS} objects/
-		${CC} -o ${NAME} objects/*.o -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
 all:		${NAME} bonus
 
 clean:
 		make clean -C libft
-		${RM} objects/*.o
-		rmdir objects/
+		${RM} ${LEXER_OBJS}
 
 fclean:		clean
 		make fclean -C libft 
