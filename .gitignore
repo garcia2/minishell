@@ -2,3 +2,4 @@ minishell
 *.o
 libft.a
 main.c
+objects/
