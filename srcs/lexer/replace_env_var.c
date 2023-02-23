@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:01:20 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/17 14:35:44 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/23 15:57:19 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,21 @@ static int	copy_env(char	*new_str, char	*str, int *new_i, int *i)
 	return (1);
 }
 
+static int is_heredoc_limiter(char *str, int i)
+{
+	while (i > 0 && !is_white_space(str[i]))
+		i--;
+	while (i > 0 && is_white_space(str[i]))
+		i--;
+	printf("i = %d, i - 1 = %d\n", i, i - 1);
+	if (i < 1)
+		return (0);
+	if (str[i] == '<' && str[i - 1] == '<')
+		return (1);
+	else
+		return (0);
+}
+
 static int	copy_and_replace(char	*new_str, char	*str)
 {
 	int		i;
@@ -77,7 +92,7 @@ static int	copy_and_replace(char	*new_str, char	*str)
 	{
 		if (str[i] == '\'')
 			is_in_quotes = !is_in_quotes;
-		if (str[i] == '$' && !is_in_quotes)
+		if (str[i] == '$' && !is_in_quotes && !is_heredoc_limiter(str, i))
 		{
 			if (copy_env(new_str, str, &new_i, &i) == 0)
 				return (0);

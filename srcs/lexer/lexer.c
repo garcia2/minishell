@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/17 14:26:00 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/23 18:41:17 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,48 @@ void	print_lexer(char **lex)
 	}
 }
 
+int	is_redirection(char *token)
+{
+	if (ft_strncmp(token, ">", ft_strlen(token)) == 0
+	|| ft_strncmp(token, ">>", ft_strlen(token)) == 0
+	|| ft_strncmp(token, "<", ft_strlen(token)) == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	convert_dolars(char **lex)
+{
+	int		i;
+	char	*temp_str;
+
+	i = 0;
+	while (lex[i] != NULL)
+	{
+		if (lex[i][0] == '\"')
+		{
+			temp_str = replace_env_var(lex[i]);
+			if (temp_str == NULL)
+				return (0);
+			free(lex[i]);
+			lex = temp_str;
+		}
+		else if (lex[i][0] != '\'')
+		{
+			temp_str = replace_env_var(lex[i]);
+			if (temp_str == NULL)
+				return (0);
+			if (ft_strlen(temp_str) == 0
+			&& (i != 0 && is_redirection(lex[i - 1])))
+				return (0);
+			free(lex[i]);
+			lex = temp_str;
+		}
+		i++;
+	}
+	return (1);
+}
+
 char	**lexer(char *str)
 {
 	char	**lex;
@@ -95,5 +137,6 @@ char	**lexer(char *str)
 	if (split_lexer(lex, str) == 0)
 		return (free_lexer(lex), NULL);
 	lex[nb_token] = NULL;
+	convert_dolars(lex);
 	return (lex);
 }
