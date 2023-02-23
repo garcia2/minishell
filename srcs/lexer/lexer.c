@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/23 18:41:17 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:01:54 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,19 @@ int	is_redirection(char *token)
 		return (0);
 }
 
+int is_limiter(char **lex, int i)
+{
+	if (i == 0)
+		return (0);
+	printf("diff de %s = %d\n" , lex[i - 1], ft_strncmp(lex[i - 1], "<<", ft_strlen(lex[i - 1]) == 0));
+	if (ft_strncmp(lex[i - 1], "<<", ft_strlen(lex[i - 1]) == 0))
+	{
+		return (1);
+	}
+	else
+		return (0);
+}
+
 int	convert_dolars(char **lex)
 {
 	int		i;
@@ -99,15 +112,16 @@ int	convert_dolars(char **lex)
 	i = 0;
 	while (lex[i] != NULL)
 	{
+		printf("i = %d\n", i);
 		if (lex[i][0] == '\"')
 		{
 			temp_str = replace_env_var(lex[i]);
 			if (temp_str == NULL)
 				return (0);
 			free(lex[i]);
-			lex = temp_str;
+			lex[i] = temp_str;
 		}
-		else if (lex[i][0] != '\'')
+		else if (lex[i][0] != '\'' && !is_limiter(lex, i))
 		{
 			temp_str = replace_env_var(lex[i]);
 			if (temp_str == NULL)
@@ -116,7 +130,7 @@ int	convert_dolars(char **lex)
 			&& (i != 0 && is_redirection(lex[i - 1])))
 				return (0);
 			free(lex[i]);
-			lex = temp_str;
+			lex[i] = temp_str;
 		}
 		i++;
 	}
