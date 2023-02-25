@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/24 13:13:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/02/25 11:48:20 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_lexer(char **lex)
 	i = 0;
 	while (lex[i] != NULL)
 	{
-		printf("lex[%d]=%s\n", i, lex[i]);
+		printf("lex[%d]=[%s]\n", i, lex[i]);
 		i++;
 	}
 }
