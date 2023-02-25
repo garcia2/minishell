@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/23 19:01:54 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/02/24 13:13:24 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,65 +76,9 @@ void	print_lexer(char **lex)
 	i = 0;
 	while (lex[i] != NULL)
 	{
-		printf("lex[%d]='%s'\n", i, lex[i]);
+		printf("lex[%d]=%s\n", i, lex[i]);
 		i++;
 	}
-}
-
-int	is_redirection(char *token)
-{
-	if (ft_strncmp(token, ">", ft_strlen(token)) == 0
-	|| ft_strncmp(token, ">>", ft_strlen(token)) == 0
-	|| ft_strncmp(token, "<", ft_strlen(token)) == 0)
-		return (1);
-	else
-		return (0);
-}
-
-int is_limiter(char **lex, int i)
-{
-	if (i == 0)
-		return (0);
-	printf("diff de %s = %d\n" , lex[i - 1], ft_strncmp(lex[i - 1], "<<", ft_strlen(lex[i - 1]) == 0));
-	if (ft_strncmp(lex[i - 1], "<<", ft_strlen(lex[i - 1]) == 0))
-	{
-		return (1);
-	}
-	else
-		return (0);
-}
-
-int	convert_dolars(char **lex)
-{
-	int		i;
-	char	*temp_str;
-
-	i = 0;
-	while (lex[i] != NULL)
-	{
-		printf("i = %d\n", i);
-		if (lex[i][0] == '\"')
-		{
-			temp_str = replace_env_var(lex[i]);
-			if (temp_str == NULL)
-				return (0);
-			free(lex[i]);
-			lex[i] = temp_str;
-		}
-		else if (lex[i][0] != '\'' && !is_limiter(lex, i))
-		{
-			temp_str = replace_env_var(lex[i]);
-			if (temp_str == NULL)
-				return (0);
-			if (ft_strlen(temp_str) == 0
-			&& (i != 0 && is_redirection(lex[i - 1])))
-				return (0);
-			free(lex[i]);
-			lex[i] = temp_str;
-		}
-		i++;
-	}
-	return (1);
 }
 
 char	**lexer(char *str)
@@ -144,13 +88,18 @@ char	**lexer(char *str)
 
 	nb_token = count_token(str);
 	if (nb_token <= 0)
-		return (NULL);
+		return (printf("ERROR : PROBLEM WITH COUNT_TOKEN\n")
+			, NULL);
 	lex = ft_calloc(nb_token + 1, sizeof(char *));
 	if (lex == NULL)
-		return (NULL);
+		return (printf("ERROR : PROBLEM WITH MALLOC OF LEX\n")
+			, NULL);
 	if (split_lexer(lex, str) == 0)
-		return (free_lexer(lex), NULL);
+		return (printf("ERROR : PROBLEM WITH SPLIT_LEXER\n"), free_lexer(lex)
+			, NULL);
 	lex[nb_token] = NULL;
-	convert_dolars(lex);
+	if (convert_dolars(lex) == 0)
+		return (printf("ERROR : PROBLEM WITH CONVERT_DOLLARS\n"), free_lexer(lex)
+			, NULL);
 	return (lex);
 }
