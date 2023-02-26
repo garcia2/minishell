@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/24 11:53:15 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/02/26 15:03:05 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <signal.h>
+
+typedef struct s_env_list
+{
+	char				*key;
+	char				*value;
+	struct s_env_list	*next;
+}						t_env_list;
 
 int		is_white_space(char c);
 int		count_token(char *str);
@@ -36,5 +43,19 @@ char	*split_without_quotes(char *str, int *i);
 char	**lexer(char *str);
 void	free_lexer(char **lex);
 void	print_lexer(char **lex);
+
+//////////////ENV_LIST/////////////////////
+void		env_lst_free_one(t_env_list *lst);
+void		env_lst_clear(t_env_list **lst);
+t_env_list	*env_lst_pop(t_env_list **lst, char *key);
+int			env_lst_exists(t_env_list *lst, char *key);
+int			env_lst_size(t_env_list *lst);
+t_env_list	*env_lstlast(t_env_list *lst);
+void		env_lst_add_back(t_env_list **lst, t_env_list *new);
+t_env_list	*env_lstnew(char *key, char *value);
+void		env_lst_print(t_env_list *lst);
+int			ft_strcmp(char *s1, char *s2);
+t_env_list	*parse_env(char **envp);
+char		*get_env_by_key(t_env_list *env_lst, char *key);
 
 #endif
