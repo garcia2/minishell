@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_var.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:01:20 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/17 14:35:44 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/24 13:43:13 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ static int	get_new_len(char *str)
 {
 	int		i;
 	int		len;
-	int		is_in_quotes;
 
-	is_in_quotes = 0;
 	len = 0;
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\'')
-			is_in_quotes = !is_in_quotes;
-		if (str[i] == '$' && !is_in_quotes)
+		if (str[i] == '$' && !is_white_space(str[i + 1]) && str[i + 1] != '\0')
 		{
 			if (add_env_len(str, &i, &len) == 0)
 				return (-1);
@@ -77,7 +73,7 @@ static int	copy_and_replace(char	*new_str, char	*str)
 	{
 		if (str[i] == '\'')
 			is_in_quotes = !is_in_quotes;
-		if (str[i] == '$' && !is_in_quotes)
+		if (str[i] == '$' && !is_white_space(str[i + 1]) && str[i + 1] != '\0')
 		{
 			if (copy_env(new_str, str, &new_i, &i) == 0)
 				return (0);
