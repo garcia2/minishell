@@ -5,7 +5,8 @@ LEXER_FILES = main.c \
 			get_env.c \
 			replace_env_var.c \
 			skip.c \
-			spliters.c
+			spliters.c \
+			convert_dolars.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 

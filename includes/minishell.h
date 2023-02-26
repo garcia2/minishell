@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/17 14:24:43 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/24 11:53:15 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		is_white_space(char c);
 int		count_token(char *str);
 char	*get_env(char *str, int *i);
 char	*replace_env_var(char *str);
+int		convert_dolars(char **lex);
 void	go_next_quote(char	*str, int *i);
 void	go_next_double_quote(char	*str, int *i);
 void	skip_white_space(char *str, int *i);

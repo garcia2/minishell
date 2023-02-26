@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:17:11 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/17 14:32:43 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/24 13:44:17 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static int	skip_token_with_dolar(char *str, int *i)
 {
 	int	len;
 
+	if (str[(*i)] == '$')
+	{
+		(*i)++;
+		return (1);
+	}
 	len = 0;
 	while (!is_white_space(str[*i])
 		&& str[*i] != '\''
