@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/17 14:24:43 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/24 17:40:27 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <signal.h>
+
+typedef struct s_env_list
+{
+	char				*key;
+	char				*value;
+	struct s_env_list	*next;
+}						t_env_list;
 
 int		is_white_space(char c);
 int		count_token(char *str);
