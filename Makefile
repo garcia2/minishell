@@ -7,7 +7,10 @@ LEXER_FILES = lexer.c \
 			spliters.c
 
 ENV_FILES	= env_parser.c \
-			env_lst.c
+			env_lst.c \
+			env_lst_del.c \
+			env_lst_print.c \
+			ft_strcmp.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 
