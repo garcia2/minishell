@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:31:13 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/26 14:59:32 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:49:33 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	find_char(char *str, char c)
+int	find_char(char *str, char c)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ static t_env_list	*split_env(char *envp_line)
 
 	equal_id = find_char(envp_line, '=');
 	envp_line[equal_id] = '\0';
-	new_env = env_lstnew(envp_line, envp_line + equal_id +1);
+	new_env = env_lstnew(envp_line, envp_line + equal_id + 1);
 	return (new_env);
 }
 
@@ -58,12 +58,9 @@ t_env_list	*parse_env(char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		printf("i = %i\n", i);
 		cur = split_env(envp[i]);
 		if (cur == NULL)
 			return (env_lst_clear(&env_lst), NULL);
-		printf("cur ok\n");
-		printf("key=%s, value=%s\n", cur->key, cur->value);
 		env_lst_add_back(&env_lst, cur);
 		i++;
 	}

@@ -13,15 +13,21 @@ ENV_FILES	= env_parser.c \
 			env_lst_print.c \
 			ft_strcmp.c
 
+BUILTIN_FILES	= export.c
+
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 
 ENV = $(addprefix srcs/env/, $(ENV_FILES))
+
+BUILTIN = $(addprefix srcs/builtin/, $(BUILTIN_FILES))
 
 MAIN		= srcs/main.c
 
 LEXER_OBJS	= ${LEXER:.c=.o}
 
 ENV_OBJS	= ${ENV:.c=.o}
+
+BUILTIN_OBJS	= ${BUILTIN:.c=.o}
 
 MAIN_OBJS	= ${MAIN:.c=.o}
 
@@ -38,15 +44,15 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 .c.o:
 		${CC} ${CFLAGS} -I includes/ -c $< -o ${<:.c=.o}
 
-${NAME}:	${LEXER_OBJS} ${ENV_OBJS} ${MAIN_OBJS}
+${NAME}:	${LEXER_OBJS} ${ENV_OBJS} ${BUILTIN_OBJS} ${MAIN_OBJS}
 		make -C libft
-		${CC} -o ${NAME} ${LEXER_OBJS} ${ENV_OBJS} ${MAIN_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} ${ENV_OBJS} ${BUILTIN_OBJS} ${MAIN_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
 all:		${NAME} bonus
 
 clean:
 		make clean -C libft
-		${RM} ${LEXER_OBJS} ${ENV_OBJS} ${MAIN_OBJS}
+		${RM} ${LEXER_OBJS} ${ENV_OBJS} ${BUILTIN_OBJS} ${MAIN_OBJS}
 
 fclean:		clean
 		make fclean -C libft 
