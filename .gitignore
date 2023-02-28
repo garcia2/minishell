@@ -3,3 +3,4 @@ minishell
 libft.a
 main.c
 *objects/
+.vscode
