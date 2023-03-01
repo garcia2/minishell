@@ -6,17 +6,17 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:23 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/28 17:00:28 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:21:42 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	export_check_args(char	*args)
+static int	export_check_args(char	*args)
 {
 	int	i;
 
-	if ((ft_strlen(args) == 0) || ft_isdigit(args[0]))
+	if ((ft_strlen(args) == 0) || ft_isdigit(args[0]) || args[0] == '=')
 		return (0);
 	i = 0;
 	while (args[i] != '\0' && args[i] != '=')
@@ -40,7 +40,7 @@ static void	export_print(t_env_list *env)
 	}
 }
 
-int	export_parse_args(char *args, char **key, char **value)
+static int	export_parse_args(char *args, char **key, char **value)
 {
 	int			equal_id;
 
@@ -49,6 +49,9 @@ int	export_parse_args(char *args, char **key, char **value)
 	equal_id = find_char(args, '=');
 	if (equal_id < 0)
 	{
+		*key = ft_strdup(args);
+		if (*key == NULL)
+			return (0);
 		return (1);
 	}
 	else
