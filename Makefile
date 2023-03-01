@@ -10,8 +10,7 @@ LEXER_FILES = lexer.c \
 ENV_FILES	= env_parser.c \
 			env_lst.c \
 			env_lst_del.c \
-			env_lst_print.c \
-			ft_strcmp.c
+			env_lst_print.c
 
 PARSER_FILES = parser.c\
 			init_utils.c\
