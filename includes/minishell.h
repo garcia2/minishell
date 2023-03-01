@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/01 15:58:40 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/02/26 15:03:05 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,12 @@ typedef struct s_cmd_table
 	struct s_cmd_table	*next;
 }	t_cmd_table;
 
-int			is_white_space(char c);
-int			count_token(char *str);
-char		*get_env(char *str, int *i);
-char		*replace_env_var(char *str);
-void		go_next_quote(char	*str, int *i);
-void		go_next_double_quote(char	*str, int *i);
-void		skip_white_space(char *str, int *i);
-void		skip_token(char *str, int *i);
-char		*split_with_simple_quotes(char *str, int *i);
-char		*split_with_double_quotes(char *str, int *i);
-char		*split_without_quotes(char *str, int *i);
-char		**lexer(char *str);
-void		free_lexer(char **lex);
-void		print_lexer(char **lex);
+typedef struct s_env_list
+{
+	char				*key;
+	char				*value;
+	struct s_env_list	*next;
+}						t_env_list;
 
 /*******************************************************\
 |					PARSER FUNCTIONS					|
@@ -62,5 +54,42 @@ int			is_delimiter(char *lex);
 void		init_cmd(char **lex, t_cmd_table *cmd_table);
 void		add_cmd(char **lex, char **cmd_table, int *i);
 void		clear_lst(t_cmd_table **lst);
+
+/*******************************************************\
+|					LEXER FUNCTIONS					|
+\*******************************************************/
+
+int		is_white_space(char c);
+int		count_token(char *str);
+char	*get_env(char *str, int *i);
+char	*replace_env_var(char *str);
+int		convert_dolars(char **lex);
+void	go_next_quote(char	*str, int *i);
+void	go_next_double_quote(char	*str, int *i);
+void	skip_white_space(char *str, int *i);
+void	skip_token(char *str, int *i);
+char	*split_with_simple_quotes(char *str, int *i);
+char	*split_with_double_quotes(char *str, int *i);
+char	*split_without_quotes(char *str, int *i);
+char	**lexer(char *str);
+void	free_lexer(char **lex);
+void	print_lexer(char **lex);
+
+/*******************************************************\
+|					ENV_LIST FUNCTIONS					|
+\*******************************************************/
+
+void		env_lst_free_one(t_env_list *lst);
+void		env_lst_clear(t_env_list **lst);
+t_env_list	*env_lst_pop(t_env_list **lst, char *key);
+int			env_lst_exists(t_env_list *lst, char *key);
+int			env_lst_size(t_env_list *lst);
+t_env_list	*env_lstlast(t_env_list *lst);
+void		env_lst_add_back(t_env_list **lst, t_env_list *new);
+t_env_list	*env_lstnew(char *key, char *value);
+void		env_lst_print(t_env_list *lst);
+int			ft_strcmp(char *s1, char *s2);
+t_env_list	*parse_env(char **envp);
+char		*get_env_by_key(t_env_list *env_lst, char *key);
 
 #endif

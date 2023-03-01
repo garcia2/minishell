@@ -4,7 +4,14 @@ LEXER_FILES = lexer.c \
 			get_env.c \
 			replace_env_var.c \
 			skip.c \
-			spliters.c
+			spliters.c \
+			convert_dolars.c
+
+ENV_FILES	= env_parser.c \
+			env_lst.c \
+			env_lst_del.c \
+			env_lst_print.c \
+			ft_strcmp.c
 
 PARSER_FILES = parser.c\
 			init_utils.c\
@@ -17,12 +24,15 @@ LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))
 
-SRCS = $(addprefix srcs/, $(SRCS_FILES))
+ENV = $(addprefix srcs/env/, $(ENV_FILES))
 
+SRCS = $(addprefix srcs/, $(SRCS_FILES))
 
 LEXER_OBJS	= ${LEXER:.c=.o}
 
 PARSER_OBJS	= ${PARSER:.c=.o}
+
+ENV_OBJS	= ${ENV:.c=.o}
 
 SRCS_OBJS	= ${SRCS:.c=.o}
 
@@ -39,15 +49,15 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 .c.o:
 		${CC} ${CFLAGS} -I includes/ -c $< -o ${<:.c=.o}
 
-${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${SRCS_OBJS}
+${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS}
 		make -C libft
-		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
 all:		${NAME} bonus
 
 clean:
 		make clean -C libft
-		${RM} ${LEXER_OBJS}
+		${RM} ${LEXER_OBJS} ${ENV_OBJS} ${PARSER_OBJS} ${SRCS_OBJS}
 
 fclean:		clean
 		make fclean -C libft
