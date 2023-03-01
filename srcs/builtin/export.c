@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:23 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/01 13:21:42 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/01 13:46:13 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,20 @@ static int	export_add_var(t_env_list *env, char *args)
 	free(value);
 	if (new_env_var == NULL)
 		return (0);
-	env_lst_add_back(&env, new_env_var);
+	if (new_env_var->key == NULL)
+		return (env_lst_clear(&new_env_var), 0);
+	if (env_lst_exists(env, new_env_var->key))
+	{
+		if (new_env_var->value != NULL)
+		{
+			env_lst_free_one(env_lst_pop(&env, new_env_var->key));
+			env_lst_add_back(&env, new_env_var);
+		}
+		else
+			env_lst_free_one(new_env_var);
+	}
+	else
+		env_lst_add_back(&env, new_env_var);
 	return (1);
 }
 
