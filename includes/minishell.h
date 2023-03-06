@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/01 16:20:48 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/06 12:32:17 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,10 @@ t_env_list	*env_lstnew(char *key, char *value);
 void		env_lst_print(t_env_list *lst);
 t_env_list	*parse_env(char **envp);
 char		*get_env_by_key(t_env_list *env_lst, char *key);
+
+/*******************************************************\
+|					EXECUTION FUNCTIONS					|
+\*******************************************************/
+int			execute_instructions(t_cmd_table *command_table, t_env_list *env);
 
 #endif
