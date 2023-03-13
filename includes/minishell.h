@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/01 16:20:48 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/13 17:41:12 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char		*split_without_quotes(char *str, int *i);
 char		**lexer(char *str);
 void		free_lexer(char **lex);
 void		print_lexer(char **lex);
+int			get_split_len(char *str, int i);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|

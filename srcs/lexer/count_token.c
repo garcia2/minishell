@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:39 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/17 14:25:24 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/03/13 17:00:40 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	process(char *str, int *i, int	*nb_token)
 		go_next_quote(str, i);
 		if (str[*i] == '\0')
 			return (-1);
-		(*nb_token)++;
 		(*i)++;
+		(*nb_token) += (str[*i] == '\0' || is_white_space(str[*i]));
 	}
 	else if (str[*i] == '"')
 	{
@@ -30,13 +30,13 @@ int	process(char *str, int *i, int	*nb_token)
 		go_next_double_quote(str, i);
 		if (str[*i] == '\0')
 			return (-2);
-		(*nb_token)++;
 		(*i)++;
+		(*nb_token) += (str[*i] == '\0' || is_white_space(str[*i]));
 	}
 	else if (str[*i] != '\0')
 	{
-		(*nb_token)++;
 		skip_token(str, i);
+		(*nb_token) += (str[*i] == '\0' || is_white_space(str[*i]));
 	}
 	return (0);
 }
