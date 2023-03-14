@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/13 18:38:21 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:33:24 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int	get_split_len(char *str, int i)
 
 	if (str[i] == '\0')
 		return (0);
+	if (str[i] == '|')
+		return (1);
 	len = 0;
 	if (str[i] == '\'' || str[i] == '"')
 	{
@@ -75,10 +77,11 @@ int	get_split_len(char *str, int i)
 		while (str[i + len] != '\0'
 			&& !is_white_space(str[i + len])
 			&& str[i + len] != '\''
-			&& str[i + len] != '"')
+			&& str[i + len] != '"'
+			&& str[i + len] != '|')
 			len++;
 	}
-	if (str[i + len] != '\0' && !is_white_space(str[i + len]))
+	if (str[i + len] != '\0' && !is_white_space(str[i + len]) && str[i + len] != '|')
 		len += get_split_len(str, len + i);
 	return (len);
 }
