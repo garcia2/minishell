@@ -6,65 +6,80 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:36:37 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/25 11:25:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/15 13:59:00 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*split_with_simple_quotes(char *str, int *i)
+static int	get_split_len_process(char *str, int i)
 {
-	char	*split;
-	int		len;
+	int	len;
 
-	(*i)++;
 	len = 0;
-	while (str[(*i) + len] != '\'' && str[(*i) + len] != '\0')
+	if (str[i] == '\'' || str[i] == '"')
+	{
 		len++;
-	split = ft_calloc(len + 3, sizeof(char));
-	if (split == NULL)
-		return (NULL);
-	ft_strlcpy(split + 1, str + *i, len + 1);
-	split[0] = '\'';
-	split[len + 1] = '\'';
-	(*i) += (len + 1);
-	return (split);
+		while (str[i + len] != str[i])
+			len++;
+		len++;
+	}
+	else
+	{
+		while (str[i + len] != '\0'
+			&& !is_white_space(str[i + len])
+			&& str[i + len] != '\''
+			&& str[i + len] != '"'
+			&& str[i + len] != '|')
+			len++;
+	}
+	return (len);
 }
 
-char	*split_with_double_quotes(char *str, int *i)
+static int	get_split_len(char *str, int i)
 {
-	char	*split;
-	int		len;
+	int	len;
 
-	(*i)++;
-	len = 0;
-	while (str[(*i) + len] != '"' && str[(*i) + len] != '\0')
-		len++;
-	split = ft_calloc(len + 3, sizeof(char));
-	if (split == NULL)
-		return (NULL);
-	ft_strlcpy(split + 1, str + *i, len + 1);
-	split[0] = '"';
-	split[len + 1] = '"';
-	(*i) += (len + 1);
-	return (split);
+	if (str[i] == '\0')
+		return (0);
+	if (str[i] == '|')
+		return (1);
+	len = get_split_len_process(str, i);
+	if (str[i + len] != '\0'
+		&& !is_white_space(str[i + len]) && str[i + len] != '|')
+		len += get_split_len(str, len + i);
+	return (len);
 }
 
-char	*split_without_quotes(char *str, int *i)
+static int	split_lexer_process(char **lex, char *str, int *lex_i, int *str_i)
 {
-	char	*split;
 	int		len;
 
-	len = 0;
-	while (!is_white_space(str[(*i) + len])
-		&& str[(*i) + len] != '\''
-		&& str[(*i) + len] != '"'
-		&& str[(*i) + len] != '\0')
-		len++;
-	split = ft_calloc(len + 1, sizeof(char));
-	if (split == NULL)
-		return (NULL);
-	ft_strlcpy(split, str + *i, len + 1);
-	(*i) += len;
-	return (split);
+	skip_white_space(str, str_i);
+	if (str[*str_i] == '\0')
+		return (1);
+	len = get_split_len(str, *str_i);
+	lex[*lex_i] = ft_calloc(len + 1, sizeof(char));
+	if (lex[*lex_i] == NULL)
+		return (0);
+	ft_strlcpy(lex[*lex_i], str + *str_i, len + 1);
+	(*lex_i)++;
+	(*str_i) += len;
+	return (1);
+}
+
+int	split_lexer(char **lex, char *str)
+{
+	int	str_i;
+	int	lex_i;
+
+	str_i = 0;
+	lex_i = 0;
+	while (str[str_i] != '\0')
+	{
+		if (split_lexer_process(lex, str, &lex_i, &str_i) == 0)
+			return (0);
+	}
+	lex[lex_i] = NULL;
+	return (1);
 }

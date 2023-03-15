@@ -5,7 +5,8 @@ LEXER_FILES = lexer.c \
 			replace_env_var.c \
 			skip.c \
 			spliters.c \
-			convert_dolars.c
+			convert_dolars.c \
+			check_lexer.c
 
 ENV_FILES	= env_parser.c \
 			env_lst.c \

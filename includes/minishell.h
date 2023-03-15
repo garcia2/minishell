@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/13 17:41:12 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/03/15 13:46:03 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,14 @@ int			count_token(char *str);
 char		*get_env(char *str, int *i);
 char		*replace_env_var(char *str);
 int			convert_dolars(char **lex);
-void		go_next_quote(char	*str, int *i);
-void		go_next_double_quote(char	*str, int *i);
+void		go_next_quote(char	*str, int *i, char quote);
 void		skip_white_space(char *str, int *i);
 void		skip_token(char *str, int *i);
-char		*split_with_simple_quotes(char *str, int *i);
-char		*split_with_double_quotes(char *str, int *i);
-char		*split_without_quotes(char *str, int *i);
+int			split_lexer(char **lex, char *str);
 char		**lexer(char *str);
 void		free_lexer(char **lex);
 void		print_lexer(char **lex);
-int			get_split_len(char *str, int i);
+int			check_lexer(char **lex);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|
