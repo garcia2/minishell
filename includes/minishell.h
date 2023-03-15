@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/15 13:46:03 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:04:01 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		clear_lst(t_cmd_table **lst);
 \*******************************************************/
 
 int			is_white_space(char c);
+int			is_spec_char(char c);
 int			count_token(char *str);
 char		*get_env(char *str, int *i);
 char		*replace_env_var(char *str);

@@ -1,6 +1,6 @@
 LEXER_FILES = lexer.c \
 			count_token.c \
-			is_white_space.c \
+			check_char.c \
 			get_env.c \
 			replace_env_var.c \
 			skip.c \
