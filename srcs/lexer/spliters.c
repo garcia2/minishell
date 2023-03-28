@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:36:37 by nicolas           #+#    #+#             */
-/*   Updated: 2023/03/15 13:59:00 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:05:56 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ static int	get_split_len_process(char *str, int i)
 			&& !is_white_space(str[i + len])
 			&& str[i + len] != '\''
 			&& str[i + len] != '"'
-			&& str[i + len] != '|')
+			&& str[i + len] != '|'
+			&& str[i + len] != '<'
+			&& str[i + len] != '>')
 			len++;
 	}
 	return (len);
@@ -44,9 +46,15 @@ static int	get_split_len(char *str, int i)
 		return (0);
 	if (str[i] == '|')
 		return (1);
+	if (str[i] == '>')
+		return (1 + (str[i + 1] == '>'));
+	if (str[i] == '<')
+		return (1 + (str[i + 1] == '<'));
 	len = get_split_len_process(str, i);
 	if (str[i + len] != '\0'
-		&& !is_white_space(str[i + len]) && str[i + len] != '|')
+		&& !is_white_space(str[i + len])
+		&& str[i + len] != '|'
+		&& str[i + len] != '>' && str[i + len] != '<')
 		len += get_split_len(str, len + i);
 	return (len);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:31:13 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/26 14:59:32 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:39:20 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ t_env_list	*parse_env(char **envp)
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		printf("i = %i\n", i);
+		//printf("i = %i\n", i);
 		cur = split_env(envp[i]);
 		if (cur == NULL)
 			return (env_lst_clear(&env_lst), NULL);
-		printf("cur ok\n");
-		printf("key=%s, value=%s\n", cur->key, cur->value);
+		//printf("cur ok\n");
+		//printf("key=%s, value=%s\n", cur->key, cur->value);
 		env_lst_add_back(&env_lst, cur);
 		i++;
 	}
