@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:17:11 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/24 13:44:17 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/29 15:42:11 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	skip_token_with_dolar(char *str, int *i)
 	return (len);
 }
 
-char	*get_env(char *str, int *i)
+char	*get_env(char *str, int *i, t_env_list *env)
 {
 	int		begin;
 	int		len;
@@ -50,7 +50,7 @@ char	*get_env(char *str, int *i)
 	if (var_name == NULL)
 		return (NULL);
 	ft_strlcpy(var_name, str + begin, len + 1);
-	var = getenv(var_name);
+	var = get_env_by_key(env, var_name);
 	if (var == NULL)
 		return (free(var_name), ft_strdup(""));
 	else
