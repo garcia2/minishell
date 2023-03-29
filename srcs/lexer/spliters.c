@@ -6,11 +6,58 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:36:37 by nicolas           #+#    #+#             */
-/*   Updated: 2023/03/28 14:05:56 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:45:27 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// static int	get_split_len_process(char *str, int i)
+// {
+// 	int	len;
+
+// 	len = 0;
+// 	if (str[i] == '\'' || str[i] == '"')
+// 	{
+// 		len++;
+// 		while (str[i + len] != str[i])
+// 			len++;
+// 		len++;
+// 	}
+// 	else
+// 	{
+// 		while (str[i + len] != '\0'
+// 			&& !is_white_space(str[i + len])
+// 			&& str[i + len] != '\''
+// 			&& str[i + len] != '"'
+// 			&& str[i + len] != '|'
+// 			&& str[i + len] != '<'
+// 			&& str[i + len] != '>')
+// 			len++;
+// 	}
+// 	return (len);
+// }
+
+// static int	get_split_len(char *str, int i)
+// {
+// 	int	len;
+
+// 	if (str[i] == '\0')
+// 		return (0);
+// 	if (str[i] == '|')
+// 		return (1);
+// 	if (str[i] == '>')
+// 		return (1 + (str[i + 1] == '>'));
+// 	if (str[i] == '<')
+// 		return (1 + (str[i + 1] == '<'));
+// 	len = get_split_len_process(str, i);
+// 	if (str[i + len] != '\0'
+// 		&& !is_white_space(str[i + len])
+// 		&& str[i + len] != '|'
+// 		&& str[i + len] != '>' && str[i + len] != '<')
+// 		len += get_split_len(str, len + i);
+// 	return (len);
+// }
 
 static int	get_split_len_process(char *str, int i)
 {
@@ -30,9 +77,7 @@ static int	get_split_len_process(char *str, int i)
 			&& !is_white_space(str[i + len])
 			&& str[i + len] != '\''
 			&& str[i + len] != '"'
-			&& str[i + len] != '|'
-			&& str[i + len] != '<'
-			&& str[i + len] != '>')
+			&& !is_spec_char(str[i + len]))
 			len++;
 	}
 	return (len);
@@ -53,8 +98,7 @@ static int	get_split_len(char *str, int i)
 	len = get_split_len_process(str, i);
 	if (str[i + len] != '\0'
 		&& !is_white_space(str[i + len])
-		&& str[i + len] != '|'
-		&& str[i + len] != '>' && str[i + len] != '<')
+		&& !is_spec_char(str[i + len]))
 		len += get_split_len(str, len + i);
 	return (len);
 }
