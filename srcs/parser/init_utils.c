@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:37:45 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/28 15:24:45 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/31 01:10:22 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void	add_back(t_cmd_table **lst, t_cmd_table *new)
 
 t_cmd_table	*init_node(void)
 {
-	int			i;
 	t_cmd_table	*new;
 
-	i = 0;
 	new = malloc(sizeof(t_cmd_table));
 	if (new == NULL)
 		return (NULL);
