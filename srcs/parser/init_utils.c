@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:37:45 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/01 14:18:37 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/28 15:24:45 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ t_cmd_table	*init_node(void)
 	new = malloc(sizeof(t_cmd_table));
 	if (new == NULL)
 		return (NULL);
-	new->append = 0;
-	new->infile = NULL;
-	new->outfile = NULL;
-	new->here_doc = NULL;
+	new->infile_fd = 0;
+	new->outfile_fd = 1;
 	new->cmd = NULL;
 	new->next = NULL;
 	return (new);

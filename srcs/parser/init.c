@@ -6,29 +6,27 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:21:22 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/01 15:58:27 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:17:38 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_redir(char **lex, t_cmd_table *cmd_table, int *i, int *j)
+void	init_redir(char **lex, t_cmd_table *cmd_table, int *i)
 {
 	while (lex[*i] && ft_strcmp(lex[*i], "|") != 0)
 	{
 		if (ft_strcmp(lex[*i], "<") == 0 && lex[*i + 1])
-			cmd_table->infile = ft_strdup(lex[(*i)++ + 1]);
+			cmd_table->infile_fd = open(lex[*i + 1], O_RDONLY);
 		else if (ft_strcmp(lex[*i], "<<") == 0 && lex[*i + 1])
-			cmd_table->here_doc = ft_strdup(lex[(*i)++ + 1]);
+			here_doc_logic(cmd_table, lex[*i + 1]);
 		else if (ft_strcmp(lex[*i], ">") == 0 && lex[*i + 1])
-			cmd_table->outfile = ft_strdup(lex[(*i)++ + 1]);
+			cmd_table->outfile_fd = open(lex[*i + 1], O_WRONLY
+					| O_CREAT | O_TRUNC, 0644);
 		else if (ft_strcmp(lex[*i], ">>") == 0 && lex[*i + 1])
-		{
-			cmd_table->outfile = ft_strdup(lex[(*i)++ + 1]);
-			cmd_table->append = 1;
-		}
+			cmd_table->outfile_fd = open(lex[*i + 1], O_WRONLY
+					| O_CREAT | O_APPEND, 0644);
 		(*i)++;
-		(*j)++;
 	}
 }
 

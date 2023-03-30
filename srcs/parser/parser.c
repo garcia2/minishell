@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:31:53 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/01 15:57:43 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:13:10 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 t_cmd_table	*init_table(char **lex)
 {
 	int			i;
-	int			j;
 	t_cmd_table	*cmd_table;
 	t_cmd_table	*tmp;
 
@@ -26,8 +25,7 @@ t_cmd_table	*init_table(char **lex)
 		tmp = init_node();
 		if (tmp == NULL)
 			return (NULL);
-		j = 0;
-		init_redir(lex, tmp, &i, &j);
+		init_redir(lex, tmp, &i);
 		if (lex[i])
 			i++;
 		add_back(&cmd_table, tmp);
