@@ -3,40 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   count_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:39 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/02/17 14:25:24 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/03/29 13:47:26 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	process(char *str, int *i, int	*nb_token)
+static void	process_special_char(char *str, int *i, int *nb_token)
+{
+	(*nb_token)++;
+	if (str[*i] == '>' && str[*i + 1] == '>')
+		(*i) += 2;
+	else if (str[*i] == '<' && str[*i + 1] == '<')
+		(*i) += 2;
+	else
+		(*i)++;
+}
+
+static int	process(char *str, int *i, int	*nb_token)
 {
 	skip_white_space(str, i);
-	if (str[*i] == '\'')
+	if ((str[*i] == '\'') || (str[*i] == '"'))
 	{
 		(*i)++;
-		go_next_quote(str, i);
+		go_next_quote(str, i, str[(*i) - 1]);
 		if (str[*i] == '\0')
 			return (-1);
-		(*nb_token)++;
 		(*i)++;
+		if (str[*i] == '\0' || is_white_space(str[*i]) || is_spec_char(str[*i]))
+			(*nb_token)++;
 	}
-	else if (str[*i] == '"')
+	else if (is_spec_char(str[*i]))
 	{
-		(*i)++;
-		go_next_double_quote(str, i);
-		if (str[*i] == '\0')
-			return (-2);
-		(*nb_token)++;
-		(*i)++;
+		process_special_char(str, i, nb_token);
 	}
 	else if (str[*i] != '\0')
 	{
-		(*nb_token)++;
 		skip_token(str, i);
+		if (str[*i] == '\0' || is_white_space(str[*i]) || is_spec_char(str[*i]))
+			(*nb_token)++;
 	}
 	return (0);
 }

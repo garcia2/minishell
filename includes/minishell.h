@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/01 16:20:48 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/29 17:28:27 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,27 @@ void		clear_lst(t_cmd_table **lst);
 \*******************************************************/
 
 int			is_white_space(char c);
+int			is_spec_char(char c);
 int			count_token(char *str);
-char		*get_env(char *str, int *i);
-char		*replace_env_var(char *str);
-int			convert_dolars(char **lex);
-void		go_next_quote(char	*str, int *i);
-void		go_next_double_quote(char	*str, int *i);
+void		go_next_quote(char	*str, int *i, char quote);
 void		skip_white_space(char *str, int *i);
 void		skip_token(char *str, int *i);
-char		*split_with_simple_quotes(char *str, int *i);
-char		*split_with_double_quotes(char *str, int *i);
-char		*split_without_quotes(char *str, int *i);
+int			split_lexer(char **lex, char *str);
 char		**lexer(char *str);
 void		free_lexer(char **lex);
 void		print_lexer(char **lex);
+int			check_lexer(char **lex);
+
+/*******************************************************\
+|					LEXER FUNCTIONS						|
+\*******************************************************/
+
+int			expand_cmd(char **str_ptr, t_env_list *env);
+char		*get_env(char *str, int *i, t_env_list *env);
+char		*replace_env_var(char *str, t_env_list *env);
+int			convert_dolars(char **lex, t_env_list *env);
+int			delete_quotes(char **split);
+char		*join_split(char **split);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|
