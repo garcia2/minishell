@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	find_char(char *str, char c)
+int	find_char(char *str, char c)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ static t_env_list	*split_env(char *envp_line)
 
 	equal_id = find_char(envp_line, '=');
 	envp_line[equal_id] = '\0';
-	new_env = env_lstnew(envp_line, envp_line + equal_id +1);
+	new_env = env_lstnew(envp_line, envp_line + equal_id + 1);
 	return (new_env);
 }
 

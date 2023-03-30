@@ -24,17 +24,21 @@ EXPAND_FILES = expand.c \
 
 SRCS_FILES = main.c
 
+BUILTIN_FILES	= export.c
+
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))
 EXPAND = $(addprefix srcs/expand/, $(EXPAND_FILES))
 ENV = $(addprefix srcs/env/, $(ENV_FILES))
 SRCS = $(addprefix srcs/, $(SRCS_FILES))
+BUILTIN = $(addprefix srcs/builtin/, $(BUILTIN_FILES))
 
 LEXER_OBJS	= ${LEXER:.c=.o}
 PARSER_OBJS	= ${PARSER:.c=.o}
 EXPAND_OBJS	= ${EXPAND:.c=.o}
 ENV_OBJS	= ${ENV:.c=.o}
 SRCS_OBJS	= ${SRCS:.c=.o}
+BUILTIN_OBJS	= ${BUILTIN:.c=.o}
 
 NAME	= minishell
 
@@ -49,21 +53,21 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 .c.o:
 		${CC} ${CFLAGS} -I includes/ -c $< -o ${<:.c=.o}
 
-${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${SRCS_OBJS}
+${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${BUILTIN_OBJS} ${ENV_OBJS} ${SRCS_OBJS}
 		make -C libft
-		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${BUILTIN_OBJS} ${ENV_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
 all:		${NAME} bonus
 
 clean:
 		make clean -C libft
-		${RM} ${LEXER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${PARSER_OBJS} ${SRCS_OBJS}
+
+		${RM} ${LEXER_OBJS} ${EXPAND_OBJS} ${BUILTIN_OBJS} ${ENV_OBJS} ${PARSER_OBJS} ${SRCS_OBJS}
 
 fclean:		clean
 		make fclean -C libft
 		${RM} ${NAME}
 
 re:		clean all
-
 
 .PHONY:		all clean fclea
