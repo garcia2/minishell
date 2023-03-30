@@ -14,14 +14,27 @@ ENV_FILES	= env_parser.c \
 
 PARSER_FILES = parser.c\
 			init_utils.c\
+			here_doc.c\
 			init.c\
 			free.c
 
-SRCS_FILES = main.c
+EXEC_FILES = pwd_cd.c
+
+BUILTINS_FILES = cd.c\
+				pwd.c\
+				echo.c
+
+SRCS_FILES = main.c\
+			launcher.c\
+			signal.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))
+
+EXEC = $(addprefix srcs/exec/, $(EXEC_FILES))
+
+BUILTINS = $(addprefix srcs/exec/builtins/, $(BUILTINS_FILES))
 
 ENV = $(addprefix srcs/env/, $(ENV_FILES))
 
@@ -30,6 +43,10 @@ SRCS = $(addprefix srcs/, $(SRCS_FILES))
 LEXER_OBJS	= ${LEXER:.c=.o}
 
 PARSER_OBJS	= ${PARSER:.c=.o}
+
+EXEC_OBJS	= ${EXEC:.c=.o}
+
+BUILTINS_OBJS	= ${BUILTINS:.c=.o}
 
 ENV_OBJS	= ${ENV:.c=.o}
 
@@ -48,9 +65,9 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 .c.o:
 		${CC} ${CFLAGS} -I includes/ -c $< -o ${<:.c=.o}
 
-${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS}
+${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS} ${BUILTINS_OBJS} ${EXEC}
 		make -C libft
-		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS} ${BUILTINS_OBJS} ${EXEC} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
 all:		${NAME} bonus
 
@@ -65,4 +82,4 @@ fclean:		clean
 re:		clean all
 
 
-.PHONY:		all clean fclea
+.PHONY:		all clean fclean
