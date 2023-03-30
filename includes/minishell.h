@@ -38,6 +38,7 @@ typedef struct s_env_list
 	struct s_env_list	*next;
 }						t_env_list;
 
+
 /*******************************************************\
 |					PARSER FUNCTIONS					|
 \*******************************************************/
@@ -90,5 +91,11 @@ t_env_list	*env_lstnew(char *key, char *value);
 void		env_lst_print(t_env_list *lst);
 t_env_list	*parse_env(char **envp);
 char		*get_env_by_key(t_env_list *env_lst, char *key);
+int			find_char(char *str, char c);
 
+/*******************************************************\
+|					BUILTIN FUNCTIONS					|
+\*******************************************************/
+
+int			export(t_env_list *env, char *args);
 #endif
