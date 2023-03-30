@@ -1,11 +1,9 @@
 LEXER_FILES = lexer.c \
 			count_token.c \
-			is_white_space.c \
-			get_env.c \
-			replace_env_var.c \
+			check_char.c \
 			skip.c \
 			spliters.c \
-			convert_dolars.c
+			check_lexer.c
 
 ENV_FILES	= env_parser.c \
 			env_lst.c \
@@ -28,28 +26,31 @@ SRCS_FILES = main.c\
 			launcher.c\
 			signal.c
 
+EXPAND_FILES = expand.c \
+			replace_env_var.c \
+			convert_dolars.c \
+			get_env.c \
+			delete_quotes.c \
+			join_split.c
+
+BUILTIN_FILES	= export.c
+
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
-
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))
-
 EXEC = $(addprefix srcs/exec/, $(EXEC_FILES))
-
 BUILTINS = $(addprefix srcs/exec/builtins/, $(BUILTINS_FILES))
-
+EXPAND = $(addprefix srcs/expand/, $(EXPAND_FILES))
 ENV = $(addprefix srcs/env/, $(ENV_FILES))
-
+BUILTIN = $(addprefix srcs/builtin/, $(BUILTIN_FILES))
 SRCS = $(addprefix srcs/, $(SRCS_FILES))
 
 LEXER_OBJS	= ${LEXER:.c=.o}
-
 PARSER_OBJS	= ${PARSER:.c=.o}
-
 EXEC_OBJS	= ${EXEC:.c=.o}
-
 BUILTINS_OBJS	= ${BUILTINS:.c=.o}
-
+EXPAND_OBJS	= ${EXPAND:.c=.o}
 ENV_OBJS	= ${ENV:.c=.o}
-
+BUILTIN_OBJS	= ${BUILTIN:.c=.o}
 SRCS_OBJS	= ${SRCS:.c=.o}
 
 NAME	= minishell
@@ -65,15 +66,16 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 .c.o:
 		${CC} ${CFLAGS} -I includes/ -c $< -o ${<:.c=.o}
 
-${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS} ${BUILTINS_OBJS} ${EXEC}
+${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${BUILTIN_OBJS} ${ENV_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS}
 		make -C libft
-		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${ENV_OBJS} ${SRCS_OBJS} ${BUILTINS_OBJS} ${EXEC} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${BUILTIN_OBJS} ${ENV_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
 all:		${NAME} bonus
 
 clean:
 		make clean -C libft
-		${RM} ${LEXER_OBJS} ${ENV_OBJS} ${PARSER_OBJS} ${SRCS_OBJS}
+
+		${RM} ${LEXER_OBJS} ${EXPAND_OBJS} ${BUILTIN_OBJS} ${ENV_OBJS} ${PARSER_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS}
 
 fclean:		clean
 		make fclean -C libft
@@ -81,5 +83,5 @@ fclean:		clean
 
 re:		clean all
 
-
 .PHONY:		all clean fclean
+

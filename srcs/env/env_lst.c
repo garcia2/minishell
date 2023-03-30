@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:42:45 by nicolas           #+#    #+#             */
-/*   Updated: 2023/02/26 14:52:07 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/03/01 12:49:24 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,20 @@ t_env_list	*env_lstnew(char *key, char *value)
 	new = malloc(sizeof(t_env_list));
 	if (new == NULL)
 		return (NULL);
-	new->key = ft_strdup(key);
-	new->value = ft_strdup(value);
-	if (new->key == NULL || new->value == NULL)
-		return (env_lst_clear(&new), NULL);
+	new->key = NULL;
+	new->value = NULL;
+	if (key != NULL)
+	{
+		new->key = ft_strdup(key);
+		if (new->key == NULL)
+			return (env_lst_clear(&new), NULL);
+	}
+	if (value != NULL)
+	{
+		new->value = ft_strdup(value);
+		if (new->key == NULL)
+			return (env_lst_clear(&new), NULL);
+	}
 	new->next = NULL;
 	return (new);
 }
