@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/28 14:39:53 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:52:15 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,22 @@ void	delete_file(void)
 {
 	int		i;
 	char	*temp_file_name;
+	char	*itoa_i;
 
 	i = 1;
-	temp_file_name = ft_strjoin(".temp_file_tmp", ft_itoa(i));
+	itoa_i = ft_itoa(i);
+	temp_file_name = ft_strjoin(".temp_file_tmp", itoa_i);
 	while (access(temp_file_name, R_OK) == 0)
 	{
 		unlink(temp_file_name);
+		free(itoa_i);
 		free(temp_file_name);
 		i++;
-		temp_file_name = ft_strjoin(".temp_file_tmp", ft_itoa(i));
+		itoa_i = ft_itoa(i);
+		temp_file_name = ft_strjoin(".temp_file_tmp", itoa_i);
 	}
+	free(itoa_i);
+	free(temp_file_name);
 }
 
 int	launcher(void)

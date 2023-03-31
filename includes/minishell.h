@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/30 12:16:58 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:42:03 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,10 @@ void		add_back(t_cmd_table **lst, t_cmd_table *new);
 void		add_cmd(char **lex, char **cmd_table, int *i);
 int			here_doc_logic(t_cmd_table *cmd_table, char *limiter);
 void		init_redir(char **lex, t_cmd_table *cmd_table, int *i);
+void		check_fd_opened(int fd);
+void		open_infile(int *fd, char *file_name);
+void		open_outfile(int *fd, char *file_name);
+void		open_append(int *fd, char *file_name);
 
 /*******************************************************\
 |					LEXER FUNCTIONS						|

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/30 12:12:20 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/31 12:40:53 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	here_doc_logic(t_cmd_table *cmd_table, char *limiter)
 		return (0);
 	close (fd);
 	fd = open(temp_file_name, O_RDONLY);
+	check_fd_opened(cmd_table->infile_fd);
 	cmd_table->infile_fd = fd;
 	return (0);
 }

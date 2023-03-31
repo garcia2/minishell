@@ -15,7 +15,9 @@ PARSER_FILES = parser.c\
 			here_doc.c\
 			get_next_line.c \
 			init.c\
-			free.c
+			free.c\
+			cmd_table_lst.c\
+			open_files.c
 
 EXEC_FILES = pwd_cd.c
 
