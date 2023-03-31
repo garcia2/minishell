@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/31 14:45:20 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:19:54 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char		*replace_env_var(char *str, t_env_list *env);
 int			convert_dolars(char **lex, t_env_list *env);
 int			delete_quotes(char **split);
 char		*join_split(char **split);
+void		expand_cmd_tables(t_cmd_table *cmd_tab, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|

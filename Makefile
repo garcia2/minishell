@@ -35,7 +35,8 @@ EXPAND_FILES = expand.c \
 			convert_dolars.c \
 			get_env.c \
 			delete_quotes.c \
-			join_split.c
+			join_split.c \
+			expand_cmd_table.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))

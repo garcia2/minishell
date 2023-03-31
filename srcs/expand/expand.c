@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:58:48 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/31 11:38:47 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:09:05 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	expand_cmd(char **str_ptr, t_env_list *env)
 	char	**split;
 	char	*join;
 
+	printf("expand of %s\n", *str_ptr);
 	split = get_part(*str_ptr);
 	if (split == NULL)
 		return (0);
