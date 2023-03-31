@@ -4,3 +4,4 @@ libft.a
 main_p.c
 *objects/
 .vscode
+tester.sh
