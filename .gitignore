@@ -1,6 +1,6 @@
 minishell
 *.o
 libft.a
-main.c
+main_p.c
 *objects/
 .vscode
