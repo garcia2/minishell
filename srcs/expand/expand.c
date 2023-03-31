@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:58:48 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/29 17:31:29 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/31 11:38:47 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,18 @@ char	**get_part(char *str)
 int	expand_cmd(char **str_ptr, t_env_list *env)
 {
 	char	**split;
+	char	*join;
 
 	split = get_part(*str_ptr);
 	if (split == NULL)
 		return (0);
 	convert_dolars(split, env);
 	delete_quotes(split);
-	printf("str = [%s]\n", join_split(split));
+	join = join_split(split);
+	free_lexer(split);
+	if (join == NULL)
+		return (0);
+	free(*str_ptr);
+	*str_ptr = join;
 	return (1);
 }
