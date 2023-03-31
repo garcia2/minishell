@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/31 12:42:03 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:45:20 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ typedef struct s_env_list
 	struct s_env_list	*next;
 }						t_env_list;
 
-int			launcher(void);
-int			minishell(void);
+int			launcher(t_env_list *env);
+int			minishell(t_env_list *env);
 
 void		do_exec(t_cmd_table *cmd_table);
 
@@ -52,8 +52,8 @@ void		do_exec(t_cmd_table *cmd_table);
 \*******************************************************/
 
 t_cmd_table	*init_node(void);
-t_cmd_table	*parser(char **lex);
-t_cmd_table	*init_table(char **lex);
+t_cmd_table	*parser(char **lex, t_env_list *env);
+t_cmd_table	*init_table(char **lex, t_env_list *env);
 
 int			cmd_size(char **lex);
 char		*get_next_line(int fd);
@@ -66,11 +66,12 @@ void		init_cmd(char **lex, t_cmd_table *cmd_table);
 void		add_back(t_cmd_table **lst, t_cmd_table *new);
 void		add_cmd(char **lex, char **cmd_table, int *i);
 int			here_doc_logic(t_cmd_table *cmd_table, char *limiter);
-void		init_redir(char **lex, t_cmd_table *cmd_table, int *i);
+void		init_redir(char **lex, t_cmd_table *cmd_table, int *i,
+				t_env_list *env);
 void		check_fd_opened(int fd);
-void		open_infile(int *fd, char *file_name);
-void		open_outfile(int *fd, char *file_name);
-void		open_append(int *fd, char *file_name);
+void		open_infile(int *fd, char **file_name, t_env_list *env);
+void		open_outfile(int *fd, char **file_name, t_env_list *env);
+void		open_append(int *fd, char **file_name, t_env_list *env);
 
 /*******************************************************\
 |					LEXER FUNCTIONS						|

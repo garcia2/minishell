@@ -6,24 +6,24 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:21:22 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/31 12:37:32 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:36:07 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_redir(char **lex, t_cmd_table *cmd_table, int *i)
+void	init_redir(char **lex, t_cmd_table *cmd_table, int *i, t_env_list *env)
 {
 	while (lex[*i] && ft_strcmp(lex[*i], "|") != 0)
 	{
 		if (ft_strcmp(lex[*i], "<") == 0 && lex[*i + 1])
-			open_infile(&(cmd_table->infile_fd), lex[*i + 1]);
+			open_infile(&(cmd_table->infile_fd), &(lex[*i + 1]), env);
 		else if (ft_strcmp(lex[*i], "<<") == 0 && lex[*i + 1])
 			here_doc_logic(cmd_table, lex[*i + 1]);
 		else if (ft_strcmp(lex[*i], ">") == 0 && lex[*i + 1])
-			open_outfile(&(cmd_table->outfile_fd), lex[*i + 1]);
+			open_outfile(&(cmd_table->outfile_fd), &(lex[*i + 1]), env);
 		else if (ft_strcmp(lex[*i], ">>") == 0 && lex[*i + 1])
-			open_append(&(cmd_table->outfile_fd), lex[*i + 1]);
+			open_append(&(cmd_table->outfile_fd), &(lex[*i + 1]), env);
 		(*i)++;
 	}
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:31:53 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/22 15:13:10 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:20:19 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd_table	*init_table(char **lex)
+t_cmd_table	*init_table(char **lex, t_env_list *env)
 {
 	int			i;
 	t_cmd_table	*cmd_table;
@@ -25,7 +25,7 @@ t_cmd_table	*init_table(char **lex)
 		tmp = init_node();
 		if (tmp == NULL)
 			return (NULL);
-		init_redir(lex, tmp, &i);
+		init_redir(lex, tmp, &i, env);
 		if (lex[i])
 			i++;
 		add_back(&cmd_table, tmp);
@@ -33,11 +33,11 @@ t_cmd_table	*init_table(char **lex)
 	return (cmd_table);
 }
 
-t_cmd_table	*parser(char **lex)
+t_cmd_table	*parser(char **lex, t_env_list *env)
 {
 	t_cmd_table	*cmd_table;
 
-	cmd_table = init_table(lex);
+	cmd_table = init_table(lex, env);
 	init_tab(lex, cmd_table);
 	init_cmd(lex, cmd_table);
 	return (cmd_table);

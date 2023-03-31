@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/31 12:52:15 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:43:59 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ void	delete_file(void)
 	free(temp_file_name);
 }
 
-int	launcher(void)
+int	launcher(t_env_list *env)
 {
+	if (env == NULL)
+		return (2);
 	init_signal();
 	while (1)
 	{
-		if (minishell() == 2)
+		if (minishell(env) == 2)
 			return (1);
 	}
 	rl_clear_history();
@@ -67,7 +69,7 @@ int	launcher(void)
 	return (0);
 }
 
-int	minishell(void)
+int	minishell(t_env_list *env)
 {
 	t_cmd_table	*cmd_table;
 	char		*command;
@@ -82,7 +84,7 @@ int	minishell(void)
 	if (lex == NULL)
 		return (2);
 	print_lexer(lex);
-	cmd_table = parser(lex);
+	cmd_table = parser(lex, env);
 	if (cmd_table == NULL)
 		return (free_lexer(lex), 2);
 	print_list(cmd_table);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:40:06 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/28 15:25:58 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/03/31 14:12:44 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	del_lst(t_cmd_table *lst)
 	i = 0;
 	if (lst == NULL)
 		return ;
-	if (lst->infile_fd > 1)
+	if (lst->infile_fd > 2)
 		close(lst->infile_fd);
-	if (lst->outfile_fd > 1)
+	if (lst->outfile_fd > 2)
 		close(lst->outfile_fd);
 	while (lst->cmd && lst->cmd[i])
 	{
