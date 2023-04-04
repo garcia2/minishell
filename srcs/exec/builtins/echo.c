@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:51:32 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/30 12:09:45 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:37:54 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,4 @@ void	do_echo(t_cmd_table *cmd_table, int *i)
 		}
 		write(1, "\n", 1);
 	}
-}
-
-void	do_exec(t_cmd_table *cmd_table)
-{
-	int	i;
-
-	i = 0;
-	if (ft_strcmp(cmd_table->cmd[i], "echo") == 0)
-		do_echo(cmd_table, &i);
-	i++;
 }

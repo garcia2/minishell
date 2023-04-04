@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/31 14:45:20 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:31:21 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -45,7 +47,7 @@ typedef struct s_env_list
 int			launcher(t_env_list *env);
 int			minishell(t_env_list *env);
 
-void		do_exec(t_cmd_table *cmd_table);
+void		do_exec(t_cmd_table *cmd_table, t_env_list *env);
 
 /*******************************************************\
 |					PARSER FUNCTIONS					|
@@ -94,13 +96,19 @@ int			check_lexer(char **lex);
 \*******************************************************/
 
 int			pwd_cd(t_cmd_table *cmd_table);
+int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
+void		dup_files(t_cmd_table *cmd_table);
 
 /*******************************************************\
 |					BUILTINS FUNCTIONS					|
 \*******************************************************/
 
+int			is_builtin(char *str);
 int			get_pwd(void);
 int			change_directory(char *cmd);
+int			export(t_env_list *env, char **args);
+int			unset(t_env_list *env, t_cmd_table *cmd_table);
+void		do_echo(t_cmd_table *cmd_table, int *i);
 
 /*******************************************************\
 |					EXPAND FUNCTIONS						|
@@ -112,6 +120,7 @@ char		*replace_env_var(char *str, t_env_list *env);
 int			convert_dolars(char **lex, t_env_list *env);
 int			delete_quotes(char **split);
 char		*join_split(char **split);
+void		expand_cmd_tables(t_cmd_table *cmd_tab, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|
@@ -134,6 +143,7 @@ void		env_lst_print(t_env_list *lst);
 t_env_list	*parse_env(char **envp);
 char		*get_env_by_key(t_env_list *env_lst, char *key);
 int			find_char(char *str, char c);
+char		**get_env_tab(t_env_list *env);
 
 /*******************************************************\
 |					SIGNAL FUNCTIONS					|
@@ -142,9 +152,4 @@ int			find_char(char *str, char c);
 void		init_signal(void);
 void		handler_signal(int sig);
 
-/*******************************************************\
-|					BUILTIN FUNCTIONS					|
-\*******************************************************/
-
-int			export(t_env_list *env, char *args);
 #endif
