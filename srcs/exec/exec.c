@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/04 15:07:14 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:52:02 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 {
-	if (ft_strcmp(cmd_table->cmd[0], "cd") == 0
+	if (ft_strcmp(cmd_table->cmd[0], "echo") == 0)
+		do_echo(cmd_table);
+	else if (ft_strcmp(cmd_table->cmd[0], "cd") == 0
 		|| ft_strcmp(cmd_table->cmd[0], "pwd") == 0)
 		pwd_cd(cmd_table);
 	else if (ft_strcmp(cmd_table->cmd[0], "export") == 0)
@@ -43,7 +45,6 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list *env)
 void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
 {
 	int	pid;
-	int	i;
 
 	printf("\nEXECUTION\n");
 	if (is_builtin(cmd_table->cmd[0]))
@@ -55,16 +56,7 @@ void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
 	if (pid == 0)
 	{
 		dup_files(cmd_table);
-		if (ft_strcmp(cmd_table->cmd[0], "echo") == 0)
-		{
-			i = 0;
-			do_echo(cmd_table, &i);
-			exit(0);
-		}
-		else
-		{
-			simple_exec(cmd_table, env);
-		}	
+		simple_exec(cmd_table, env);
 	}
 	else
 		waitpid(pid, NULL, 0);

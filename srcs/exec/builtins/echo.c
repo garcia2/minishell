@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:51:32 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/04 13:37:54 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:46:52 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,32 @@ void	echo_with_option(t_cmd_table *cmd_table, int i)
 			write(cmd_table->outfile_fd, &cmd_table->cmd[i][j], 1);
 			j++;
 		}
-		write(1, " ", 1);
+		write(cmd_table->outfile_fd, " ", 1);
 		(i)++;
 	}
 }
 
-void	do_echo(t_cmd_table *cmd_table, int *i)
+void	do_echo(t_cmd_table *cmd_table)
 {
+	int	i;
 	int	j;
 
-	(*i)++;
-	if (check_options(cmd_table->cmd, *i) == 1)
-		echo_with_option(cmd_table, *i);
+	i = 1;
+	if (check_options(cmd_table->cmd, i) == 1)
+		echo_with_option(cmd_table, i);
 	else
 	{
-		while (cmd_table->cmd[*i])
+		while (cmd_table->cmd[i])
 		{
 			j = 0;
-			while (cmd_table->cmd[*i][j])
+			while (cmd_table->cmd[i][j])
 			{
-				write(cmd_table->outfile_fd, &cmd_table->cmd[*i][j], 1);
+				write(cmd_table->outfile_fd, &cmd_table->cmd[i][j], 1);
 				j++;
 			}
-			write(1, " ", 1);
-			(*i)++;
+			write(cmd_table->outfile_fd, " ", 1);
+			i++;
 		}
-		write(1, "\n", 1);
+		write(cmd_table->outfile_fd, "\n", 1);
 	}
 }
