@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/31 14:43:59 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:39:25 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	minishell(t_env_list *env)
 	if (cmd_table == NULL)
 		return (free_lexer(lex), 2);
 	print_list(cmd_table);
-	do_exec(cmd_table);
+	do_exec(cmd_table, env);
 	free_lexer(lex);
 	clear_lst(&cmd_table);
 	delete_file();
