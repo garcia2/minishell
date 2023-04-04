@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:40:29 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/04 14:49:35 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:01:36 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_builtin(char *str)
 {
-	if (ft_strcmp(str, "echo") == 0
+	if (ft_strcmp(str, "cd") == 0
 		|| ft_strcmp(str, "pwd") == 0
 		|| ft_strcmp(str, "export") == 0
 		|| ft_strcmp(str, "unset") == 0
