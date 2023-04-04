@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:21:22 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/31 17:11:22 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:24:36 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,36 +27,6 @@ void	init_redir(char **lex, t_cmd_table *cmd_table, int *i, t_env_list *env)
 		(*i)++;
 	}
 }
-
-// void	init_redir(char **lex, t_cmd_table *cmd_table, int *i)
-// {
-// 	while (lex[*i] && ft_strcmp(lex[*i], "|") != 0)
-// 	{
-// 		if (ft_strcmp(lex[*i], "<") == 0 && lex[*i + 1])
-// 		{
-// 			if (cmd_table->infile_fd > 2)
-// 				close(cmd_table->infile_fd);
-// 			cmd_table->infile_fd = open(lex[*i + 1], O_RDONLY);
-// 		}
-// 		else if (ft_strcmp(lex[*i], "<<") == 0 && lex[*i + 1])
-// 			here_doc_logic(cmd_table, lex[*i + 1]);
-// 		else if (ft_strcmp(lex[*i], ">") == 0 && lex[*i + 1])
-// 		{
-// 			if (cmd_table->outfile_fd > 2)
-// 				close(cmd_table->outfile_fd);
-// 			cmd_table->outfile_fd = open(lex[*i + 1], O_WRONLY
-// 					| O_CREAT | O_TRUNC, 0644);
-// 		}
-// 		else if (ft_strcmp(lex[*i], ">>") == 0 && lex[*i + 1])
-// 		{
-// 			if (cmd_table->outfile_fd > 2)
-// 				close(cmd_table->outfile_fd);
-// 			cmd_table->outfile_fd = open(lex[*i + 1], O_WRONLY
-// 					| O_CREAT | O_APPEND, 0644);
-// 		}
-// 		(*i)++;
-// 	}
-// }
 
 static int	count_element(char **lex, int *i)
 {
@@ -82,12 +52,14 @@ void	add_cmd(char **lex, char **cmd, int *i)
 	j = 0;
 	if (!is_delimiter(lex[*i]))
 			cmd[j++] = ft_strdup(lex[*i]);
+			// a proteger
 	(*i)++;
 	while (lex[*i] && ft_strcmp(lex[*i], "|") != 0)
 	{
 		if (!is_delimiter(lex[*i]) && !is_delimiter(lex[*i - 1]))
 		{
 			cmd[j] = ft_strdup(lex[*i]);
+			// a proteger
 			j++;
 		}
 		(*i)++;
@@ -120,10 +92,12 @@ void	init_tab(char **lex, t_cmd_table *cmd_table)
 	while (lex[i])
 	{
 		cmd_table->cmd = malloc(sizeof(char *) * (count_element(lex, &i) + 1));
+		// a proteger
 		if (lex[i])
 		{
 			cmd_table = cmd_table->next;
 			i++;
 		}
 	}
+	// return (1);
 }
