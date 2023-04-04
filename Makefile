@@ -8,7 +8,8 @@ LEXER_FILES = lexer.c \
 ENV_FILES	= env_parser.c \
 			env_lst.c \
 			env_lst_del.c \
-			env_lst_print.c
+			env_lst_print.c \
+			get_env_tab.c
 
 PARSER_FILES = parser.c\
 			init_utils.c\
@@ -19,12 +20,17 @@ PARSER_FILES = parser.c\
 			cmd_table_lst.c\
 			open_files.c
 
-EXEC_FILES = pwd_cd.c
+EXEC_FILES = pwd_cd.c \
+			exec.c \
+			command.c \
+			dup_files.c
 
 BUILTINS_FILES = cd.c\
 				pwd.c\
 				echo.c\
-				export.c
+				export.c\
+				builtin_util.c\
+				unset.c
 
 SRCS_FILES = main.c\
 			launcher.c\
