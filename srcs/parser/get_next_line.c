@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 12:12:07 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/30 12:12:35 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:11:39 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_next_line(int fd)
 	i = 0;
 	rd = 0;
 	buffer = malloc(sizeof(char) * 1000);
+	// a proteger
 	if (BUFFER_SIZE <= 0)
 		return (free(buffer), NULL);
 	while (1)

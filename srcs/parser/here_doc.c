@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/31 14:01:44 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:12:57 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,6 @@ char	*ft_strcpy(char *dest, const char *src)
 	return (dest);
 }
 
-size_t	ft_stringlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != 0)
-		i++;
-	return (i);
-}
-
 int	write_in_file(char *limiter, int fd, char *readed_line)
 {
 	int		size;
@@ -52,10 +42,11 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 
 	size = ft_strlen(limiter) + 2;
 	limit = malloc(sizeof(char) * size);
+	// a proteger
 	limit = ft_strcpy(limit, limiter);
 	while (1)
 	{
-		write (STDIN_FILENO, ">>", 2);
+		write (STDIN_FILENO, ">", 1);
 		readed_line = get_next_line(STDIN_FILENO);
 		if (compare_eof(readed_line, limit) == 0)
 		{
@@ -63,10 +54,19 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 			free(readed_line);
 			break ;
 		}
-		write (fd, readed_line, ft_stringlen(readed_line));
+		write (fd, readed_line, ft_strlen(readed_line));
 		free(readed_line);
 	}
 	return (1);
+}
+
+void	fd_gestion(t_cmd_table *cmd_table, int fd, char *temp_file_name)
+{
+	close (fd);
+	fd = open(temp_file_name, O_RDONLY);
+	check_fd_opened(cmd_table->infile_fd);
+	cmd_table->infile_fd = fd;
+	free(temp_file_name);
 }
 
 int	here_doc_logic(t_cmd_table *cmd_table, char *limiter)
@@ -75,22 +75,26 @@ int	here_doc_logic(t_cmd_table *cmd_table, char *limiter)
 	int		fd;
 	char	*temp_file_name;
 	char	*readed_line;
+	char	*nb;
 
 	i = 1;
 	readed_line = NULL;
-	temp_file_name = ft_strjoin(".temp_file_tmp", ft_itoa(i));
+	nb = ft_itoa(i);
+	temp_file_name = ft_strjoin(".temp_file_tmp", nb);
+	// a proteger
+	free(nb);
 	while (access(temp_file_name, R_OK) == 0)
 	{
 		free(temp_file_name);
 		i++;
-		temp_file_name = ft_strjoin(".temp_file_tmp", ft_itoa(i));
+		nb = ft_itoa(i);
+		temp_file_name = ft_strjoin(".temp_file_tmp", nb);
+		// a proteger
+		free(nb);
 	}
 	fd = open(temp_file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (write_in_file(limiter, fd, readed_line) == 0)
 		return (0);
-	close (fd);
-	fd = open(temp_file_name, O_RDONLY);
-	check_fd_opened(cmd_table->infile_fd);
-	cmd_table->infile_fd = fd;
+	fd_gestion(cmd_table, fd, temp_file_name);
 	return (1);
 }
