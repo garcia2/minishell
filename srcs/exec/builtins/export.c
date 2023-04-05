@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:23 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/04 13:11:01 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 14:29:48 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	export(t_env_list *env, char **args)
 	int	i;
 
 	if (args == NULL)
+		export_print(env);
+	else if (args[0] == NULL)
 		export_print(env);
 	else
 	{

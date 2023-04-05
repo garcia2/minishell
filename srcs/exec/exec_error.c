@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:00:04 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 12:44:33 by nigarcia         ###   ########.fr       */
+/*   Created: 2023/04/05 14:42:02 by nigarcia          #+#    #+#             */
+/*   Updated: 2023/04/05 14:45:50 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	print_error(char *str)
 {
-	t_env_list	*env;
+	write(2, str, ft_strlen(str));
+}
 
-	if (argc != 1)
-		return (printf("NO ARGS REQUIRED\n"), 1);
-	(void) argv;
-	env = parse_env(envp);
-	launcher(env);
-	env_lst_clear(&env);
-	return (0);
+void	print_command_not_found_error(char *cmd)
+{
+	print_error("minishell: ");
+	print_error(cmd);
+	print_error(": command not found\n");
 }

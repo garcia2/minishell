@@ -23,7 +23,8 @@ PARSER_FILES = parser.c\
 EXEC_FILES = pwd_cd.c \
 			exec.c \
 			command.c \
-			dup_files.c
+			dup_files.c \
+			exec_error.c
 
 BUILTINS_FILES = cd.c\
 				pwd.c\

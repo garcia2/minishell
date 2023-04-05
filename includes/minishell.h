@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/04 15:43:54 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:46:56 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int			is_builtin(char *str);
 int			get_pwd(void);
 int			change_directory(char *cmd);
 int			export(t_env_list *env, char **args);
-int			unset(t_env_list *env, t_cmd_table *cmd_table);
+int			unset(t_env_list *env, char	**args);
 void		do_echo(t_cmd_table *cmd_table);
 
 /*******************************************************\
@@ -151,5 +151,12 @@ char		**get_env_tab(t_env_list *env);
 
 void		init_signal(void);
 void		handler_signal(int sig);
+
+/*******************************************************\
+|					ERROR FUNCTIONS						|
+\*******************************************************/
+
+void		print_error(char *str);
+void		print_command_not_found_error(char *cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:31:53 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/31 17:21:34 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:57:08 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_cmd_table	*init_table(char **lex, t_env_list *env)
 	t_cmd_table	*cmd_table;
 	t_cmd_table	*tmp;
 
+	if (lex[0] == NULL)
+		return (init_node());
 	i = 0;
 	cmd_table = NULL;
 	while (lex[i])

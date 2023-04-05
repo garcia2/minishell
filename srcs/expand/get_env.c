@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:17:11 by nicolas           #+#    #+#             */
-/*   Updated: 2023/03/29 15:42:11 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:27:06 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	skip_token_with_dolar(char *str, int *i)
 	}
 	len = 0;
 	while (!is_white_space(str[*i])
+		&& ft_isdigit(str[*i])
 		&& str[*i] != '\''
 		&& str[*i] != '"'
 		&& str[*i] != '$'
