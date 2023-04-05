@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 16:40:23 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:53:22 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,12 @@ void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
 {
 	int	pid;
 
-	if (cmd_table->cmd == NULL)
+	if (cmd_table->infile_fd < 0 || cmd_table->outfile_fd < 0)
+	{
+		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
+		return ;
+	}
+	if (cmd_table->cmd == NULL || cmd_table->cmd[0] == NULL)
 		return ;
 	if (is_builtin(cmd_table->cmd[0]))
 	{
@@ -60,7 +65,13 @@ void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
 	pid = fork();
 	if (pid == 0)
 	{
-		dup_files(cmd_table);
+		if (dup_files(cmd_table) == 0)
+		{
+			print_error("ERROR: PROBLEM WITH DUP_FILES\n");
+			clear_lst(&cmd_table);
+			env_lst_clear(&env);
+			exit(2);
+		}
 		simple_exec(cmd_table, env);
 	}
 	else

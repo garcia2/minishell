@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 16:46:56 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:37:20 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			check_lexer(char **lex);
 
 int			pwd_cd(t_cmd_table *cmd_table);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
-void		dup_files(t_cmd_table *cmd_table);
+int			dup_files(t_cmd_table *cmd_table);
 
 /*******************************************************\
 |					BUILTINS FUNCTIONS					|
@@ -111,7 +111,7 @@ int			unset(t_env_list *env, char	**args);
 void		do_echo(t_cmd_table *cmd_table);
 
 /*******************************************************\
-|					EXPAND FUNCTIONS						|
+|					EXPAND FUNCTIONS					|
 \*******************************************************/
 
 int			expand_cmd(char **str_ptr, t_env_list *env);

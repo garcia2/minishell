@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:31:13 by nicolas           #+#    #+#             */
-/*   Updated: 2023/03/29 16:54:03 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:05:44 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static t_env_list	*split_env(char *envp_line)
 	t_env_list	*new_env;
 
 	equal_id = find_char(envp_line, '=');
+	if (equal_id == -1)
+		return (NULL);
 	envp_line[equal_id] = '\0';
 	new_env = env_lstnew(envp_line, envp_line + equal_id + 1);
 	return (new_env);

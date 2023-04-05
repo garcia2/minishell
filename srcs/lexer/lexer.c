@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/15 14:32:01 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:18:56 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ void	print_lexer(char **lex)
 	}
 }
 
+char	**get_empty_lexer(void)
+{
+	char	**empty_lex;
+
+	empty_lex = ft_calloc(1, sizeof(char *));
+	if (empty_lex == NULL)
+		return (NULL);
+	empty_lex[0] = NULL;
+	return (empty_lex);
+}
+
 char	**lexer(char *str)
 {
 	char	**lex;
@@ -46,16 +57,16 @@ char	**lexer(char *str)
 
 	nb_token = count_token(str);
 	if (nb_token < 0)
-		return (printf("ERROR : PROBLEM WITH COUNT_TOKEN\n")
+		return (print_error("ERROR : PROBLEM WITH COUNT_TOKEN\n")
 			, NULL);
 	lex = ft_calloc(nb_token + 1, sizeof(char *));
 	if (lex == NULL)
-		return (printf("ERROR : PROBLEM WITH MALLOC OF LEX\n")
+		return (print_error("ERROR : PROBLEM WITH MALLOC OF LEX\n")
 			, NULL);
 	if (split_lexer(lex, str) == 0)
-		return (printf("ERROR : PROBLEM WITH SPLIT_LEXER\n"), free_lexer(lex)
-			, NULL);
+		return (print_error("ERROR : PROBLEM WITH SPLIT_LEXER\n"),
+			free_lexer(lex), NULL);
 	if (check_lexer(lex) == 0)
-		return (free_lexer(lex), NULL);
+		return (free_lexer(lex), get_empty_lexer());
 	return (lex);
 }
