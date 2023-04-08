@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_char.c                                       :+:      :+:    :+:   */
+/*   get_nb_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:12:44 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/08 12:53:53 by nigarcia         ###   ########.fr       */
+/*   Created: 2023/04/08 13:17:35 by nigarcia          #+#    #+#             */
+/*   Updated: 2023/04/08 13:24:37 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_white_space(char c)
+int	get_nb_cmd(char **cmds)
 {
-	return (c == ' '
-		|| (c >= 9 && c <= 13)
-		|| c == '\n');
+	int	nb_cmd;
+
+	nb_cmd = 0;
+	while (cmds[nb_cmd] != NULL)
+		nb_cmd++;
+	return (nb_cmd);
 }
 
-int	is_spec_char(char c)
+int	get_lexers_nb_cmd(char ***lexs)
 {
-	return ((c == '|')
-		|| (c == '<')
-		|| (c == '>'));
-}
+	int	nb_cmd;
+	int	i;
 
-int	is_quote(char c)
-{
-	return ((c == '\'')
-		|| (c == '"'));
+	nb_cmd = 0;
+	i = 0;
+	while (lexs[i] != NULL)
+	{
+		nb_cmd += get_nb_cmd(lexs[i]);
+		i++;
+	}
+	return (nb_cmd);
 }

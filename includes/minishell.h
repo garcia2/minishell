@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 17:37:20 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/08 14:09:14 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void		open_append(int *fd, char **file_name, t_env_list *env);
 
 int			is_white_space(char c);
 int			is_spec_char(char c);
+int			is_quote(char c);
 int			count_token(char *str);
 void		go_next_quote(char	*str, int *i, char quote);
 void		skip_white_space(char *str, int *i);
@@ -121,6 +122,10 @@ int			convert_dolars(char **lex, t_env_list *env);
 int			delete_quotes(char **split);
 char		*join_split(char **split);
 void		expand_cmd_tables(t_cmd_table *cmd_tab, t_env_list *env);
+int			re_lexing_cmd(char ***cmd, int *quote_map);
+int			get_nb_cmd(char **cmds);
+int			get_lexers_nb_cmd(char ***lexs);
+int			*get_quote_map(char **lex);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|

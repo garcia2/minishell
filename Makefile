@@ -43,7 +43,10 @@ EXPAND_FILES = expand.c \
 			get_env.c \
 			delete_quotes.c \
 			join_split.c \
-			expand_cmd_table.c
+			expand_cmd_table.c \
+			re_lexing.c \
+			get_nb_cmd.c \
+			quote_map.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))
