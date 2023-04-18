@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/08 14:09:14 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:43:47 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			is_builtin(char *str);
 int			get_pwd(void);
 int			change_directory(char *cmd);
 int			export(t_env_list *env, char **args);
+void		print_export_wrong_arg_error(char *arg);
 int			unset(t_env_list *env, char	**args);
 void		do_echo(t_cmd_table *cmd_table);
 

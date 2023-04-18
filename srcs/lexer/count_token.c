@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:39 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/29 13:47:26 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:20:49 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ static int	process(char *str, int *i, int	*nb_token)
 			(*nb_token)++;
 	}
 	else if (is_spec_char(str[*i]))
-	{
 		process_special_char(str, i, nb_token);
-	}
 	else if (str[*i] != '\0')
 	{
 		skip_token(str, i);

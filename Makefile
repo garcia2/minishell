@@ -30,6 +30,7 @@ BUILTINS_FILES = cd.c\
 				pwd.c\
 				echo.c\
 				export.c\
+				export_error.c\
 				builtin_util.c\
 				unset.c
 

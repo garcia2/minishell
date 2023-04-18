@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 12:23:52 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/08 14:12:58 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/18 13:50:21 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,19 +101,10 @@ int	re_lexing_cmd(char ***cmds, int *quote_map)
 	lexs = get_lexers(*cmds, quote_map);
 	if (lexs == NULL)
 		return (0);
-	// int	i = 0;
-	// while (lexs[i] != NULL)
-	// {
-	// 	printf("\nprint_lex[%d]\n", i);
-	// 	print_lexer(lexs[i]);
-	// 	i++;
-	// }
 	joined_lexs = join_lexers(lexs);
 	if (joined_lexs == NULL)
 		return (free_lexers(lexs), 0);
 	free(*cmds);
 	*cmds = joined_lexs;
-	//printf("final lexing\n");
-	//print_lexer(joined_lexs);
 	return (1);
 }
