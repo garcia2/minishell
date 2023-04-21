@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:57:37 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/21 12:31:17 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/21 16:47:09 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	*find_valid_path(char *command, char **paths)
 	int		i;
 	char	*command_path;
 
+	if (ft_strlen(command) == 0)
+		return (NULL);
 	i = 0;
 	while (paths[i] != NULL)
 	{

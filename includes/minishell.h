@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/18 13:43:47 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/21 17:11:47 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ t_env_list	*env_lstnew(char *key, char *value);
 void		env_lst_print(t_env_list *lst);
 t_env_list	*parse_env(char **envp);
 char		*get_env_by_key(t_env_list *env_lst, char *key);
+int			set_env_by_key(t_env_list *env_lst, char *key, char *new_value);
 int			find_char(char *str, char c);
 char		**get_env_tab(t_env_list *env);
 

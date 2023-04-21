@@ -9,7 +9,8 @@ ENV_FILES	= env_parser.c \
 			env_lst.c \
 			env_lst_del.c \
 			env_lst_print.c \
-			get_env_tab.c
+			get_env_tab.c \
+			get_set_env_by_key.c
 
 PARSER_FILES = parser.c\
 			init_utils.c\
