@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:57:37 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/04 14:41:15 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:31:17 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*find_valid_path(char *command, char **paths)
 		command_path = join_path_and_command(command, paths[i]);
 		if (command_path != NULL)
 		{
-			if (access(command_path, 0) == 0)
+			if (access(command_path, X_OK) == 0)
 				return (command_path);
 			free(command_path);
 		}
@@ -62,15 +62,18 @@ int	set_command_path(t_cmd_table *cmd_table, t_env_list *env)
 	char	*command_path;
 	char	**paths;
 
-	if (access(cmd_table->cmd[0], 0) == 0)
-		return (1);
 	paths = get_paths(env);
 	if (paths == NULL)
 		return (0);
 	command_path = find_valid_path(cmd_table->cmd[0], paths);
 	free_lexer(paths);
 	if (command_path == NULL)
-		return (0);
+	{
+		if (access(cmd_table->cmd[0], X_OK) == 0)
+			return (1);
+		else
+			return (0);
+	}
 	free(cmd_table->cmd[0]);
 	cmd_table->cmd[0] = command_path;
 	return (1);
