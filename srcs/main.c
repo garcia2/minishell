@@ -19,9 +19,11 @@ int	main(int argc, char **argv, char **envp)
 	t_env_list	*env;
 
 	if (argc != 1)
-		return (printf("NO ARGS REQUIRED\n"), 1);
+		return (print_error("ERROR: NO ARGS REQUIRED\n"), 1);
 	(void) argv;
 	env = parse_env(envp);
+	if (env == NULL)
+		return (print_error("ERROR: PROBLEM WITH ENV PARSING\n"), 2);
 	launcher(env);
 	env_lst_clear(&env);
 	return (0);

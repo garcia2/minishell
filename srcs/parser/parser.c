@@ -18,6 +18,8 @@ t_cmd_table	*init_table(char **lex, t_env_list *env)
 	t_cmd_table	*cmd_table;
 	t_cmd_table	*tmp;
 
+	if (lex[0] == NULL)
+		return (init_node());
 	i = 0;
 	cmd_table = NULL;
 	while (lex[i])

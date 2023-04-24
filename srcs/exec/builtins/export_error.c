@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_files.c                                        :+:      :+:    :+:   */
+/*   export_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 14:30:36 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 17:52:13 by nigarcia         ###   ########.fr       */
+/*   Created: 2023/04/18 13:39:00 by nigarcia          #+#    #+#             */
+/*   Updated: 2023/04/18 13:45:08 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	dup_files(t_cmd_table *cmd_table)
+void	print_export_wrong_arg_error(char *arg)
 {
-	if (cmd_table->infile_fd > 2)
-	{
-		dup2(cmd_table->infile_fd, 0);
-	}
-	if (cmd_table->outfile_fd > 2)
-	{
-		dup2(cmd_table->outfile_fd, 1);
-	}
-	return (1);
+	print_error("minishell: export : `");
+	print_error(arg);
+	print_error("': not a valid identifier\n");
 }

@@ -9,7 +9,8 @@ ENV_FILES	= env_parser.c \
 			env_lst.c \
 			env_lst_del.c \
 			env_lst_print.c \
-			get_env_tab.c
+			get_env_tab.c \
+			get_set_env_by_key.c
 
 PARSER_FILES = parser.c\
 			init_utils.c\
@@ -22,12 +23,14 @@ PARSER_FILES = parser.c\
 EXEC_FILES = pwd_cd.c \
 			exec.c \
 			command.c \
-			dup_files.c
+			dup_files.c \
+			exec_error.c
 
 BUILTINS_FILES = cd.c\
 				pwd.c\
 				echo.c\
 				export.c\
+				export_error.c\
 				builtin_util.c\
 				unset.c
 
@@ -41,7 +44,10 @@ EXPAND_FILES = expand.c \
 			get_env.c \
 			delete_quotes.c \
 			join_split.c \
-			expand_cmd_table.c
+			expand_cmd_table.c \
+			re_lexing.c \
+			get_nb_cmd.c \
+			quote_map.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))

@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:22:25 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/31 16:27:13 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 17:43:02 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	check_fd_opened(int fd)
 void	open_infile(int *fd, char **file_name, t_env_list *env)
 {
 	expand_cmd(file_name, env);
-	printf("open expanded: %s\n", *file_name);
 	check_fd_opened(*fd);
 	*fd = open(*file_name, O_RDONLY);
 }

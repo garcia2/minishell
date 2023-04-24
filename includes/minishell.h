@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/22 16:28:10 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/21 17:11:47 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int			init_here_doc(int *i, char **nb, char **temp_file_name);
 
 int			is_white_space(char c);
 int			is_spec_char(char c);
+int			is_quote(char c);
 int			count_token(char *str);
 void		go_next_quote(char	*str, int *i, char quote);
 void		skip_white_space(char *str, int *i);
@@ -95,7 +96,7 @@ int			check_lexer(char **lex);
 
 int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
-void		dup_files(t_cmd_table *cmd_table);
+int			dup_files(t_cmd_table *cmd_table);
 
 /*******************************************************\
 |					BUILTINS FUNCTIONS					|
@@ -105,11 +106,12 @@ int			is_builtin(char *str);
 int			get_pwd(void);
 int			change_directory(char *cmd, t_env_list *env);
 int			export(t_env_list *env, char **args);
-int			unset(t_env_list *env, t_cmd_table *cmd_table);
+void		print_export_wrong_arg_error(char *arg);
+int			unset(t_env_list *env, char	**args);
 void		do_echo(t_cmd_table *cmd_table);
 
 /*******************************************************\
-|					EXPAND FUNCTIONS						|
+|					EXPAND FUNCTIONS					|
 \*******************************************************/
 
 int			expand_cmd(char **str_ptr, t_env_list *env);
@@ -119,6 +121,10 @@ int			convert_dolars(char **lex, t_env_list *env);
 int			delete_quotes(char **split);
 char		*join_split(char **split);
 void		expand_cmd_tables(t_cmd_table *cmd_tab, t_env_list *env);
+int			re_lexing_cmd(char ***cmd, int *quote_map);
+int			get_nb_cmd(char **cmds);
+int			get_lexers_nb_cmd(char ***lexs);
+int			*get_quote_map(char **lex);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|
@@ -140,6 +146,7 @@ t_env_list	*env_lstnew(char *key, char *value);
 void		env_lst_print(t_env_list *lst);
 t_env_list	*parse_env(char **envp);
 char		*get_env_by_key(t_env_list *env_lst, char *key);
+int			set_env_by_key(t_env_list *env_lst, char *key, char *new_value);
 int			find_char(char *str, char c);
 char		**get_env_tab(t_env_list *env);
 
@@ -151,5 +158,12 @@ void		init_signal(void);
 void		handler_signal(int sig);
 void		handler_heredoc(int sig);
 void		signal_heredoc(int sig);
+
+/*******************************************************\
+|					ERROR FUNCTIONS						|
+\*******************************************************/
+
+void		print_error(char *str);
+void		print_command_not_found_error(char *cmd);
 
 #endif

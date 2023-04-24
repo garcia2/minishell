@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 17:01:13 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/03/29 17:17:33 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:25:02 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ int	delete_quotes(char **split)
 		split[i] = deleted_quotes_str;
 		i++;
 	}
-	printf("deleted done\n");
 	return (1);
 }

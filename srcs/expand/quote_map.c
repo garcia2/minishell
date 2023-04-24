@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_files.c                                        :+:      :+:    :+:   */
+/*   quote_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 14:30:36 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 17:52:13 by nigarcia         ###   ########.fr       */
+/*   Created: 2023/04/08 14:01:17 by nigarcia          #+#    #+#             */
+/*   Updated: 2023/04/18 13:49:38 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	dup_files(t_cmd_table *cmd_table)
+int	*get_quote_map(char **lex)
 {
-	if (cmd_table->infile_fd > 2)
+	int	i;
+	int	*quote_map;
+
+	quote_map = ft_calloc(get_nb_cmd(lex) + 1, sizeof(int));
+	if (quote_map == NULL)
+		return (NULL);
+	i = 0;
+	while (lex[i] != NULL)
 	{
-		dup2(cmd_table->infile_fd, 0);
+		quote_map[i] = is_quote(lex[i][0]);
+		i++;
 	}
-	if (cmd_table->outfile_fd > 2)
-	{
-		dup2(cmd_table->outfile_fd, 1);
-	}
-	return (1);
+	quote_map[i] = -1;
+	return (quote_map);
 }

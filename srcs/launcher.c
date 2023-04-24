@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
 /*   Updated: 2023/04/07 14:50:51 by jileroux         ###   ########.fr       */
@@ -101,8 +101,8 @@ int	minishell(t_env_list *env)
 	free(command);
 	if (lex == NULL)
 		return (2);
-	print_lexer(lex);
 	cmd_table = parser(lex, env);
+	free_lexer(lex);
 	if (cmd_table == NULL)
 		return (free_lexer(lex), 2);
 	print_list(cmd_table);

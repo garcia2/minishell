@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_files.c                                        :+:      :+:    :+:   */
+/*   exec_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 14:30:36 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 17:52:13 by nigarcia         ###   ########.fr       */
+/*   Created: 2023/04/05 14:42:02 by nigarcia          #+#    #+#             */
+/*   Updated: 2023/04/05 14:45:50 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	dup_files(t_cmd_table *cmd_table)
+void	print_error(char *str)
 {
-	if (cmd_table->infile_fd > 2)
-	{
-		dup2(cmd_table->infile_fd, 0);
-	}
-	if (cmd_table->outfile_fd > 2)
-	{
-		dup2(cmd_table->outfile_fd, 1);
-	}
-	return (1);
+	write(2, str, ft_strlen(str));
+}
+
+void	print_command_not_found_error(char *cmd)
+{
+	print_error("minishell: ");
+	print_error(cmd);
+	print_error(": command not found\n");
 }
