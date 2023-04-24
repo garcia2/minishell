@@ -6,11 +6,18 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/21 16:39:05 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:31:46 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	exit_failure(t_cmd_table *cmd_table, t_env_list *env, int exit_code)
+{
+	clear_lst(&cmd_table);
+	env_lst_clear(&env);
+	exit(exit_code);
+}
 
 int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 {
@@ -35,19 +42,15 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list *env)
 	if (set_command_path(cmd_table, env) == 0)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
-		clear_lst(&cmd_table);
-		env_lst_clear(&env);
-		exit(1);
+		exit_failure(cmd_table, env, 1);
 	}
 	env_tab = get_env_tab(env);
 	if (env_tab == NULL)
-		exit(1);
+		exit_failure(cmd_table, env, 1);
 	if (execve(cmd_table->cmd[0], cmd_table->cmd, env_tab) == -1)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
-		clear_lst(&cmd_table);
-		env_lst_clear(&env);
-		exit(1);
+		exit_failure(cmd_table, env, 1);
 	}
 }
 
@@ -73,9 +76,7 @@ void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
 		if (dup_files(cmd_table) == 0)
 		{
 			print_error("ERROR: PROBLEM WITH DUP_FILES\n");
-			clear_lst(&cmd_table);
-			env_lst_clear(&env);
-			exit(2);
+			exit_failure(cmd_table, env, 2);
 		}
 		simple_exec(cmd_table, env);
 	}

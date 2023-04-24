@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:31:13 by nicolas           #+#    #+#             */
-/*   Updated: 2023/04/21 17:22:27 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:33:15 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,11 @@ int	increment_shlvl(t_env_list *env)
 	shlvl_str = get_env_by_key(env, "SHLVL");
 	if (shlvl_str == NULL)
 		return (0);
-	printf("shlvl = %s\n", shlvl_str);
 	shlvl_int = ft_atoi(shlvl_str);
-	printf("shlvl_int = %d\n", shlvl_int);
 	free(shlvl_str);
 	shlvl_str = ft_itoa(shlvl_int + 1);
 	if (shlvl_str == NULL)
 		return (0);
-	printf("new_shlvl = %s\n", shlvl_str);
 	return (set_env_by_key(env, "SHLVL", shlvl_str));
 }
 
@@ -74,7 +71,5 @@ t_env_list	*parse_env(char **envp)
 		env_lst_add_back(&env_lst, cur);
 		i++;
 	}
-	if (increment_shlvl(env_lst) == 0)
-		return (env_lst_clear(&env_lst), NULL);
 	return (env_lst);
 }
