@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/22 16:26:54 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:44:59 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	exit_failure(t_cmd_table *cmd_table, t_env_list *env, int exit_code)
-{
-	clear_lst(&cmd_table);
-	env_lst_clear(&env);
-	exit(exit_code);
-}
 
 int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 {
@@ -42,19 +35,23 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list *env)
 	if (set_command_path(cmd_table, env) == 0)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
-		exit_failure(cmd_table, env, 1);
+		clear_lst(&cmd_table);
+		env_lst_clear(&env);
+		exit(1);
 	}
 	env_tab = get_env_tab(env);
 	if (env_tab == NULL)
-		exit_failure(cmd_table, env, 1);
+		exit(1);
 	if (execve(cmd_table->cmd[0], cmd_table->cmd, env_tab) == -1)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
-		exit_failure(cmd_table, env, 1);
+		clear_lst(&cmd_table);
+		env_lst_clear(&env);
+		exit(1);
 	}
 }
 
-void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
+void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list *env)
 {
 	int	pid;
 
@@ -76,10 +73,20 @@ void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
 		if (dup_files(cmd_table) == 0)
 		{
 			print_error("ERROR: PROBLEM WITH DUP_FILES\n");
-			exit_failure(cmd_table, env, 2);
+			clear_lst(&cmd_table);
+			env_lst_clear(&env);
+			exit(2);
 		}
 		simple_exec(cmd_table, env);
 	}
 	else
 		waitpid(pid, NULL, 0);
+}
+
+void	do_exec(t_cmd_table *cmd_table, t_env_list *env)
+{
+	if (cmd_table->next == NULL)
+		do_exec_without_pipe(cmd_table, env);
+	else
+		do_exec_with_pipes(cmd_table, env);
 }
