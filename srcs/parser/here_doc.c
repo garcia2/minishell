@@ -6,51 +6,41 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/04 15:12:57 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/07 14:54:36 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	compare_eof(char *s1, char *s2)
+int	check_signal(char *readed_line, int fd_dup, int fd)
 {
-	if (ft_strlen(s1) != ft_strlen(s2))
-		return (-1);
-	return (0);
-}
-
-char	*ft_strcpy(char *dest, const char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i])
+	if (g_error == 42)
 	{
-		dest[i] = src[i];
-		i++;
+		free(readed_line);
+		dup2(fd_dup, STDIN_FILENO);
+		close(fd_dup);
+		return (close(fd), 0);
 	}
-	dest[i] = '\n';
-	i++;
-	dest[i] = '\0';
-	return (dest);
+	return (1);
 }
 
 int	write_in_file(char *limiter, int fd, char *readed_line)
 {
+	int		fd_dup;
 	int		size;
-	char	*limit;
 
+	fd_dup = dup(STDIN_FILENO);
 	size = ft_strlen(limiter) + 2;
-	limit = malloc(sizeof(char) * size);
-	// a proteger
-	limit = ft_strcpy(limit, limiter);
-	while (1)
+	signal(SIGINT, &signal_heredoc);
+	while (1 && g_error != 42)
 	{
-		write (STDIN_FILENO, ">", 1);
-		readed_line = get_next_line(STDIN_FILENO);
-		if (compare_eof(readed_line, limit) == 0)
+		readed_line = readline(">");
+		if (check_signal(readed_line, fd_dup, fd) == 0)
+			return (0);
+		if (!readed_line)
+			break ;
+		if (ft_strcmp(readed_line, limiter) == 0)
 		{
-			free(limit);
 			free(readed_line);
 			break ;
 		}
@@ -77,19 +67,17 @@ int	here_doc_logic(t_cmd_table *cmd_table, char *limiter)
 	char	*readed_line;
 	char	*nb;
 
-	i = 1;
 	readed_line = NULL;
-	nb = ft_itoa(i);
-	temp_file_name = ft_strjoin(".temp_file_tmp", nb);
-	// a proteger
-	free(nb);
+	nb = NULL;
+	temp_file_name = NULL;
+	init_here_doc(&i, &nb, &temp_file_name);
 	while (access(temp_file_name, R_OK) == 0)
 	{
 		free(temp_file_name);
-		i++;
-		nb = ft_itoa(i);
+		nb = ft_itoa(i++);
 		temp_file_name = ft_strjoin(".temp_file_tmp", nb);
-		// a proteger
+		if (temp_file_name == NULL)
+			return (write(1, "Error : can't create file\n", 27), 0);
 		free(nb);
 	}
 	fd = open(temp_file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);

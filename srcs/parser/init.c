@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:21:22 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/04 15:24:36 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/07 13:16:14 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,32 @@ static int	count_element(char **lex, int *i)
 	return (element);
 }
 
-void	add_cmd(char **lex, char **cmd, int *i)
+int	add_cmd(char **lex, char **cmd, int *i)
 {
 	int	j;
 
 	j = 0;
 	if (!is_delimiter(lex[*i]))
 			cmd[j++] = ft_strdup(lex[*i]);
-			// a proteger
+	if (cmd[j - 1] == NULL)
+		return (write (1, "Error malloc\n", 13), 0);
 	(*i)++;
 	while (lex[*i] && ft_strcmp(lex[*i], "|") != 0)
 	{
 		if (!is_delimiter(lex[*i]) && !is_delimiter(lex[*i - 1]))
 		{
 			cmd[j] = ft_strdup(lex[*i]);
-			// a proteger
+			if (cmd[j - 1] == NULL)
+				return (write (1, "Error malloc\n", 13), 0);
 			j++;
 		}
 		(*i)++;
 	}
 	cmd[j] = NULL;
+	return (1);
 }
 
-void	init_cmd(char **lex, t_cmd_table *cmd_table)
+int	init_cmd(char **lex, t_cmd_table *cmd_table)
 {
 	int	i;
 
@@ -76,15 +79,17 @@ void	init_cmd(char **lex, t_cmd_table *cmd_table)
 	{
 		if (lex[i])
 		{
-			add_cmd(lex, cmd_table->cmd, &i);
+			if (add_cmd(lex, cmd_table->cmd, &i) == 0)
+				return (0);
 			cmd_table = cmd_table->next;
 			if (lex[i])
 				i++;
 		}
 	}
+	return (1);
 }
 
-void	init_tab(char **lex, t_cmd_table *cmd_table)
+int	init_tab(char **lex, t_cmd_table *cmd_table)
 {
 	int	i;
 
@@ -92,12 +97,13 @@ void	init_tab(char **lex, t_cmd_table *cmd_table)
 	while (lex[i])
 	{
 		cmd_table->cmd = malloc(sizeof(char *) * (count_element(lex, &i) + 1));
-		// a proteger
+		if (cmd_table->cmd == NULL)
+			return (0);
 		if (lex[i])
 		{
 			cmd_table = cmd_table->next;
 			i++;
 		}
 	}
-	// return (1);
+	return (1);
 }
