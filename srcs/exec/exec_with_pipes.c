@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/24 14:36:20 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/24 16:24:24 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int	exec_pipex_command(t_pipex *pipex, int pid, t_cmd_table *cmd_table, t_env_li
 	if (is_builtin(cmd_table->cmd[0]))
 	{
 		exec_builtin(cmd_table, env);
+		clear_lst(&cmd_table);
+		env_lst_clear(&env);
+		close_all_pipes(pipex);
+		free_pipex(pipex);
 		exit(1);
 	}
 	if (dup_files(cmd_table) == 0)
@@ -59,9 +63,9 @@ void	do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list *env)
 {
 	t_pipex	*pipex;
 
-	(void) env;
 	pipex = get_pipex(count_pipe(cmd_table));
 	if (pipex == NULL)
 		return ;
 	pipex_process(pipex, cmd_table, env);
+	free_pipex(pipex);
 }

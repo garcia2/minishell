@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/24 15:44:59 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/24 16:17:04 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list *env)
 		env_lst_clear(&env);
 		exit(1);
 	}
+	printf("NO EXEC\n");
 }
 
 void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list *env)
