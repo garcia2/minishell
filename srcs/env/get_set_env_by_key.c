@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 17:05:27 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/21 17:31:03 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:22:51 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,12 @@ char	*get_env_by_key(t_env_list *env_lst, char *key)
 */
 int	set_env_by_key(t_env_list *env_lst, char *key, char *new_value)
 {
-	printf("new_value = %s\n", ft_strdup(new_value));
-	printf("ft_strlen = %zu\n", ft_strlen(new_value));
 	while (env_lst != NULL)
 	{
 		if (strcmp(env_lst->key, key) == 0)
 		{
 			free(env_lst->value);
 			env_lst->value = ft_strdup(new_value);
-			printf("strdup = %s\n", env_lst->value);
 			if (env_lst->value == NULL)
 				return (-1);
 			else
