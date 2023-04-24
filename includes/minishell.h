@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/04 15:43:54 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/22 16:28:10 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+extern int	g_error;
 
 typedef struct s_cmd_table
 {
@@ -62,11 +60,10 @@ char		*get_next_line(int fd);
 int			is_delimiter(char *lex);
 void		clear_lst(t_cmd_table **lst);
 int			ft_strcmp(char *s1, char *s2);
-int			compare_eof(char *s1, char *s2);
-void		init_tab(char **lex, t_cmd_table *cmd_table);
-void		init_cmd(char **lex, t_cmd_table *cmd_table);
+int			add_cmd(char **lex, char **cmd_table, int *i);
+int			init_tab(char **lex, t_cmd_table *cmd_table);
+int			init_cmd(char **lex, t_cmd_table *cmd_table);
 void		add_back(t_cmd_table **lst, t_cmd_table *new);
-void		add_cmd(char **lex, char **cmd_table, int *i);
 int			here_doc_logic(t_cmd_table *cmd_table, char *limiter);
 void		init_redir(char **lex, t_cmd_table *cmd_table, int *i,
 				t_env_list *env);
@@ -74,6 +71,7 @@ void		check_fd_opened(int fd);
 void		open_infile(int *fd, char **file_name, t_env_list *env);
 void		open_outfile(int *fd, char **file_name, t_env_list *env);
 void		open_append(int *fd, char **file_name, t_env_list *env);
+int			init_here_doc(int *i, char **nb, char **temp_file_name);
 
 /*******************************************************\
 |					LEXER FUNCTIONS						|
@@ -95,7 +93,7 @@ int			check_lexer(char **lex);
 |					EXEC FUNCTIONS						|
 \*******************************************************/
 
-int			pwd_cd(t_cmd_table *cmd_table);
+int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
 void		dup_files(t_cmd_table *cmd_table);
 
@@ -105,7 +103,7 @@ void		dup_files(t_cmd_table *cmd_table);
 
 int			is_builtin(char *str);
 int			get_pwd(void);
-int			change_directory(char *cmd);
+int			change_directory(char *cmd, t_env_list *env);
 int			export(t_env_list *env, char **args);
 int			unset(t_env_list *env, t_cmd_table *cmd_table);
 void		do_echo(t_cmd_table *cmd_table);
@@ -151,5 +149,7 @@ char		**get_env_tab(t_env_list *env);
 
 void		init_signal(void);
 void		handler_signal(int sig);
+void		handler_heredoc(int sig);
+void		signal_heredoc(int sig);
 
 #endif

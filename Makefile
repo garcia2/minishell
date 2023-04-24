@@ -14,7 +14,6 @@ ENV_FILES	= env_parser.c \
 PARSER_FILES = parser.c\
 			init_utils.c\
 			here_doc.c\
-			get_next_line.c \
 			init.c\
 			free.c\
 			cmd_table_lst.c\

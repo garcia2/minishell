@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/04 15:52:02 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/22 16:26:54 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 		do_echo(cmd_table);
 	else if (ft_strcmp(cmd_table->cmd[0], "cd") == 0
 		|| ft_strcmp(cmd_table->cmd[0], "pwd") == 0)
-		pwd_cd(cmd_table);
+		pwd_cd(cmd_table, env);
 	else if (ft_strcmp(cmd_table->cmd[0], "export") == 0)
 		export(env, cmd_table->cmd);
 	else if (ft_strcmp(cmd_table->cmd[0], "unset") == 0)

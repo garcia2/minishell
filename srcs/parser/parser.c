@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:31:53 by jileroux          #+#    #+#             */
-/*   Updated: 2023/03/31 17:21:34 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/05 13:33:40 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_cmd_table	*parser(char **lex, t_env_list *env)
 
 	cmd_table = init_table(lex, env);
 	init_tab(lex, cmd_table);
-	init_cmd(lex, cmd_table);
+	if (init_cmd(lex, cmd_table) == 0)
+		return (clear_lst(&cmd_table), NULL);
 	expand_cmd_tables(cmd_table, env);
 	return (cmd_table);
 }
