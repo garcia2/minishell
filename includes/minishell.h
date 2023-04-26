@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/24 14:35:02 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:41:57 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int			dup_files(t_cmd_table *cmd_table);
 int			exec_builtin(t_cmd_table *cmd_table, t_env_list *env);
 void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list *env);
 void		simple_exec(t_cmd_table *cmd_table, t_env_list *env);
-int			exec_pipex_command(t_pipex *pipex, int pid, t_cmd_table *cmd_table, t_env_list *env);
+int			exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list *env);
+void		crit_exit(t_cmd_table *cmd_tab, t_env_list *env, t_pipex *pipex, int ec);
 
 /*******************************************************\
 |					BUILTINS FUNCTIONS					|

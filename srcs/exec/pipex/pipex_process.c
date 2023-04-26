@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:28:39 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/24 14:26:31 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:42:28 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	pipex_process(t_pipex *pipex, t_cmd_table *cmd_table, t_env_list *env)
 			return (2);
 		if (pipex->pids[i] == 0)
 		{
-			if (exec_pipex_command(pipex, i, cmd_table, env) != 0)
+			if (exec_ppx_cmd(pipex, i, cmd_table, env) != 0)
 				return (0);
 			return (1);
 		}

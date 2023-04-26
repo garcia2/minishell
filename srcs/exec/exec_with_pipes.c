@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/24 16:24:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/26 15:41:01 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,31 @@ static int	count_pipe(t_cmd_table *cmd_table)
 	return (nb_pipe);
 }
 
-int	exec_pipex_command(t_pipex *pipex, int pid, t_cmd_table *cmd_table, t_env_list *env)
+int	exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list *env)
 {
 	if (ft_dup(pipex, pid) == 0)
 	{
-		free_pipex(pipex);
-		exit(1);
+		print_error("ERROR: PROBLEM WITH FT_DUP\n");
+		crit_exit(cmd_tab, env, pipex, 1);
 	}
-	if (cmd_table->infile_fd < 0 || cmd_table->outfile_fd < 0)
+	if (cmd_tab->infile_fd < 0 || cmd_tab->outfile_fd < 0)
 	{
 		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
-		exit(1);
+		crit_exit(cmd_tab, env, pipex, 1);
 	}
-	if (cmd_table->cmd == NULL || cmd_table->cmd[0] == NULL)
-		exit(1);
-	if (is_builtin(cmd_table->cmd[0]))
+	if (cmd_tab->cmd == NULL || cmd_tab->cmd[0] == NULL)
+		crit_exit(cmd_tab, env, pipex, 1);
+	if (is_builtin(cmd_tab->cmd[0]))
 	{
-		exec_builtin(cmd_table, env);
-		clear_lst(&cmd_table);
-		env_lst_clear(&env);
-		close_all_pipes(pipex);
-		free_pipex(pipex);
-		exit(1);
+		exec_builtin(cmd_tab, env);
+		crit_exit(cmd_tab, env, pipex, 0);
 	}
-	if (dup_files(cmd_table) == 0)
+	if (dup_files(cmd_tab) == 0)
 	{
 		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
-		clear_lst(&cmd_table);
-		env_lst_clear(&env);
-		exit(2);
+		crit_exit(cmd_tab, env, pipex, 1);
 	}
-	simple_exec(cmd_table, env);
+	simple_exec(cmd_tab, env);
 	return (1);
 }
 
