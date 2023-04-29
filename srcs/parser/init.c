@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:21:22 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/07 13:16:14 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/29 13:17:22 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ int	add_cmd(char **lex, char **cmd, int *i)
 
 	j = 0;
 	if (!is_delimiter(lex[*i]))
-			cmd[j++] = ft_strdup(lex[*i]);
-	if (cmd[j - 1] == NULL)
-		return (write (1, "Error malloc\n", 13), 0);
+	{
+		cmd[j++] = ft_strdup(lex[*i]);
+		if (cmd[j - 1] == NULL)
+			return (write (1, "Error malloc\n", 13), 0);
+	}
 	(*i)++;
 	while (lex[*i] && ft_strcmp(lex[*i], "|") != 0)
 	{
 		if (!is_delimiter(lex[*i]) && !is_delimiter(lex[*i - 1]))
 		{
-			cmd[j] = ft_strdup(lex[*i]);
+			cmd[j++] = ft_strdup(lex[*i]);
 			if (cmd[j - 1] == NULL)
 				return (write (1, "Error malloc\n", 13), 0);
-			j++;
 		}
 		(*i)++;
 	}
