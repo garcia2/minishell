@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/21 17:11:47 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:14:19 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@ typedef struct s_env_list
 	char				*value;
 	struct s_env_list	*next;
 }						t_env_list;
+
+typedef struct s_pipex
+{
+	int	**pipes;
+	int	*pids;
+	int	nb_cmd;
+	int	rfd;
+	int	wfd;
+	int	rdup;
+	int	wdup;
+}	t_pipex;
 
 int			launcher(t_env_list *env);
 int			minishell(t_env_list *env);
@@ -97,6 +108,13 @@ int			check_lexer(char **lex);
 int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
 int			dup_files(t_cmd_table *cmd_table);
+int			exec_builtin(t_cmd_table *cmd_table, t_env_list *env);
+void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list *env);
+void		simple_exec(t_cmd_table *cmd_table, t_env_list *env);
+int			exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab,
+				t_env_list *env);
+void		crit_exit(t_cmd_table *cmd_tab, t_env_list *env,
+				t_pipex *pipex, int ec);
 
 /*******************************************************\
 |					BUILTINS FUNCTIONS					|
@@ -125,6 +143,8 @@ int			re_lexing_cmd(char ***cmd, int *quote_map);
 int			get_nb_cmd(char **cmds);
 int			get_lexers_nb_cmd(char ***lexs);
 int			*get_quote_map(char **lex);
+
+char		**expand_new(char **lex, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|
@@ -165,5 +185,21 @@ void		signal_heredoc(int sig);
 
 void		print_error(char *str);
 void		print_command_not_found_error(char *cmd);
+
+/*******************************************************\
+|					PIPEX FUNCTIONS						|
+\*******************************************************/
+
+int			**get_pipes(int nb_pipes);
+void		free_pipes(int **pipes, int nb_pipes);
+void		close_pipes_not_used(t_pipex *pipex);
+int			waitforit(t_pipex *pipex);
+t_pipex		*get_pipex(int nb_cmd);
+void		free_pipex(t_pipex *pipex);
+void		close_pipex_dup(t_pipex *pipex);
+void		close_all_pipes(t_pipex *pipex);
+int			ft_dup(t_pipex *pipex, int pid);
+int			pipex_process(t_pipex *pipex, t_cmd_table *cmd_table,
+				t_env_list *env);
 
 #endif

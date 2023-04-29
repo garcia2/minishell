@@ -22,6 +22,7 @@ PARSER_FILES = parser.c\
 
 EXEC_FILES = pwd_cd.c \
 			exec.c \
+			exec_with_pipes.c \
 			command.c \
 			dup_files.c \
 			exec_error.c
@@ -45,9 +46,15 @@ EXPAND_FILES = expand.c \
 			delete_quotes.c \
 			join_split.c \
 			expand_cmd_table.c \
-			re_lexing.c \
 			get_nb_cmd.c \
-			quote_map.c
+			quote_map.c \
+			expand_new.c
+
+PIPEX_FILES = pipe.c \
+			pipex.c \
+			pipex_process.c \
+			wait.c \
+			dup.c
 
 LEXER = $(addprefix srcs/lexer/, $(LEXER_FILES))
 PARSER = $(addprefix srcs/parser/, $(PARSER_FILES))
@@ -55,6 +62,7 @@ EXEC = $(addprefix srcs/exec/, $(EXEC_FILES))
 BUILTINS = $(addprefix srcs/exec/builtins/, $(BUILTINS_FILES))
 EXPAND = $(addprefix srcs/expand/, $(EXPAND_FILES))
 ENV = $(addprefix srcs/env/, $(ENV_FILES))
+PIPEX = $(addprefix srcs/exec/pipex/, $(PIPEX_FILES))
 SRCS = $(addprefix srcs/, $(SRCS_FILES))
 
 LEXER_OBJS	= ${LEXER:.c=.o}
@@ -63,6 +71,7 @@ EXEC_OBJS	= ${EXEC:.c=.o}
 BUILTINS_OBJS	= ${BUILTINS:.c=.o}
 EXPAND_OBJS	= ${EXPAND:.c=.o}
 ENV_OBJS	= ${ENV:.c=.o}
+PIPEX_OBJS	= ${PIPEX:.c=.o}
 SRCS_OBJS	= ${SRCS:.c=.o}
 
 NAME	= minishell
@@ -78,16 +87,16 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 .c.o:
 		${CC} ${CFLAGS} -I includes/ -c $< -o ${<:.c=.o}
 
-${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS}
+${NAME}:	${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${PIPEX_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS}
 		make -C libft
-		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
+		${CC} -o ${NAME} ${LEXER_OBJS} ${PARSER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${PIPEX_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS} -I includes/ -L. ${LIBFT} -L/usr/lib/x86_64-linux-gnu  -lreadline
 
-all:		${NAME} bonus
+all:		${NAME}
 
 clean:
 		make clean -C libft
 
-		${RM} ${LEXER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${PARSER_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS}
+		${RM} ${LEXER_OBJS} ${EXPAND_OBJS} ${ENV_OBJS} ${PIPEX_OBJS} ${PARSER_OBJS} ${BUILTINS_OBJS} ${EXEC_OBJS} ${SRCS_OBJS}
 
 fclean:		clean
 		make fclean -C libft

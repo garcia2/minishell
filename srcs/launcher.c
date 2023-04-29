@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/07 14:50:51 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:01:13 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	minishell(t_env_list *env)
 	char		*command;
 	char		**lex;
 
-	add_history("cat << eof > f1");
 	command = readline(">> ");
 	if (check_cmd(command) == 2)
 		return (2);
@@ -101,14 +100,13 @@ int	minishell(t_env_list *env)
 	free(command);
 	if (lex == NULL)
 		return (2);
+	expand_new(lex, env);
 	cmd_table = parser(lex, env);
 	free_lexer(lex);
 	if (cmd_table == NULL)
-		return (free_lexer(lex), 2);
-	print_list(cmd_table);
+		return (2);
 	if (g_error != 42)
 		do_exec(cmd_table, env);
-	free_lexer(lex);
 	clear_lst(&cmd_table);
 	delete_file();
 	return (0);
