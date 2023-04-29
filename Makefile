@@ -46,9 +46,9 @@ EXPAND_FILES = expand.c \
 			delete_quotes.c \
 			join_split.c \
 			expand_cmd_table.c \
-			re_lexing.c \
 			get_nb_cmd.c \
-			quote_map.c
+			quote_map.c \
+			expand_new.c
 
 PIPEX_FILES = pipe.c \
 			pipex.c \

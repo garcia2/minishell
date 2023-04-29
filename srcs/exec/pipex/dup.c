@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:16:08 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/26 14:14:49 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:25:48 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	dup_pid(t_pipex *pipex, int pid)
 		pipex->wdup = -1;
 	else
 		pipex->wdup = dup2(pipex->pipes[pipex->wfd][1], 1);
-	if (pid != 0)
+	/*if (pid != 0)
 		close(pipex->pipes[pipex->rfd][0]);
 	if (pid != pipex->nb_cmd - 1)
-		close(pipex->pipes[pipex->wfd][1]);
+		close(pipex->pipes[pipex->wfd][1]);*/
 }
 
 int	ft_dup(t_pipex *pipex, int pid)

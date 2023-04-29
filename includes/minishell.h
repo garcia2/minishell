@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/26 15:41:57 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:14:19 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,10 @@ int			dup_files(t_cmd_table *cmd_table);
 int			exec_builtin(t_cmd_table *cmd_table, t_env_list *env);
 void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list *env);
 void		simple_exec(t_cmd_table *cmd_table, t_env_list *env);
-int			exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list *env);
-void		crit_exit(t_cmd_table *cmd_tab, t_env_list *env, t_pipex *pipex, int ec);
+int			exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab,
+				t_env_list *env);
+void		crit_exit(t_cmd_table *cmd_tab, t_env_list *env,
+				t_pipex *pipex, int ec);
 
 /*******************************************************\
 |					BUILTINS FUNCTIONS					|
@@ -141,6 +143,8 @@ int			re_lexing_cmd(char ***cmd, int *quote_map);
 int			get_nb_cmd(char **cmds);
 int			get_lexers_nb_cmd(char ***lexs);
 int			*get_quote_map(char **lex);
+
+char		**expand_new(char **lex, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|
@@ -195,6 +199,7 @@ void		free_pipex(t_pipex *pipex);
 void		close_pipex_dup(t_pipex *pipex);
 void		close_all_pipes(t_pipex *pipex);
 int			ft_dup(t_pipex *pipex, int pid);
-int			pipex_process(t_pipex *pipex, t_cmd_table *cmd_table, t_env_list *env);
+int			pipex_process(t_pipex *pipex, t_cmd_table *cmd_table,
+				t_env_list *env);
 
 #endif

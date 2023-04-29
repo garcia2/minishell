@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/07 14:54:36 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:16:37 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	check_signal(char *readed_line, int fd_dup, int fd)
 int	write_in_file(char *limiter, int fd, char *readed_line)
 {
 	int		fd_dup;
-	int		size;
+	//int		size;
 
 	fd_dup = dup(STDIN_FILENO);
-	size = ft_strlen(limiter) + 2;
+	//size = ft_strlen(limiter) + 2;
 	signal(SIGINT, &signal_heredoc);
 	while (1 && g_error != 42)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/26 14:23:41 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:22:18 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	launcher(t_env_list *env)
 {
 	if (env == NULL)
 		return (2);
-	add_history("cat << eof > f1");
 	while (1)
 	{
 		g_error = 0;
@@ -101,6 +100,7 @@ int	minishell(t_env_list *env)
 	free(command);
 	if (lex == NULL)
 		return (2);
+	//expand_new(lex, env);
 	cmd_table = parser(lex, env);
 	free_lexer(lex);
 	if (cmd_table == NULL)
