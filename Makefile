@@ -24,7 +24,8 @@ EXEC_FILES = pwd_cd.c \
 			exec.c \
 			command.c \
 			dup_files.c \
-			exec_error.c
+			exec_error.c\
+			exec_end.c
 
 BUILTINS_FILES = cd.c\
 				pwd.c\
@@ -35,8 +36,9 @@ BUILTINS_FILES = cd.c\
 				unset.c
 
 SRCS_FILES = main.c\
-			launcher.c\
-			signal.c
+			exit.c\
+			signal.c\
+			launcher.c
 
 EXPAND_FILES = expand.c \
 			replace_env_var.c \

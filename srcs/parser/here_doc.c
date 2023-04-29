@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/07 14:54:36 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:13:28 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int	check_signal(char *readed_line, int fd_dup, int fd)
 int	write_in_file(char *limiter, int fd, char *readed_line)
 {
 	int		fd_dup;
-	int		size;
 
 	fd_dup = dup(STDIN_FILENO);
-	size = ft_strlen(limiter) + 2;
 	signal(SIGINT, &signal_heredoc);
 	while (1 && g_error != 42)
 	{

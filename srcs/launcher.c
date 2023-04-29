@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/07 14:50:51 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/29 12:11:15 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	print_list(t_cmd_table *cmd_table)
-{
-	int	i;
-
-	printf("\n PARSER \n\n");
-	while (cmd_table)
-	{
-		i = 0;
-		printf("infile : %d\n", cmd_table->infile_fd);
-		printf("outfile : %d\n", cmd_table->outfile_fd);
-		while (cmd_table->cmd && cmd_table->cmd[i])
-		{
-			printf("cmd : %s\n", cmd_table->cmd[i]);
-			i++;
-		}
-		printf("\nnext cmd ->\n\n");
-		cmd_table = cmd_table->next;
-	}
-}
 
 int	check_cmd(char *command)
 {
@@ -73,10 +53,10 @@ int	launcher(t_env_list *env)
 {
 	if (env == NULL)
 		return (2);
+	init_signal();
 	while (1)
 	{
 		g_error = 0;
-		init_signal();
 		if (minishell(env) == 2)
 			return (1);
 	}
@@ -101,14 +81,19 @@ int	minishell(t_env_list *env)
 	free(command);
 	if (lex == NULL)
 		return (2);
+	if (ft_strcmp(lex[0], "exit") == 0)
+	{
+		env_lst_clear(&env);
+		g_error = exit_value(lex);
+		free_lexer(lex);
+		exit (g_error);
+	}
 	cmd_table = parser(lex, env);
 	free_lexer(lex);
 	if (cmd_table == NULL)
-		return (free_lexer(lex), 2);
-	print_list(cmd_table);
+		return (2);
 	if (g_error != 42)
 		do_exec(cmd_table, env);
-	free_lexer(lex);
 	clear_lst(&cmd_table);
 	delete_file();
 	return (0);

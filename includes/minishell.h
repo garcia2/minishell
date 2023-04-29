@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/21 17:11:47 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/04/29 11:54:19 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,10 @@ int			check_lexer(char **lex);
 |					EXEC FUNCTIONS						|
 \*******************************************************/
 
+void		child_exit(int pid, int *cnt);
+int			dup_files(t_cmd_table *cmd_table);
 int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
-int			dup_files(t_cmd_table *cmd_table);
 
 /*******************************************************\
 |					BUILTINS FUNCTIONS					|
@@ -155,6 +156,7 @@ char		**get_env_tab(t_env_list *env);
 \*******************************************************/
 
 void		init_signal(void);
+void		init_signal2(void);
 void		handler_signal(int sig);
 void		handler_heredoc(int sig);
 void		signal_heredoc(int sig);
@@ -163,6 +165,7 @@ void		signal_heredoc(int sig);
 |					ERROR FUNCTIONS						|
 \*******************************************************/
 
+int			exit_value(char **lex);
 void		print_error(char *str);
 void		print_command_not_found_error(char *cmd);
 
