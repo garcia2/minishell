@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:46:51 by nicolas           #+#    #+#             */
-/*   Updated: 2023/04/27 13:16:34 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/04/29 12:12:07 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ static int	get_str_nb_part(char *str)
 	return (nb_part);
 }
 
+// static int	str_next_part_len(char *str, int i)
+// {
+	
+// }
+
+// static char	**expand_split_part(char *str)
+// {
+// 	char	**split;
+
+// 	split = ft_calloc(get_str_nb_part(str) + 1, sizeof(char *));
+// 	if (split == NULL)
+// 		return (NULL);
+// 	return (split);
+// }
+
 char	**get_expanded_lex(char *str, t_env_list *env)
 {
 	char	*expanded_str;
@@ -53,6 +68,7 @@ char	**expand_new(char **lex, t_env_list *env)
 	int		i;
 
 	(void) lexers;
+	i = 0;
 	while (lex[i] != NULL)
 	{
 		get_expanded_lex(lex[i], env);
