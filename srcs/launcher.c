@@ -71,7 +71,6 @@ int	minishell(t_env_list *env)
 	char		*command;
 	char		**lex;
 
-	add_history("cat << eof > f1");
 	command = readline(">> ");
 	if (check_cmd(command) == 2)
 		return (2);

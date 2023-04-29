@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_files.c                                        :+:      :+:    :+:   */
+/*   pipex_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 14:30:36 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/26 16:05:42 by nigarcia         ###   ########.fr       */
+/*   Created: 2023/01/25 10:28:39 by nigarcia          #+#    #+#             */
+/*   Updated: 2023/04/26 15:42:28 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	dup_files(t_cmd_table *cmd_table)
+int	pipex_process(t_pipex *pipex, t_cmd_table *cmd_table, t_env_list *env)
 {
-	if (cmd_table->infile_fd > 2)
+	int	i;
+
+	i = 0;
+	while (i < pipex->nb_cmd)
 	{
-		dup2(cmd_table->infile_fd, 0);
-		close(cmd_table->infile_fd);
+		pipex->pids[i] = fork();
+		if (pipex->pids[i] < 0)
+			return (2);
+		if (pipex->pids[i] == 0)
+		{
+			if (exec_ppx_cmd(pipex, i, cmd_table, env) != 0)
+				return (0);
+			return (1);
+		}
+		i++;
+		cmd_table = cmd_table->next;
 	}
-	if (cmd_table->outfile_fd > 2)
-	{
-		dup2(cmd_table->outfile_fd, 1);
-		close(cmd_table->outfile_fd);
-	}
-	return (1);
+	close_all_pipes(pipex);
+	return (waitforit(pipex));
 }
