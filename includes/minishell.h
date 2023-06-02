@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/06/02 13:04:21 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:48:31 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int			get_lexers_nb_cmd(char ***lexs);
 int			*get_quote_map(char **lex);
 
 char		**expand_new(char **lex, t_env_list *env);
-char		***relexing(char **lex, t_env_list *env);
+char		**relexing(char **lex, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|

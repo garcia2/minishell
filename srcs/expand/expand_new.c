@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:46:51 by nicolas           #+#    #+#             */
-/*   Updated: 2023/06/02 13:16:47 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:53:43 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,9 @@ char	**get_expanded_lex(char *str, t_env_list *env)
 
 	expanded_lex = expand_split_part(str);
 	print_lexer(expanded_lex);
-	relexing(expanded_lex, env);
+	printf("EXPAND\n");
+	expanded_lex = relexing(expanded_lex, env);
+	print_lexer(expanded_lex);
 	/*i = 0;
 	while (expanded_lex[i] != NULL)
 	{
@@ -126,35 +128,100 @@ static int	lex_len(char **lex)
 	return (i);
 }
 
-char	***relexing(char **lex, t_env_list *env)
+void	print_lexers(char ***lexers)
 {
-	char	***lexers;
+	int	i;
+
+	i = 0;
+	while (lexers[i] != NULL)
+	{
+		printf("PRINT OF Lexers[%d]\n", i);
+		print_lexer(lexers[i]);
+		i++;
+	}
+}
+
+int		get_nb_elem_lexers(char ***lexers)
+{
+	int		len;
 	int		i;
 	int		j;
 
-	printf("Starting relexing\n");
-	lexers = ft_calloc(lex_len(lex), sizeof(char **));
+	len = 0;
+	i = 0;
+	while (lexers[i] != NULL)
+	{
+		j = 0;
+		while (lexers[i][j] != 0)
+		{
+			j++;
+			len++;
+		}
+		i++;
+	}
+	return (len);
+}
+
+char	**rejoin_lexers(char ***lexers)
+{
+	char	**joined_lex;
+	int		x;
+	int		i;
+	int		j;
+
+	printf("nb_elem = %d\n", get_nb_elem_lexers(lexers));
+	joined_lex = ft_calloc(get_nb_elem_lexers(lexers), sizeof(char *));
+	x = 0;
+	i = 0;
+	while (lexers[i] != NULL)
+	{
+		j = 0;
+		while (lexers[i][j] != NULL)
+		{
+			joined_lex[x] = ft_strdup(lexers[i][j]);
+			j++;
+			x++;
+		}
+		i++;
+	}
+	joined_lex[x] = NULL;
+	return (joined_lex);
+}
+
+char	**relexing(char **lex, t_env_list *env)
+{
+	char	***lexers;
+	int		i;
+
+	lexers = ft_calloc(lex_len(lex) + 1, sizeof(char **));
 	if (lexers == NULL)
 		return (NULL);
 	i = 0;
-	j = 0;
 	while (lex[i] != NULL)
 	{
 		if (lex[i][0] == '"')
 		{
 			expand_cmd(lex + i, env);
-			printf("[%s] has double quotes\n", lex[i]);
+			lexers[i] = ft_calloc(2, sizeof(char *));
+			lexers[i][0] = ft_strdup(lex[i]);
+			lexers[i][1] = NULL;
 		}
 		else if (lex[i][0] == '\'')
-			printf("[%s] has simple quotes\n", lex[i]);
+		{
+			lexers[i] = ft_calloc(2, sizeof(char *));
+			lexers[i][0] = ft_calloc(ft_strlen(lex[i] - 2 + 1), sizeof(char));
+			ft_strlcpy(lexers[i][0], lex[i] + 1, ft_strlen(lex[i]) - 2 + 1);
+			lexers[i][1] = NULL;
+		}
 		else
 		{
 			expand_cmd(lex + i, env);
-			printf("[%s] has no quotes\n", lex[i]);
+			lexers[i] = lexer(lex[i]);
 		}
 		i++;
 	}
-	return (lexers);
+	lexers[i] = NULL;
+	return (rejoin_lexers(lexers));
 }
 
 char	**expand_new(char **lex, t_env_list *env)
