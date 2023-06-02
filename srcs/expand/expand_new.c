@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:46:51 by nicolas           #+#    #+#             */
-/*   Updated: 2023/05/10 12:41:49 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/06/02 13:16:47 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,15 @@ static char	**expand_split_part(char *str)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (str[i] != 0)
+	while (str[i] != '\0')
 	{
 		len = str_next_part_len(str, i);
-		printf("len = %d\n", len);
+		//printf("len = %d, i = %d\n", len, i);
 		split[j] = ft_calloc(len + 1, sizeof(char));
-		if (split[i] == NULL)
+		if (split[j] == NULL)
 			return (free_lexer(split), NULL);
 		ft_strlcpy(split[j], str + i, len + 1);
+		//printf("part %d = [%s]\n", j, split[j]);
 		i += len;
 		j++;
 	}
@@ -100,9 +101,9 @@ char	**get_expanded_lex(char *str, t_env_list *env)
 	//char	*expanded_str;
 	//int		i;
 
-	(void) env;
 	expanded_lex = expand_split_part(str);
-	//print_lexer(expanded_lex);
+	print_lexer(expanded_lex);
+	relexing(expanded_lex, env);
 	/*i = 0;
 	while (expanded_lex[i] != NULL)
 	{
@@ -113,6 +114,47 @@ char	**get_expanded_lex(char *str, t_env_list *env)
 	}*/
 	//print_lexer(expanded_lex);
 	return (NULL);
+}
+
+static int	lex_len(char **lex)
+{
+	int	i;
+
+	i = 0;
+	while (lex[i] != NULL)
+		i++;
+	return (i);
+}
+
+char	***relexing(char **lex, t_env_list *env)
+{
+	char	***lexers;
+	int		i;
+	int		j;
+
+	printf("Starting relexing\n");
+	lexers = ft_calloc(lex_len(lex), sizeof(char **));
+	if (lexers == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (lex[i] != NULL)
+	{
+		if (lex[i][0] == '"')
+		{
+			expand_cmd(lex + i, env);
+			printf("[%s] has double quotes\n", lex[i]);
+		}
+		else if (lex[i][0] == '\'')
+			printf("[%s] has simple quotes\n", lex[i]);
+		else
+		{
+			expand_cmd(lex + i, env);
+			printf("[%s] has no quotes\n", lex[i]);
+		}
+		i++;
+	}
+	return (lexers);
 }
 
 char	**expand_new(char **lex, t_env_list *env)
