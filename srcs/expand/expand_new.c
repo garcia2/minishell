@@ -6,11 +6,26 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:46:51 by nicolas           #+#    #+#             */
-/*   Updated: 2023/06/02 14:53:43 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/06/16 12:18:42 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_lexers(char ***lexers)
+{
+	int	i;
+
+	if (lexers == NULL)
+		return ;
+	i = 0;
+	while (lexers[i] != NULL)
+	{
+		free_lexer(lexers[i]);
+		i++;
+	}
+	free(lexers);
+}
 
 int	get_str_nb_part(char *str)
 {
@@ -71,12 +86,12 @@ static char	**expand_split_part(char *str)
 	while (str[i] != '\0')
 	{
 		len = str_next_part_len(str, i);
-		//printf("len = %d, i = %d\n", len, i);
+		printf("len = %d, i = %d\n", len, i);
 		split[j] = ft_calloc(len + 1, sizeof(char));
 		if (split[j] == NULL)
 			return (free_lexer(split), NULL);
 		ft_strlcpy(split[j], str + i, len + 1);
-		//printf("part %d = [%s]\n", j, split[j]);
+		printf("part %d = [%s]\n", j, split[j]);
 		i += len;
 		j++;
 	}
@@ -106,16 +121,7 @@ char	**get_expanded_lex(char *str, t_env_list *env)
 	printf("EXPAND\n");
 	expanded_lex = relexing(expanded_lex, env);
 	print_lexer(expanded_lex);
-	/*i = 0;
-	while (expanded_lex[i] != NULL)
-	{
-		expanded_str = get_expanded_str(expanded_lex[i], env);
-		free(expanded_lex[i]);
-		expanded_lex[i] = expanded_str;
-		i++;
-	}*/
-	//print_lexer(expanded_lex);
-	return (NULL);
+	return (expanded_lex);
 }
 
 static int	lex_len(char **lex)
@@ -169,7 +175,7 @@ char	**rejoin_lexers(char ***lexers)
 	int		i;
 	int		j;
 
-	printf("nb_elem = %d\n", get_nb_elem_lexers(lexers));
+	//printf("nb_elem = %d\n", get_nb_elem_lexers(lexers));
 	joined_lex = ft_calloc(get_nb_elem_lexers(lexers), sizeof(char *));
 	x = 0;
 	i = 0;
@@ -216,6 +222,7 @@ char	**relexing(char **lex, t_env_list *env)
 		else
 		{
 			expand_cmd(lex + i, env);
+			printf("expand = [%s]\n", lex[i]);
 			lexers[i] = lexer(lex[i]);
 		}
 		i++;
@@ -224,18 +231,36 @@ char	**relexing(char **lex, t_env_list *env)
 	return (rejoin_lexers(lexers));
 }
 
-char	**expand_new(char **lex, t_env_list *env)
+// int	nb_lex(char **lex, t_env_list *env)
+// {
+// 	int		i;
+// 	int		nb_lex;
+
+// 	i = 0;
+// 	while (lex[i] != NULL)
+// 	{
+// 		lexers[i] = get_expanded_lex(lex[i], env);
+// 		i++;
+// 	}
+// }
+
+void	expand_new(char ***lex_ptr, t_env_list *env)
 {
 	char	***lexers;
+	char	**expanded_lex;
 	int		i;
 
-	(void) lexers;
+	lexers = ft_calloc(lex_len(*lex_ptr), sizeof(char **));
 	i = 0;
-	while (lex[i] != NULL)
+	while ((*lex_ptr)[i] != NULL)
 	{
-		printf("nb part of [%s] = %d\n", lex[i], get_str_nb_part(lex[i]));
-		get_expanded_lex(lex[i], env);
+		//printf("nb part of [%s] = %d\n", (*lex_ptr)[i], get_str_nb_part((*lex_ptr)[i]));
+		lexers[i] = get_expanded_lex((*lex_ptr)[i], env);
 		i++;
 	}
-	return (NULL);
+	lexers[i] = NULL;
+	expanded_lex = rejoin_lexers(lexers);
+	free_lexers(lexers);
+	free_lexer(*lex_ptr);
+	*lex_ptr = expanded_lex;
 }

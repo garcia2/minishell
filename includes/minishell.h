@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/06/02 14:48:31 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:08:52 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int			get_nb_cmd(char **cmds);
 int			get_lexers_nb_cmd(char ***lexs);
 int			*get_quote_map(char **lex);
 
-char		**expand_new(char **lex, t_env_list *env);
+void		expand_new(char ***lex_ptr, t_env_list *env);
 char		**relexing(char **lex, t_env_list *env);
 
 /*******************************************************\
