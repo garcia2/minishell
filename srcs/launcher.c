@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/29 12:11:15 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:54:29 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	minishell(t_env_list *env)
 		free_lexer(lex);
 		exit (g_error);
 	}
+	//expand_new(&lex, env);
 	cmd_table = parser(lex, env);
 	free_lexer(lex);
 	if (cmd_table == NULL)

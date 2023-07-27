@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/29 12:02:27 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/04/29 15:07:50 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list *env)
 	if (cmd_table->infile_fd < 0 || cmd_table->outfile_fd < 0)
 	{
 		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
+		perror(NULL);
 		return ;
 	}
 	if (cmd_table->cmd == NULL || cmd_table->cmd[0] == NULL)
@@ -74,6 +75,7 @@ void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list *env)
 		if (dup_files(cmd_table) == 0)
 		{
 			print_error("ERROR: PROBLEM WITH DUP_FILES\n");
+			perror(NULL);
 			crit_exit(cmd_table, env, NULL, 1);
 		}
 		init_signal2();
