@@ -14,8 +14,16 @@
 
 int	check_cmd(char *command)
 {
-	if (command == NULL || ft_strcmp(command, "exit") == 0)
+	if (command == NULL)
+	{
+		write (1, "exit\n", 5);
 		return (2);
+	}
+	if (ft_strcmp(command, "exit") == 0)
+	{
+		write (1, "exit\n", 5);
+		return (2);
+	}
 	if (strcmp(command, "\0") == 0)
 		return (1);
 	add_history(command);
@@ -80,13 +88,6 @@ int	minishell(t_env_list *env)
 	free(command);
 	if (lex == NULL)
 		return (2);
-	if (ft_strcmp(lex[0], "exit") == 0)
-	{
-		env_lst_clear(&env);
-		g_error = exit_value(lex);
-		free_lexer(lex);
-		exit (g_error);
-	}
 	//expand_new(&lex, env);
 	cmd_table = parser(lex, env);
 	free_lexer(lex);

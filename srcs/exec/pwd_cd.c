@@ -14,20 +14,22 @@
 
 int	pwd_cd(t_cmd_table *cmd_table, t_env_list *env)
 {
-	if (!cmd_table->cmd[1] && ft_strcmp(cmd_table->cmd[0], "pwd") == 0)
+	if (ft_strcmp(cmd_table->cmd[0], "pwd") == 0)
 	{
 		if (get_pwd() == 2)
-			return (2);
+			return (1);
 	}
 	else if (!cmd_table->cmd[1])
 	{
 		print_error("Error : argument required for cd\n");
-		return (2);
+		return (1);
 	}
+	else if (ft_strcmp(cmd_table->cmd[0], "cd") == 0 && cmd_table->cmd[2])
+		printf("Minishell: cd: too many arguments\n");
 	else if (!cmd_table->cmd[2] && ft_strcmp(cmd_table->cmd[0], "cd") == 0)
 	{
 		if (change_directory(cmd_table->cmd[1], env) == 2)
-			return (2);
+			return (1);
 	}
 	return (0);
 }

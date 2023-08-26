@@ -40,7 +40,10 @@ int	change_directory(char *cmd, t_env_list *env)
 	path = cmd;
 	if (chdir(path) == -1)
 	{
-		printf("Minishell: cd: No such file or directory\n");
+		if (access(path, F_OK) == 0)
+			printf("Minishell: cd: Not a directory\n");
+		else
+			printf("Minishell: cd: No such file or directory\n");
 		return (2);
 	}
 	change_oldpwd(env);
