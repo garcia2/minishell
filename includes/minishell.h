@@ -79,6 +79,7 @@ int			here_doc_logic(t_cmd_table *cmd_table, char *limiter);
 void		init_redir(char **lex, t_cmd_table *cmd_table, int *i,
 				t_env_list *env);
 void		check_fd_opened(int fd);
+void		check_fd_closed(int fd);
 void		open_infile(int *fd, char **file_name, t_env_list *env);
 void		open_outfile(int *fd, char **file_name, t_env_list *env);
 void		open_append(int *fd, char **file_name, t_env_list *env);

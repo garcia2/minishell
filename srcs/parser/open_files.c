@@ -18,6 +18,15 @@ void	check_fd_opened(int fd)
 		close(fd);
 }
 
+void	check_fd_closed(int fd)
+{
+	if (fd > 1)
+	{
+		printf("je close %d\n", fd);
+		close(fd);
+	}
+}
+
 void	open_infile(int *fd, char **file_name, t_env_list *env)
 {
 	expand_cmd(file_name, env);

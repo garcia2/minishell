@@ -28,6 +28,8 @@ int	pipex_process(t_pipex *pipex, t_cmd_table *cmd_table, t_env_list *env)
 				return (0);
 			return (1);
 		}
+		check_fd_closed(cmd_table->infile_fd);
+		check_fd_closed(cmd_table->outfile_fd);
 		i++;
 		cmd_table = cmd_table->next;
 	}

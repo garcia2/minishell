@@ -26,9 +26,6 @@ int	check_args(char **lex)
 
 int	check_digit(char **lex)
 {
-	int		i;
-
-	i = 0;
 	if (lex[1][0] != '0' && atoi(lex[1]) == 0)
 	{
 		print_error("minishell: exit: ");

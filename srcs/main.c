@@ -38,6 +38,7 @@ int	main(int argc, char **argv, char **envp)
 	if (env == NULL)
 		return (print_error("ERROR: PROBLEM WITH ENV PARSING\n"), 2);
 	shlvl_increment(env);
+	add_history("cat .gitignore > infile | cat .gitignore > f1");
 	launcher(env);
 	env_lst_clear(&env);
 	return (0);
