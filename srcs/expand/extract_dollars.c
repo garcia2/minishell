@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 15:46:35 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/12 07:39:22 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/12 08:03:31 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,5 @@ char **expand_process(char *str, t_env_list *env)
 	tab2 = extract_dollars_tab(tab, env);
 	free_lexer(tab);
 	tab = interpret_dolars(tab2, env);
-	print_lexer(tab);
 	return (tab);
 }

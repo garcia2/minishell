@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/12 07:38:58 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/12 08:02:50 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	minishell(t_env_list *env)
 	t_cmd_table	*cmd_table;
 	char		*command;
 	char		**lex;
+	char		**tab;
 
 	command = readline(">> ");
 	if (check_cmd(command) == 2)
@@ -113,7 +114,9 @@ int	minishell(t_env_list *env)
 	//extract_dollars(command, env);	
 	//extract_quotes(command);
 	//printf("[%s] => [%s]\n", command, replace_env_var(command, env));
-	expand_process(command, env);
+	tab = expand_process(command, env);
+	print_lexer(tab);
+	free(tab);
 	lex = lexer(command);
 	free(command);
 	if (lex == NULL)
@@ -126,6 +129,6 @@ int	minishell(t_env_list *env)
 	// if (g_error != 42)
 	// 	do_exec(cmd_table, env);
 	clear_lst(&cmd_table);
-	// delete_file();
+	delete_file();
 	return (0);
 }
