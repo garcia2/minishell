@@ -56,6 +56,7 @@ EXPAND_FILES = expand.c \
 			rejoin_expand_f.c \
 			split_space_without_quotes_f.c \
 			delete_quotes_f.c \
+			expand_f.c
 
 PIPEX_FILES = pipe.c \
 			pipex.c \

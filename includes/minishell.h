@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/12 16:31:28 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:15:53 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,12 +152,15 @@ char		**relexing(char **lex, t_env_list *env);
 
 void		 print_command_table(t_cmd_table *cmd_table);
 char 		**extract_dollars(char *str, t_env_list *env);
+char		 **extract_dollars_tab(char **tab, t_env_list *env);
+char		**interpret_dolars(char **tab, t_env_list *env);
 char 		**extract_quotes(char *str);
 char		*rejoin_expand(char **tab);
-char 		**expand_process(char *str, t_env_list *env);
 char		 **split_spaces_witout_quotes(char *str);
 int			get_len(char **tab);
 char		**erazer(char **tab);
+char 		**expand_process(char *str, t_env_list *env);
+char		**expands(char **tab, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|

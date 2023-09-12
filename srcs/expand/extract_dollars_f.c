@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 15:46:35 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/12 16:50:11 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:18:29 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char **extract_dollars_tab(char **tab, t_env_list *env)
 			nb_dollars++;
 		i++;
 	}
-	printf("nb_dollars=%d\n", nb_dollars);
+	// printf("nb_dollars=%d\n", nb_dollars);
 	new_tab = ft_calloc(nb_dollars + 2, sizeof(char *));
 	i = 0;
 	k = 0;
@@ -137,7 +137,7 @@ char **extract_dollars_tab(char **tab, t_env_list *env)
 		}
 		i++;
 	}
-	printf("k = %d\n", k);
+	// printf("k = %d\n", k);
 	new_tab[k] = NULL;
 	return (new_tab);
 }
@@ -169,24 +169,4 @@ char	**interpret_dolars(char **tab, t_env_list *env)
 	}
 	new_tab[i] = NULL;
 	return (new_tab);
-}
-
-char	**expand_process(char *str, t_env_list *env)
-{
-	char	**tab;
-	char	**tab2;
-	char	*new_str;
-
-	tab = extract_quotes(str);
-	tab2 = extract_dollars_tab(tab, env);
-	free_lexer(tab);
-	tab = interpret_dolars(tab2, env);
-	new_str = rejoin_expand(tab);
-	//printf("rejoined = [%s]\n", new_str);
-	free_lexer(tab);
-	tab = split_spaces_witout_quotes(new_str);
-	free(new_str);
-	tab2 = erazer(tab);
-	free_lexer(tab);
-	return (tab2);
 }

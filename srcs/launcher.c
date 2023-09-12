@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/12 16:46:23 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/12 17:17:33 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,9 @@ int	minishell(t_env_list *env)
 	// extract_dollars(command, env);	
 	// extract_quotes(command);
 	// printf("[%s] => [%s]\n", command, replace_env_var(command, env));
-	tab = expand_process(command, env);
-	print_lexer(tab);
-	free_lexer(tab);
+	//tab = expand_process(command, env);
+	//print_lexer(tab);
+	//free_lexer(tab);
 	///split_spaces_witout_quotes(command);
 	lex = lexer(command);
 	free(command);
@@ -126,9 +126,12 @@ int	minishell(t_env_list *env)
 	free_lexer(lex);
 	if (cmd_table == NULL)
 		return (2);
-	//print_command_table(cmd_table);
-	// if (g_error != 42)
-	// 	do_exec(cmd_table, env);
+	tab = expands(cmd_table->cmd, env);
+	free_lexer(cmd_table->cmd);
+	cmd_table->cmd = tab;
+	print_command_table(cmd_table);
+	if (g_error != 42)
+		do_exec(cmd_table, env);
 	clear_lst(&cmd_table);
 	delete_file();
 	return (0);
