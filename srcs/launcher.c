@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/12 08:02:50 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/12 16:46:23 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,13 @@ int	minishell(t_env_list *env)
 		return (2);
 	else if (check_cmd(command) == 1)
 		return (1);
-	//extract_dollars(command, env);	
-	//extract_quotes(command);
-	//printf("[%s] => [%s]\n", command, replace_env_var(command, env));
+	// extract_dollars(command, env);	
+	// extract_quotes(command);
+	// printf("[%s] => [%s]\n", command, replace_env_var(command, env));
 	tab = expand_process(command, env);
 	print_lexer(tab);
-	free(tab);
+	free_lexer(tab);
+	///split_spaces_witout_quotes(command);
 	lex = lexer(command);
 	free(command);
 	if (lex == NULL)

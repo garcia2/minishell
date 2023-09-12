@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_quotes.c                                   :+:      :+:    :+:   */
+/*   extract_quotes_f.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:47:15 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/12 08:08:03 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/12 14:19:17 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	split_quotes(char **splited_quotes, char *str)
 			quote = str[i];
 			while (str[i + j] != '\0' && str[i + j] != quote)
 				j++;
-			j += str[i] == quote;
+			j += str[i + j] == quote;
 		}
 		else
 		{
