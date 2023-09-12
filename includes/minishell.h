@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/06/16 11:08:52 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/12 07:25:06 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,11 @@ int			*get_quote_map(char **lex);
 
 void		expand_new(char ***lex_ptr, t_env_list *env);
 char		**relexing(char **lex, t_env_list *env);
+
+void		 print_command_table(t_cmd_table *cmd_table);
+char 		**extract_dollars(char *str, t_env_list *env);
+char 		**extract_quotes(char *str);
+char 		**expand_process(char *str, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|

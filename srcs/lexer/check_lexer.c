@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_lexer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:32:27 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 17:26:31 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/12 07:42:38 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	check_delimiters(char **lex)
 	int	i;
 
 	i = 0;
+	//printf("Check deimiter of lex :\n");
+	//print_lexer(lex);
 	while (lex[i] != NULL)
 	{
 		if (is_delimiter(lex[i]))
