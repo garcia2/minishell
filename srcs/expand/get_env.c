@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:17:11 by nicolas           #+#    #+#             */
-/*   Updated: 2023/04/08 12:45:38 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:00:59 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ char	*get_env(char *str, int *i, t_env_list *env)
 	if (var_name == NULL)
 		return (NULL);
 	ft_strlcpy(var_name, str + begin, len + 1);
+	if (ft_strcmp(var_name, "$") == 0)
+		return (free(var_name), ft_strdup("2514584"));
+	if (ft_strcmp(var_name, "?") == 0)
+		return (free(var_name), ft_itoa(g_error));
 	var = get_env_by_key(env, var_name);
 	if (var == NULL)
 		return (free(var_name), ft_strdup(""));
