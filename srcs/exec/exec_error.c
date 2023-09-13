@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:42:02 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/26 14:41:51 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:26:21 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	print_command_not_found_error(char *cmd)
 	print_error(": command not found\n");
 }
 
-void	crit_exit(t_cmd_table *cmd_tab, t_env_list *env, t_pipex *pipex, int ec)
+void	crit_exit(t_cmd_table *cmd_tab, t_env_list **env, t_pipex *pipex, int ec)
 {
 	if (cmd_tab != NULL)
 		clear_lst(&cmd_tab);
 	if (env != NULL)
-		env_lst_clear(&env);
+		env_lst_clear(env);
 	if (pipex != NULL)
 	{
 		close_all_pipes(pipex);

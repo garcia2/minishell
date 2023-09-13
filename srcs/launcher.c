@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/13 13:01:02 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:25:04 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	delete_file(void)
 	return (1);
 }
 
-int	launcher(t_env_list *env)
+int	launcher(t_env_list **env)
 {
 	if (env == NULL)
 		return (2);
@@ -73,7 +73,7 @@ int	launcher(t_env_list *env)
 	return (0);
 }
 
-int	minishell(t_env_list *env)
+int	minishell(t_env_list **env)
 {
 	t_cmd_table	*cmd_table;
 	char		*command;
@@ -88,7 +88,7 @@ int	minishell(t_env_list *env)
 	free(command);
 	if (lex == NULL)
 		return (2);
-	cmd_table = parser(lex, env);
+	cmd_table = parser(lex, *env);
 	free_lexer(lex);
 	if (cmd_table == NULL)
 		return (2);

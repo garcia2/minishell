@@ -6,13 +6,13 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:28:39 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/26 15:42:28 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:33:52 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	pipex_process(t_pipex *pipex, t_cmd_table *cmd_table, t_env_list *env)
+int	pipex_process(t_pipex *pipex, t_cmd_table *cmd_table, t_env_list **env)
 {
 	int	i;
 
