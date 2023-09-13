@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:35:28 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/13 15:52:45 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:26:47 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ t_env_list	*env_lst_pop(t_env_list **lst, char *key)
 	if (ft_strcmp((*lst)->key, key) == 0)
 	{
 		pop = *lst;
-		printf("next ? %d\n", (*lst)->next != NULL);
 		*lst = (*lst)->next;
 		pop->next = NULL;
-		env_lst_print(pop);
-		//env_lst_print(*lst);
 		return (pop);
 	}
 	cur = *lst;

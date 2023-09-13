@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 16:25:58 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 17:58:21 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list **env
 		crit_exit(cmd_tab, env, pipex, 1);
 	if (is_builtin(cmd_tab->cmd[0]))
 	{
-		exec_builtin(cmd_tab, env);
+		exec_builtin(cmd_tab, env, pipex);
 		crit_exit(cmd_tab, env, pipex, 0);
 	}
 	if (dup_files(cmd_tab) == 0)

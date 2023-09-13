@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:23 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/18 13:44:40 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:22:24 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	export_parse_args(char *args, char **key, char **value)
 	}
 }
 
-static int	export_add_var(t_env_list *env, char *args)
+static int	export_add_var(t_env_list **env, char *args)
 {
 	t_env_list	*new_env_var;
 	char		*key;
@@ -82,29 +82,29 @@ static int	export_add_var(t_env_list *env, char *args)
 		return (0);
 	if (new_env_var->key == NULL)
 		return (env_lst_clear(&new_env_var), 0);
-	if (env_lst_exists(env, new_env_var->key))
+	if (env_lst_exists(*env, new_env_var->key))
 	{
 		if (new_env_var->value != NULL)
 		{
-			env_lst_free_one(env_lst_pop(&env, new_env_var->key));
-			env_lst_add_back(&env, new_env_var);
+			env_lst_free_one(env_lst_pop(env, new_env_var->key));
+			env_lst_add_back(env, new_env_var);
 		}
 		else
 			env_lst_free_one(new_env_var);
 	}
 	else
-		env_lst_add_back(&env, new_env_var);
+		env_lst_add_back(env, new_env_var);
 	return (1);
 }
 
-int	export(t_env_list *env, char **args)
+int	export(t_env_list **env, char **args)
 {
 	int	i;
 
 	if (args == NULL)
-		export_print(env);
+		export_print(*env);
 	else if (args[0] == NULL)
-		export_print(env);
+		export_print(*env);
 	else
 	{
 		i = 0;
