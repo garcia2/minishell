@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:28:39 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 18:41:05 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 21:11:52 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	pipex_process(t_pipex *pipex, t_cmd_table *cmd_table, t_env_list **env)
 		check_fd_closed(cmd_table->infile_fd);
 		check_fd_closed(cmd_table->outfile_fd);
 		i++;
-		//cmd_table = cmd_table->next;
+		cmd_table = cmd_table->next;
 	}
 	close_all_pipes(pipex);
 	return (waitforit(pipex));
