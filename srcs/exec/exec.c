@@ -28,6 +28,7 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 	else if (ft_strcmp(cmd_table->cmd[0], "exit") == 0)
 	{
 		env_lst_clear(&env);
+		clear_lst(&cmd_table);
 		write (1, "exit\n", 5);
 		exit (g_error);
 	}

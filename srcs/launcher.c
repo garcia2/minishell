@@ -21,7 +21,7 @@ int	check_cmd(char *command)
 	}
 	if (ft_strcmp(command, "exit") == 0)
 	{
-		write (1, "exit\n", 5);
+		write (2, "exit\n", 5);
 		return (2);
 	}
 	if (strcmp(command, "\0") == 0)

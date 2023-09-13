@@ -12,11 +12,6 @@
 
 #include "minishell.h"
 
-int	is_whitespace(char c)
-{
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
-}
-
 int	get_nb_spaces_without_quotes(char *str)
 {
 	int	is_in_quote;
@@ -94,7 +89,6 @@ char	**split_spaces_witout_quotes(char *str)
 	int		len;
 	int		k;
 
-	(void) str;
 	splited_tab = ft_calloc(get_nb_spaces_without_quotes(str) + 1,
 			sizeof(char *));
 	k = 0;

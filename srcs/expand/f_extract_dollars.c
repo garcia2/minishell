@@ -38,7 +38,7 @@ int	get_nb_dollars(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '$' && str[i +1] != '\0' && str[i + 1] != ' ')
+		if (str[i] == '$' && str[i +1] != '\0' && str[i+1] != ' ' && str[i+1] != '$')
 		{
 			nb_dollars++;
 			i++;
@@ -51,47 +51,47 @@ int	get_nb_dollars(char *str)
 			}
 		}
 		else
-	i++;
+			i++;
 	}
-	return (nb_dollars);
+	return (nb_dollars + 1);
 }
 
-char	**extract_dollars(char *str, t_env_list *env)
+char	**extract_dollars(char *str)
 {
 	char	**splited_str;
 	int		i;
 	int		j;
 	int		k;
 
-	(void) env;
-	splited_str = ft_calloc(get_nb_dollars(str) + 2, sizeof(char *));
+	splited_str = ft_calloc(get_nb_dollars(str) + 2, sizeof(char*));
 	splited_str[get_nb_dollars(str)] = NULL;
 	k = 0;
 	i = 0;
 	while (str[i] != '\0')
 	{
 		j = 1;
-		while (str[i] == '$' && str[i + j] != '\0' && str[i + j] != '$'
-			&& str[i + j] != ' ')
-				j++;
+		while (str[i] == '$' && str[i + j] == '$')
+			j++;
+		while (str[i] == '$' && str[i + j] != '\0' && str[i + j] != '$' && str[i + j] != ' ')
+			j++;
 		while (str[i] != '$' && str[i + j] != '\0' && str[i + j] != '$')
-				j++;
+			j++;
 		splited_str[k] = ft_calloc(j + 1, sizeof(char));
 		ft_strlcpy(splited_str[k], str + i, j + 1);
 		splited_str[k][j] = '\0';
 		k++;
 		i += j;
 	}
+	splited_str[k] = NULL;
 	return (splited_str);
 }
 
-void	extract_dollars_tab_without_quote(char **new_tab, char *str,
-		t_env_list *env, int *k)
+void	extract_dollars_tab_without_quote(char **new_tab, char *str, int *k)
 {
 	char	**temp_tab;
 	int		i;
 
-	temp_tab = extract_dollars(str, env);
+	temp_tab = extract_dollars(str);
 	i = 0;
 	while (temp_tab[i] != NULL)
 	{
@@ -102,7 +102,7 @@ void	extract_dollars_tab_without_quote(char **new_tab, char *str,
 	free_lexer(temp_tab);
 }
 
-char	**extract_dollars_tab(char **tab, t_env_list *env)
+char **extract_dollars_tab(char **tab)
 {
 	char	**new_tab;
 	int		nb_dollars;
@@ -125,7 +125,7 @@ char	**extract_dollars_tab(char **tab, t_env_list *env)
 	while (tab[i] != NULL)
 	{
 		if (!is_quote(tab[i][0]))
-			extract_dollars_tab_without_quote(new_tab, tab[i], env, &k);
+			extract_dollars_tab_without_quote(new_tab, tab[i], &k);
 		else
 		{
 			new_tab[k] = ft_strdup(tab[i]);

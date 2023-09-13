@@ -19,7 +19,7 @@ char	**expand_process(char *str, t_env_list *env)
 	char	*new_str;
 
 	tab = extract_quotes(str);
-	tab2 = extract_dollars_tab(tab, env);
+	tab2 = extract_dollars_tab(tab);
 	free_lexer(tab);
 	tab = interpret_dolars(tab2, env);
 	free_lexer(tab2);
@@ -79,7 +79,7 @@ char	**expands(char **tab, t_env_list *env)
 
 	i = -1;
 	k = 0;
-	new_tab = malloc(sizeof(char *) * (sizer(tab) + 1));
+	new_tab = malloc(sizeof(char *) * (sizer(tab) + 2));
 	if (new_tab == NULL)
 		return (0);
 	while (tab[++i])
