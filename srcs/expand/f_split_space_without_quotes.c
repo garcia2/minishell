@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_split_space_without_quotes.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:01:50 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:51:29 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:35:42 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	get_len_next_word(char *str, int i)
 	{
 		if (str[i + j] == ' ' && !is_in_quote)
 			return (j);
-		else if(is_quote(str[i + j]))
+		else if (is_quote(str[i + j]))
 		{
 			if (is_in_quote && str[i + j] == quote)
 				is_in_quote = 0;
@@ -82,14 +82,15 @@ int	get_len_next_word(char *str, int i)
 	return (j);
 }
 
-char **split_spaces_witout_quotes(char *str)
+char	**split_spaces_witout_quotes(char *str)
 {
 	char	**splited_tab;
 	int		i;
 	int		len;
 	int		k;
 
-	splited_tab = ft_calloc(get_nb_spaces_without_quotes(str) + 1, sizeof(char *));
+	splited_tab = ft_calloc(get_nb_spaces_without_quotes(str) + 1,
+			sizeof(char *));
 	k = 0;
 	i = 0;
 	while (str[i] != 0)

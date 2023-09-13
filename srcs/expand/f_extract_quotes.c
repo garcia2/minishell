@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_quotes_f.c                                 :+:      :+:    :+:   */
+/*   f_extract_quotes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 18:47:15 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/12 14:19:17 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:38:58 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	count_quotes(char *str)
 	int		nb_quotes;
 	char	quote;
 	int		i;
-	
+
 	i = 0;
 	nb_quotes = 0;
 	while (str[i] != '\0')
@@ -61,7 +61,8 @@ static void	split_quotes(char **splited_quotes, char *str)
 		}
 		else
 		{
-			while (str[i + j] != '\0' && str[i + j] != '\'' && str[i + j] != '"')
+			while (str[i + j] != '\0' && str[i + j] != '\''
+				&& str[i + j] != '"')
 				j++;
 		}
 		splited_quotes[k] = ft_calloc(j + 1, sizeof(char));
@@ -73,16 +74,13 @@ static void	split_quotes(char **splited_quotes, char *str)
 	splited_quotes[k] = NULL;
 }
 
-char **extract_quotes(char *str)
+char	**extract_quotes(char *str)
 {
 	char	**splited_quotes;
 
 	splited_quotes = ft_calloc(count_quotes(str) + 1, sizeof(char *));
 	if (splited_quotes == NULL)
 		return (NULL);
-	//printf("count quotes = %d\n", count_quotes(str));
 	split_quotes(splited_quotes, str);
-	//printf("Print of splited_quotes :\n");
-	//print_lexer(splited_quotes);
 	return (splited_quotes);
 }

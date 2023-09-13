@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   f_extract_dollars.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 15:46:35 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/13 14:06:42 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:36:50 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_command_table(t_cmd_table *cmd_table)
+void	print_command_table(t_cmd_table *cmd_table)
 {
 	int	i;
 

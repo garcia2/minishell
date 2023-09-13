@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:28:40 by nico              #+#    #+#             */
-/*   Updated: 2023/04/24 13:13:26 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:59:50 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	free_pipex(t_pipex *pipex)
 
 void	close_pipex_dup(t_pipex *pipex)
 {
-	close(pipex->rdup);
-	close(pipex->wdup);
+	check_fd_closed(pipex->rdup);
+	check_fd_closed(pipex->wdup);
 }

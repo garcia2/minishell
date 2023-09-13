@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/13 13:09:06 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:01:02 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,32 +72,6 @@ int	launcher(t_env_list *env)
 	dprintf(STDOUT_FILENO, "exit\n");
 	return (0);
 }
-
-// int	minishell(t_env_list *env)
-// {
-// 	t_cmd_table	*cmd_table;
-// 	char		*command;
-// 	char		**lex;
-
-// 	command = readline(">> ");
-// 	if (check_cmd(command) == 2)
-// 		return (2);
-// 	else if (check_cmd(command) == 1)
-// 		return (1);
-// 	lex = lexer(command);
-// 	free(command);
-// 	if (lex == NULL)
-// 		return (2);
-// 	cmd_table = parser(lex, env);
-// 	free_lexer(lex);
-// 	if (cmd_table == NULL)
-// 		return (2);
-// 	if (g_error != 42)
-// 		do_exec(cmd_table, env);
-// 	clear_lst(&cmd_table);
-// 	delete_file();
-// 	return (0);
-// }
 
 int	minishell(t_env_list *env)
 {
