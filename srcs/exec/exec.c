@@ -6,13 +6,13 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 18:21:45 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:40:31 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_builtin(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex)
+int	exec_builtin(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd_table *cmd_table_save)
 {
 	if (ft_strcmp(cmd_table->cmd[0], "echo") == 0)
 		do_echo(cmd_table);
@@ -32,7 +32,7 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex)
 		else
 			write (1, "exit\n", 5);
 		env_lst_clear(env);
-		clear_lst(&cmd_table);
+		clear_lst(&cmd_table_save);
 		exit (g_error);
 	}
 	return (1);
@@ -83,7 +83,7 @@ void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env)
 		return ;
 	if (is_builtin(cmd_table->cmd[0]))
 	{
-		exec_builtin(cmd_table, env, NULL);
+		exec_builtin(cmd_table, env, NULL, cmd_table);
 		return ;
 	}
 	pid = fork();

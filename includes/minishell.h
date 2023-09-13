@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 18:20:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:43:49 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ int			dup_files(t_cmd_table *cmd_table);
 int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
 int			dup_files(t_cmd_table *cmd_table);
-int			exec_builtin(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex);
+int			exec_builtin(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd_table *cmd_table_save);
 void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list **env);
 void		simple_exec(t_cmd_table *cmd_table, t_env_list **env);
 int			exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab,
-				t_env_list **env);
+				t_env_list **env, t_cmd_table *cmd_table_save);
 void		crit_exit(t_cmd_table *cmd_tab, t_env_list **env,
 				t_pipex *pipex, int ec);
 

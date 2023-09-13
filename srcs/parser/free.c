@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:40:06 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/13 18:04:31 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:46:18 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	clear_lst(t_cmd_table **lst)
 		return ;
 	while ((*lst)->next != NULL)
 	{
-		printf("cleaning\n");
 		cur = (*lst)->next;
 		del_lst(*lst);
 		*lst = cur;
