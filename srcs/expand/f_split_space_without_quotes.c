@@ -3,31 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   f_split_space_without_quotes.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:01:50 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:35:42 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:18:49 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_nb_spaces_without_quotes(char *str)
+static int	get_nb_spaces_process(char *str, char quote, int is_in_quote)
 {
-	int	is_in_quote;
-	int	quote;
 	int	i;
 	int	nb_spaces;
 
-	if (ft_strlen(str) == 0)
-		return (0);
 	nb_spaces = str[0] != ' ';
-	is_in_quote = 0;
-	if (is_quote(str[0]))
-	{
-		is_in_quote = 1;
-		quote = str[0];
-	}
 	i = 1;
 	while (str[i] != '\0')
 	{
@@ -48,20 +38,28 @@ int	get_nb_spaces_without_quotes(char *str)
 	return (nb_spaces);
 }
 
-int	get_len_next_word(char *str, int i)
+int	get_nb_spaces_without_quotes(char *str)
 {
-	int		is_in_quote;
-	char	quote;
-	int		j;
+	int	is_in_quote;
+	int	quote;
+	int	nb_spaces;
 
-	if (str[i] == '\0')
+	if (ft_strlen(str) == 0)
 		return (0);
 	is_in_quote = 0;
-	if (is_quote(str[i]))
+	if (is_quote(str[0]))
 	{
 		is_in_quote = 1;
-		quote = str[i];
+		quote = str[0];
 	}
+	nb_spaces = get_nb_spaces_process(str, quote, is_in_quote);
+	return (nb_spaces);
+}
+
+static int	get_len_process(char *str, int i, int is_in_quote, char quote)
+{
+	int	j;
+
 	j = 1;
 	while (str[i + j] != '\0')
 	{
@@ -81,6 +79,58 @@ int	get_len_next_word(char *str, int i)
 	}
 	return (j);
 }
+
+int	get_len_next_word(char *str, int i)
+{
+	int		is_in_quote;
+	char	quote;
+	int		len;
+
+	if (str[i] == '\0')
+		return (0);
+	is_in_quote = 0;
+	if (is_quote(str[i]))
+	{
+		is_in_quote = 1;
+		quote = str[i];
+	}
+	len = get_len_process(str, i, is_in_quote, quote);
+	return (len);
+}
+
+// int	get_len_next_word(char *str, int i)
+// {
+// 	int		is_in_quote;
+// 	char	quote;
+// 	int		j;
+
+// 	if (str[i] == '\0')
+// 		return (0);
+// 	is_in_quote = 0;
+// 	if (is_quote(str[i]))
+// 	{
+// 		is_in_quote = 1;
+// 		quote = str[i];
+// 	}
+// 	j = 1;
+// 	while (str[i + j] != '\0')
+// 	{
+// 		if (str[i + j] == ' ' && !is_in_quote)
+// 			return (j);
+// 		else if (is_quote(str[i + j]))
+// 		{
+// 			if (is_in_quote && str[i + j] == quote)
+// 				is_in_quote = 0;
+// 			else if (!is_in_quote)
+// 			{
+// 				is_in_quote = 1;
+// 				quote = str[i];
+// 			}
+// 		}
+// 		j++;
+// 	}
+// 	return (j);
+// }
 
 char	**split_spaces_witout_quotes(char *str)
 {

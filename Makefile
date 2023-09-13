@@ -23,6 +23,7 @@ PARSER_FILES = parser.c\
 EXEC_FILES = pwd_cd.c \
 			exec.c \
 			exec_with_pipes.c \
+			exec_without_pipe.c \
 			command.c \
 			dup_files.c \
 			exec_error.c\
@@ -45,13 +46,10 @@ EXPAND_FILES = expand.c \
 			replace_env_var.c \
 			convert_dolars.c \
 			get_env.c \
-			delete_quotes.c \
 			join_split.c \
-			expand_cmd_table.c \
-			get_nb_cmd.c \
-			quote_map.c \
-			expand_new.c \
 			f_extract_dollars.c \
+			f_extract_dollars_tab.c \
+			f_interpret_dollars.c \
 			f_extract_quotes.c \
 			f_rejoin_expand.c \
 			f_split_space_without_quotes.c \

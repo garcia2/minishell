@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 18:43:49 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:35:38 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_pipex
 	int	wfd;
 	int	rdup;
 	int	wdup;
+	int	pid;
 }	t_pipex;
 
 int			launcher(t_env_list **env);
@@ -111,10 +112,12 @@ int			dup_files(t_cmd_table *cmd_table);
 int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
 int			dup_files(t_cmd_table *cmd_table);
-int			exec_builtin(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd_table *cmd_table_save);
+int			exec_builtin(t_cmd_table *cmd_table, t_env_list **env,
+				t_pipex *pipex, t_cmd_table *cmd_table_save);
 void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list **env);
+void		do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env);
 void		simple_exec(t_cmd_table *cmd_table, t_env_list **env);
-int			exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab,
+int			exec_ppx_cmd(t_pipex *pipex, t_cmd_table *cmd_tab,
 				t_env_list **env, t_cmd_table *cmd_table_save);
 void		crit_exit(t_cmd_table *cmd_tab, t_env_list **env,
 				t_pipex *pipex, int ec);
@@ -139,27 +142,28 @@ int			expand_cmd(char **str_ptr, t_env_list *env);
 char		*get_env(char *str, int *i, t_env_list *env);
 char		*replace_env_var(char *str, t_env_list *env);
 int			convert_dolars(char **lex, t_env_list *env);
-int			delete_quotes(char **split);
+//int			delete_quotes(char **split);
 char		*join_split(char **split);
-void		expand_cmd_tables(t_cmd_table *cmd_tab, t_env_list *env);
+//void		expand_cmd_tables(t_cmd_table *cmd_tab, t_env_list *env);
 int			re_lexing_cmd(char ***cmd, int *quote_map);
-int			get_nb_cmd(char **cmds);
-int			get_lexers_nb_cmd(char ***lexs);
-int			*get_quote_map(char **lex);
+//int			get_nb_cmd(char **cmds);
+//int			get_lexers_nb_cmd(char ***lexs);
+//int			*get_quote_map(char **lex);
 
-void		expand_new(char ***lex_ptr, t_env_list *env);
-char		**relexing(char **lex, t_env_list *env);
+//void		expand_new(char ***lex_ptr, t_env_list *env);
+//char		**relexing(char **lex, t_env_list *env);
 
-void		 print_command_table(t_cmd_table *cmd_table);
-char 		**extract_dollars(char *str);
-char		 **extract_dollars_tab(char **tab);
+//void		print_command_table(t_cmd_table *cmd_table);
+int			get_nb_dollars(char *str);
+char		**extract_dollars(char *str);
+char		**extract_dollars_tab(char **tab);
 char		**interpret_dolars(char **tab, t_env_list *env);
-char 		**extract_quotes(char *str);
+char		**extract_quotes(char *str);
 char		*rejoin_expand(char **tab);
-char		 **split_spaces_witout_quotes(char *str);
+char		**split_spaces_witout_quotes(char *str);
 int			get_len(char **tab);
 char		**erazer(char **tab);
-char 		**expand_process(char *str, t_env_list *env);
+char		**expand_process(char *str, t_env_list *env);
 char		**expands(char **tab, t_env_list *env);
 void		f_expand_command_table(t_cmd_table *cmd_table, t_env_list *env);
 

@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete_quotes_f.c                                  :+:      :+:    :+:   */
+/*   f_delete_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:15:20 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/12 17:10:46 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:04:43 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*copy_checker(char *str)
+static int	get_size_copy_checker(char *str)
 {
-	int		i;
-	int		j;
-	int		size;
-	int		quote;
-	char	*new_str;
+	int	size;
+	int	quote;
 
-	i = 0;
-	j = 0;
 	quote = 0;
 	if (is_quote(str[0]))
 		quote++;
 	if (is_quote(str[strlen(str) - 1]))
 		quote++;
 	size = (strlen(str) - quote);
+	return (size);
+}
+
+char	*copy_checker(char *str)
+{
+	int		i;
+	int		j;
+	int		size;
+	char	*new_str;
+
+	i = 0;
+	j = 0;
+	size = get_size_copy_checker(str);
 	new_str = malloc(sizeof(char) * size + 1);
 	if (new_str == NULL)
 		return (NULL);

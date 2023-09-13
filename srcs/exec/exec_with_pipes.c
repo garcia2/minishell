@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_with_pipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 18:39:51 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:21:24 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ static int	count_pipe(t_cmd_table *cmd_table)
 	return (nb_pipe);
 }
 
-int	exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list **env, t_cmd_table *cmd_table_save)
+int	exec_ppx_cmd(t_pipex *pipex, t_cmd_table *cmd_tab,
+t_env_list **env, t_cmd_table *cmd_table_save)
 {
-	if (ft_dup(pipex, pid) == 0)
+	if (ft_dup(pipex, pipex->pid) == 0)
 	{
 		print_error("ERROR: PROBLEM WITH FT_DUP\n");
 		crit_exit(cmd_table_save, env, pipex, 1);

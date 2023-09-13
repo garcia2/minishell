@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_nb_cmd.c                                       :+:      :+:    :+:   */
+/*   f_interpret_dollars.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/08 13:17:35 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/27 09:59:34 by nicolas          ###   ########.fr       */
+/*   Created: 2023/09/13 23:24:23 by nicolas           #+#    #+#             */
+/*   Updated: 2023/09/13 23:25:14 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	get_nb_cmd(char **cmds)
+int	get_len(char **tab)
 {
-	int	nb_cmd;
+	int	len;
 
-	nb_cmd = 0;
-	while (cmds[nb_cmd] != NULL)
-		nb_cmd++;
-	return (nb_cmd);
+	len = 0;
+	while (tab[len] != NULL)
+		len++;
+	return (len);
 }
 
-int	get_lexers_nb_cmd(char ***lexs)
+char	**interpret_dolars(char **tab, t_env_list *env)
 {
-	int	nb_cmd;
-	int	i;
+	char	**new_tab;
+	int		i;
 
-	nb_cmd = 0;
+	new_tab = ft_calloc(get_len(tab) + 1, sizeof(char *));
 	i = 0;
-	while (lexs[i] != NULL)
+	while (tab[i] != NULL)
 	{
-		nb_cmd += get_nb_cmd(lexs[i]);
+		if (tab[i][0] == '\'')
+			new_tab[i] = ft_strdup(tab[i]);
+		else
+			new_tab[i] = replace_env_var(tab[i], env);
 		i++;
 	}
-	return (nb_cmd);
+	new_tab[i] = NULL;
+	return (new_tab);
 }
