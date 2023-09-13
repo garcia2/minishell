@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/13 08:55:44 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/13 11:15:05 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,12 @@ int	minishell(t_env_list *env)
 	t_cmd_table	*cmd_table;
 	char		*command;
 	char		**lex;
-	char		**tab;
 
 	command = readline(">> ");
 	if (check_cmd(command) == 2)
 		return (2);
 	else if (check_cmd(command) == 1)
 		return (1);
-	// extract_dollars(command, env);	
-	// extract_quotes(command);
-	// printf("[%s] => [%s]\n", command, replace_env_var(command, env));
-	//tab = expand_process(command, env);
-	//print_lexer(tab);
-	//free_lexer(tab);
-	///split_spaces_witout_quotes(command);
 	lex = lexer(command);
 	free(command);
 	if (lex == NULL)
@@ -126,10 +118,6 @@ int	minishell(t_env_list *env)
 	free_lexer(lex);
 	if (cmd_table == NULL)
 		return (2);
-	tab = expands(cmd_table->cmd, env);
-	free_lexer(cmd_table->cmd);
-	cmd_table->cmd = tab;
-	//print_command_table(cmd_table);
 	if (g_error != 42)
 		do_exec(cmd_table, env);
 	clear_lst(&cmd_table);

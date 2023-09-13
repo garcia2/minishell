@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_f.c                                         :+:      :+:    :+:   */
+/*   f_expand.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:08:41 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/12 17:18:08 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:11:27 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,19 @@ int	sizer(char **tab)
 		i++;
 	}
 	return (malloc_len);
+}
+
+void	f_expand_command_table(t_cmd_table *cmd_table, t_env_list *env)
+{
+	char	**expanded_cmd;
+
+	while (cmd_table != NULL)
+	{
+		expanded_cmd = expands(cmd_table->cmd, env);
+		free_lexer(cmd_table->cmd);
+		cmd_table->cmd = expanded_cmd;
+		cmd_table = cmd_table->next;
+	}
 }
 
 char	**expands(char **tab, t_env_list *env)

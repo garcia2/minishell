@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/12 17:15:53 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:09:02 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ int			get_len(char **tab);
 char		**erazer(char **tab);
 char 		**expand_process(char *str, t_env_list *env);
 char		**expands(char **tab, t_env_list *env);
+void		f_expand_command_table(t_cmd_table *cmd_table, t_env_list *env);
 
 /*******************************************************\
 |					ENV_LIST FUNCTIONS					|

@@ -51,12 +51,12 @@ EXPAND_FILES = expand.c \
 			get_nb_cmd.c \
 			quote_map.c \
 			expand_new.c \
-			extract_dollars_f.c \
-			extract_quotes_f.c \
-			rejoin_expand_f.c \
-			split_space_without_quotes_f.c \
-			delete_quotes_f.c \
-			expand_f.c
+			f_extract_dollars.c \
+			f_extract_quotes.c \
+			f_rejoin_expand.c \
+			f_split_space_without_quotes.c \
+			f_delete_quotes.c \
+			f_expand.c \
 
 PIPEX_FILES = pipe.c \
 			pipex.c \
