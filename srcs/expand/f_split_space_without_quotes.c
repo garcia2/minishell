@@ -6,89 +6,11 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:01:50 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:01:43 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:51:29 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-A remplacer char espace  par white_space 
-*/
-// int	get_nb_spaces_without_quotes(char *str)
-// {
-// 	int		nb_spaces;
-// 	int		i;
-// 	char	quote;
-
-// 	i = 0;
-// 	while (str[i] != '\0' && str[i] == ' ')
-// 		i++;
-// 	nb_spaces = (str[i] != '\0' && str[i] != ' ' && !is_quote(str[i]));
-// 	while (str[i] != '\0')
-// 	{
-// 		if (is_quote(str[i]))
-// 		{
-// 			nb_spaces++;
-// 			quote = str[i];
-// 			i++;
-// 			while (str[i] != '\0' && str[i] != quote)
-// 				i++;
-// 		}
-// 		else
-// 		{
-// 			if (str[i] == ' ')
-// 			{
-// 				while (str[i] != '\0' && str[i] == ' ')
-// 					i++;
-// 				nb_spaces += str[i] != '\0';
-// 			}
-// 		}
-// 		i += (str[i] != '\0');
-// 	}
-// 	return (nb_spaces);
-// }
-
-int is_whitespace(char c) {
-    return c == ' ' || c == '\t' || c == '\n' || c == '\r';
-}
-
-// int	get_nb_spaces_without_quotes(char *str) {
-//     int word_count = 0;
-//     int in_quotes = 0; // 0 represents false, 1 represents double quotes, 2 represents single quotes
-
-//     while (*str) {
-//         if (*str == '"') {
-//             if (in_quotes == 1) {
-//                 in_quotes = 0;
-//             } else if (in_quotes == 0) {
-//                 in_quotes = 1;
-//             }
-//         } else if (*str == '\'') {
-//             if (in_quotes == 2) {
-//                 in_quotes = 0;
-//             } else if (in_quotes == 0) {
-//                 in_quotes = 2;
-//             }
-//         } else if (!in_quotes && is_whitespace(*str)) {
-//             // Skip consecutive whitespace characters
-//             while (is_whitespace(*str)) {
-//                 str++;
-//             }
-//             word_count++;
-//             continue;
-//         }
-//         str++;
-//     }
-
-//     // If the string ends with non-whitespace characters
-//     // and it's not inside quotes, increment word_count.
-//     if (!in_quotes && word_count > 0) {
-//         word_count++;
-//     }
-
-//     return word_count;
-// }
 
 int	get_nb_spaces_without_quotes(char *str)
 {
@@ -167,18 +89,6 @@ char **split_spaces_witout_quotes(char *str)
 	int		len;
 	int		k;
 
-	(void) str;
-	//TEST
-	// printf("nb_space of [s] = %d\n", get_nb_spaces_without_quotes("s"));
-	// printf("nb_space of [] = %d\n", get_nb_spaces_without_quotes(""));
-	// printf("nb_space of [  sfwef] = %d\n", get_nb_spaces_without_quotes("  sfwef"));
-	// printf("nb_space of [    ] = %d\n", get_nb_spaces_without_quotes("    "));
-	// printf("nb_space of [\"Salut\"] = %d\n", get_nb_spaces_without_quotes("\"Salut\""));
-	// printf("nb_space of [\"S a l ut\"] = %d\n", get_nb_spaces_without_quotes("\"S a l ut\""));
-	// printf("nb_space of [\"S a l ut\" 'oui' et \"toi\"] = %d\n", get_nb_spaces_without_quotes("\"S a l ut\" 'oui' et \"toi\""));
-	// printf("nb_space of [j\"ie  ie\"wjf   ] = %d\n", get_nb_spaces_without_quotes("j\"ie  ie\"wjf   "));
-	// printf("nb_space of [    ewf wef ewf wef e  ] = %d\n", get_nb_spaces_without_quotes("    ewf wef ewf wef e  "));
-	// 
 	splited_tab = ft_calloc(get_nb_spaces_without_quotes(str) + 1, sizeof(char *));
 	k = 0;
 	i = 0;
@@ -192,8 +102,6 @@ char **split_spaces_witout_quotes(char *str)
 		splited_tab[k][len] = '\0';
 		k++;
 		i += len;
-		// printf("len = %d\n", len);
-		// printf("i = %d\n", i);
 	}
 	splited_tab[k] = NULL;
 	return (splited_tab);

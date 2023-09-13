@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/08/26 11:04:01 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/13 13:08:36 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 	{
 		env_lst_clear(&env);
 		//g_error = exit_value(lex);
-		//free_lexer(lex);
-		write (1, "exit\n", 5);
+		clear_lst(&cmd_table);
+		write (2, "exit\n", 5);
 		exit (g_error);
 	}
 	return (1);

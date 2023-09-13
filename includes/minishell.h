@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:09:02 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:29:53 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,8 @@ void		expand_new(char ***lex_ptr, t_env_list *env);
 char		**relexing(char **lex, t_env_list *env);
 
 void		 print_command_table(t_cmd_table *cmd_table);
-char 		**extract_dollars(char *str, t_env_list *env);
-char		 **extract_dollars_tab(char **tab, t_env_list *env);
+char 		**extract_dollars(char *str);
+char		 **extract_dollars_tab(char **tab);
 char		**interpret_dolars(char **tab, t_env_list *env);
 char 		**extract_quotes(char *str);
 char		*rejoin_expand(char **tab);

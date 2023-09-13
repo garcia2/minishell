@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/13 11:15:05 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:09:06 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_cmd(char *command)
 	}
 	if (ft_strcmp(command, "exit") == 0)
 	{
-		write (1, "exit\n", 5);
+		write (2, "exit\n", 5);
 		return (2);
 	}
 	if (strcmp(command, "\0") == 0)

@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:08:41 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:11:27 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:03:25 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ char	**expand_process(char *str, t_env_list *env)
 	char	*new_str;
 
 	tab = extract_quotes(str);
-	tab2 = extract_dollars_tab(tab, env);
+	tab2 = extract_dollars_tab(tab);
 	free_lexer(tab);
 	tab = interpret_dolars(tab2, env);
+	free_lexer(tab2);
 	new_str = rejoin_expand(tab);
 	free_lexer(tab);
 	tab = split_spaces_witout_quotes(new_str);
@@ -78,7 +79,7 @@ char	**expands(char **tab, t_env_list *env)
 
 	i = -1;
 	k = 0;
-	new_tab = malloc(sizeof(char *) * (sizer(tab) + 1));
+	new_tab = malloc(sizeof(char *) * (sizer(tab) + 2));
 	if (new_tab == NULL)
 		return (0);
 	while (tab[++i])
