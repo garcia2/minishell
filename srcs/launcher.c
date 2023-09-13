@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/12 17:17:33 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 08:55:44 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int	minishell(t_env_list *env)
 	tab = expands(cmd_table->cmd, env);
 	free_lexer(cmd_table->cmd);
 	cmd_table->cmd = tab;
-	print_command_table(cmd_table);
+	//print_command_table(cmd_table);
 	if (g_error != 42)
 		do_exec(cmd_table, env);
 	clear_lst(&cmd_table);
