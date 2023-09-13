@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:33:39 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:05:01 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 	else if (ft_strcmp(cmd_table->cmd[0], "export") == 0)
 		export(env, cmd_table->cmd + 1);
 	else if (ft_strcmp(cmd_table->cmd[0], "unset") == 0)
+	{
 		unset(env, cmd_table->cmd + 1);
+		printf("PRINT OF ENV\n\n\n\n\n");
+		env_lst_print(env);
+		
+	}
 	else if (ft_strcmp(cmd_table->cmd[0], "env") == 0)
 		env_lst_print(env);
 	else if (ft_strcmp(cmd_table->cmd[0], "exit") == 0)
