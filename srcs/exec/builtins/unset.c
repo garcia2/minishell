@@ -6,13 +6,13 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:13:25 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 16:06:59 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:37:36 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	unset(t_env_list *env, char	**args)
+int	unset(t_env_list **env, char	**args)
 {
 	int			i;
 	t_env_list	*pop;
@@ -20,11 +20,9 @@ int	unset(t_env_list *env, char	**args)
 	i = 0;
 	while (args[i] != NULL)
 	{
-		pop = env_lst_pop(&env, args[i]);
-		printf("PRINT OF POP\n\n\n\n\n");
+		pop = env_lst_pop(env, args[i]);
 		env_lst_print(pop);
 		env_lst_clear(&pop);
-		
 		i++;
 	}
 	return (1);

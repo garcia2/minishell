@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 13:29:53 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:31:02 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef struct s_pipex
 	int	wdup;
 }	t_pipex;
 
-int			launcher(t_env_list *env);
-int			minishell(t_env_list *env);
+int			launcher(t_env_list **env);
+int			minishell(t_env_list **env);
 
-void		do_exec(t_cmd_table *cmd_table, t_env_list *env);
+void		do_exec(t_cmd_table *cmd_table, t_env_list **env);
 
 /*******************************************************\
 |					PARSER FUNCTIONS					|
@@ -111,12 +111,12 @@ int			dup_files(t_cmd_table *cmd_table);
 int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
 int			dup_files(t_cmd_table *cmd_table);
-int			exec_builtin(t_cmd_table *cmd_table, t_env_list *env);
-void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list *env);
-void		simple_exec(t_cmd_table *cmd_table, t_env_list *env);
+int			exec_builtin(t_cmd_table *cmd_table, t_env_list **env);
+void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list **env);
+void		simple_exec(t_cmd_table *cmd_table, t_env_list **env);
 int			exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab,
-				t_env_list *env);
-void		crit_exit(t_cmd_table *cmd_tab, t_env_list *env,
+				t_env_list **env);
+void		crit_exit(t_cmd_table *cmd_tab, t_env_list **env,
 				t_pipex *pipex, int ec);
 
 /*******************************************************\
@@ -128,7 +128,7 @@ int			get_pwd(void);
 int			change_directory(char *cmd, t_env_list *env);
 int			export(t_env_list *env, char **args);
 void		print_export_wrong_arg_error(char *arg);
-int			unset(t_env_list *env, char	**args);
+int			unset(t_env_list **env, char	**args);
 void		do_echo(t_cmd_table *cmd_table);
 
 /*******************************************************\
@@ -219,6 +219,6 @@ void		close_pipex_dup(t_pipex *pipex);
 void		close_all_pipes(t_pipex *pipex);
 int			ft_dup(t_pipex *pipex, int pid);
 int			pipex_process(t_pipex *pipex, t_cmd_table *cmd_table,
-				t_env_list *env);
+				t_env_list **env);
 
 #endif

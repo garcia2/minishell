@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:00:04 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/09 16:00:03 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:24:16 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv, char **envp)
 		return (print_error("ERROR: PROBLEM WITH ENV PARSING\n"), 2);
 	shlvl_increment(env);
 	add_history("cat .gitignore > infile | cat .gitignore > f1");
-	launcher(env);
+	launcher(&env);
 	env_lst_clear(&env);
 	return (0);
 }

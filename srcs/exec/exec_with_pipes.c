@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/26 15:41:01 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 16:25:58 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	count_pipe(t_cmd_table *cmd_table)
 	return (nb_pipe);
 }
 
-int	exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list *env)
+int	exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list **env)
 {
 	if (ft_dup(pipex, pid) == 0)
 	{
@@ -53,7 +53,7 @@ int	exec_ppx_cmd(t_pipex *pipex, int pid, t_cmd_table *cmd_tab, t_env_list *env)
 	return (1);
 }
 
-void	do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list *env)
+void	do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list **env)
 {
 	t_pipex	*pipex;
 
