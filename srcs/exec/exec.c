@@ -6,13 +6,13 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 16:37:48 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 18:40:31 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_builtin(t_cmd_table *cmd_table, t_env_list **env)
+int	exec_builtin(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd_table *cmd_table_save)
 {
 	if (ft_strcmp(cmd_table->cmd[0], "echo") == 0)
 		do_echo(cmd_table);
@@ -20,16 +20,19 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list **env)
 		|| ft_strcmp(cmd_table->cmd[0], "pwd") == 0)
 		pwd_cd(cmd_table, *env);
 	else if (ft_strcmp(cmd_table->cmd[0], "export") == 0)
-		export(*env, cmd_table->cmd + 1);
+		export(env, cmd_table->cmd + 1);
 	else if (ft_strcmp(cmd_table->cmd[0], "unset") == 0)
 		unset(env, cmd_table->cmd + 1);
 	else if (ft_strcmp(cmd_table->cmd[0], "env") == 0)
 		env_lst_print(*env);
 	else if (ft_strcmp(cmd_table->cmd[0], "exit") == 0)
 	{
+		if (pipex != NULL)
+			free_pipex(pipex);
+		else
+			write (1, "exit\n", 5);
 		env_lst_clear(env);
-		clear_lst(&cmd_table);
-		write (1, "exit\n", 5);
+		clear_lst(&cmd_table_save);
 		exit (g_error);
 	}
 	return (1);
@@ -80,7 +83,7 @@ void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env)
 		return ;
 	if (is_builtin(cmd_table->cmd[0]))
 	{
-		exec_builtin(cmd_table, env);
+		exec_builtin(cmd_table, env, NULL, cmd_table);
 		return ;
 	}
 	pid = fork();
