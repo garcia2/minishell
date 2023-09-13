@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 12:31:53 by jileroux          #+#    #+#             */
-/*   Updated: 2023/06/16 12:20:30 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:07:52 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ t_cmd_table	*parser(char **lex, t_env_list *env)
 	init_tab(lex, cmd_table);
 	if (init_cmd(lex, cmd_table) == 0)
 		return (clear_lst(&cmd_table), NULL);
-	//expand_cmd_tables(cmd_table, env);
+	f_expand_command_table(cmd_table, env);
 	return (cmd_table);
 }

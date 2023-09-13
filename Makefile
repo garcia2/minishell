@@ -50,7 +50,13 @@ EXPAND_FILES = expand.c \
 			expand_cmd_table.c \
 			get_nb_cmd.c \
 			quote_map.c \
-			expand_new.c
+			expand_new.c \
+			f_extract_dollars.c \
+			f_extract_quotes.c \
+			f_rejoin_expand.c \
+			f_split_space_without_quotes.c \
+			f_delete_quotes.c \
+			f_expand.c \
 
 PIPEX_FILES = pipe.c \
 			pipex.c \
