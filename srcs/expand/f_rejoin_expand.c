@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rejoin_expand_f.c                                  :+:      :+:    :+:   */
+/*   f_rejoin_expand.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:39:28 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/12 16:41:00 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:36:06 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int get_total_len(char **tab)
+static	int	get_total_len(char **tab)
 {
 	int	total_len;
 	int	i;
@@ -32,7 +32,6 @@ char	*rejoin_expand(char **tab)
 	char	*str;
 	int		i;
 	int		k;
-	
 
 	str = ft_calloc(get_total_len(tab) + 1, sizeof(char));
 	k = 0;

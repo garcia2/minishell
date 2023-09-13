@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 12:22:25 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/05 17:43:02 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:53:54 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	check_fd_closed(int fd)
 {
 	if (fd > 1)
 	{
-		printf("je close %d\n", fd);
 		close(fd);
 	}
 }

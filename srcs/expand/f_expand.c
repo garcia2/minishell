@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_expand.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:08:41 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:11:27 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:40:57 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	**expand_process(char *str, t_env_list *env)
 	tab2 = extract_dollars_tab(tab, env);
 	free_lexer(tab);
 	tab = interpret_dolars(tab2, env);
+	free_lexer(tab2);
 	new_str = rejoin_expand(tab);
 	free_lexer(tab);
 	tab = split_spaces_witout_quotes(new_str);

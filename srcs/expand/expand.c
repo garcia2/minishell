@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 13:58:48 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 10:48:40 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 11:38:03 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	expand_cmd(char **str_ptr, t_env_list *env)
 	if (split == NULL)
 		return (0);
 	convert_dolars(split, env);
-	//delete_quotes(split);
 	join = join_split(split);
 	free_lexer(split);
 	if (join == NULL)

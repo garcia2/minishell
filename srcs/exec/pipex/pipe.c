@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_bonus.c                                       :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 14:03:06 by nico              #+#    #+#             */
-/*   Updated: 2023/04/24 13:13:20 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/13 12:58:38 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	close_all_pipes(t_pipex *pipex)
 	i = 0;
 	while (i < pipex->nb_cmd)
 	{
-		close(pipex->pipes[i][0]);
-		close(pipex->pipes[i][1]);
+		check_fd_closed(pipex->pipes[i][0]);
+		check_fd_closed(pipex->pipes[i][1]);
 		i++;
 	}
 }

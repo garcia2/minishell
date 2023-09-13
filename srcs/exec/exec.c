@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/08/26 11:04:01 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/13 11:33:39 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 	else if (ft_strcmp(cmd_table->cmd[0], "exit") == 0)
 	{
 		env_lst_clear(&env);
-		//g_error = exit_value(lex);
-		//free_lexer(lex);
 		write (1, "exit\n", 5);
 		exit (g_error);
 	}
@@ -39,10 +37,9 @@ int	exec_builtin(t_cmd_table *cmd_table, t_env_list *env)
 void	simple_exec(t_cmd_table *cmd_table, t_env_list *env)
 {
 	char		**env_tab;
-	t_cmd_table *tmp;
+	t_cmd_table	*tmp;
 
 	tmp = cmd_table;
-
 	if (set_command_path(cmd_table, env) == 0)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
