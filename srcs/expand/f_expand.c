@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_expand.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:08:41 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 11:40:57 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/13 14:27:09 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**expand_process(char *str, t_env_list *env)
 	return (tab2);
 }
 
-int	sizer(char **tab)
+int	sizer(char **tab, t_env_list *env)
 {
 	int		i;
 	int		j;
@@ -43,7 +43,7 @@ int	sizer(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		t_tab = extract_quotes(tab[i]);
+		t_tab = expand_process(tab[i], env);
 		j = 0;
 		while (t_tab[j])
 		{
@@ -79,7 +79,7 @@ char	**expands(char **tab, t_env_list *env)
 
 	i = -1;
 	k = 0;
-	new_tab = malloc(sizeof(char *) * (sizer(tab) + 2));
+	new_tab = malloc(sizeof(char *) * (sizer(tab, env) + 1));
 	if (new_tab == NULL)
 		return (0);
 	while (tab[++i])
