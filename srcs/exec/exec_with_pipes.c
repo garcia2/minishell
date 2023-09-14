@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_with_pipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 15:06:58 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:37:01 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,10 @@ int	exec_ppx_cmd(t_pipex *pipex, t_cmd_table *cmd_tab,
 t_env_list **env, t_cmd_table *cmd_table_save)
 {
 	if (ft_dup(pipex, pipex->pid) == 0)
-	{
-		print_error("ERROR: PROBLEM WITH FT_DUP\n");
 		crit_exit(cmd_table_save, env, pipex, 1);
-	}
 	if (cmd_tab->infile_fd < 0 || cmd_tab->outfile_fd < 0)
 	{
-		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
+		perror("minishell");
 		crit_exit(cmd_table_save, env, pipex, 1);
 	}
 	if (cmd_tab->cmd == NULL || cmd_tab->cmd[0] == NULL)
@@ -46,10 +43,7 @@ t_env_list **env, t_cmd_table *cmd_table_save)
 		crit_exit(cmd_table_save, env, pipex, 0);
 	}
 	if (dup_files(cmd_tab) == 0)
-	{
-		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
 		crit_exit(cmd_table_save, env, pipex, 1);
-	}
 	simple_exec(cmd_tab, env, pipex, cmd_table_save);
 	return (1);
 }

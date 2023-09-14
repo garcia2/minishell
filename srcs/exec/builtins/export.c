@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:23 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 12:06:15 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:37:45 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	export(t_env_list **env, char **args)
 			if (export_check_args(args[i]))
 			{
 				if (export_add_var(env, args[i]) == 0)
-					return (printf("Problem with export\n"), 0);
+					return (0);
 			}
 			else
 				print_export_wrong_arg_error(args[i]);

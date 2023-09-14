@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:00:04 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 20:26:56 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:31:19 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	main(int argc, char **argv, char **envp)
 	t_env_list	*env;
 
 	if (argc != 1)
-		return (print_error("ERROR: NO ARGS REQUIRED\n"), 1);
+		return (1);
 	(void) argv;
 	env = parse_env(envp);
 	if (env == NULL)
-		return (print_error("ERROR: PROBLEM WITH ENV PARSING\n"), 2);
+		return (2);
 	shlvl_increment(env);
 	launcher(&env);
 	env_lst_clear(&env);

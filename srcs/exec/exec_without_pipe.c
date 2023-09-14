@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 22:25:31 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/14 15:08:21 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:37:25 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	fork_without_pipe(t_cmd_table *cmd_table, t_env_list **env, int cnt)
 	{
 		if (dup_files(cmd_table) == 0)
 		{
-			print_error("ERROR: PROBLEM WITH DUP_FILES\n");
 			perror(NULL);
 			crit_exit(cmd_table, env, NULL, 1);
 		}
@@ -43,8 +42,7 @@ void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env)
 	cnt = 0;
 	if (cmd_table->infile_fd < 0 || cmd_table->outfile_fd < 0)
 	{
-		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
-		perror(NULL);
+		perror("minishell");
 		return ;
 	}
 	if (cmd_table->cmd == NULL || cmd_table->cmd[0] == NULL)

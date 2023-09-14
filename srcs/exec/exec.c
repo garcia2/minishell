@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 23:01:31 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:30:58 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_pipex *pipex, t_cmd_table *save)
 	env_tab = get_env_tab(*env);
 	if (env_tab == NULL)
 	{
-		print_error("PROBLEM WITH GET_ENV_TAB");
 		crit_exit(save, env, NULL, 1);
 	}
 	while (tmp)
