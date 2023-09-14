@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:33:22 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/27 15:14:25 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:22:53 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	pwd_cd(t_cmd_table *cmd_table, t_env_list *env)
 		return (1);
 	}
 	else if (ft_strcmp(cmd_table->cmd[0], "cd") == 0 && cmd_table->cmd[2])
+	{
 		printf("Minishell: cd: too many arguments\n");
+		g_error = 1;
+	}
 	else if (!cmd_table->cmd[2] && ft_strcmp(cmd_table->cmd[0], "cd") == 0)
 	{
 		if (change_directory(cmd_table->cmd[1], env) == 2)
