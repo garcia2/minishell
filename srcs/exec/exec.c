@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 16:56:06 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:23:21 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_pipex *pipex, t_cmd_table *cmd_table_save)
 	return (1);
 }
 
-void	simple_exec(t_cmd_table *cmd_table, t_env_list **env)
+void	simple_exec(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd_table *save)
 {
 	char		**env_tab;
 	t_cmd_table	*tmp;
@@ -48,13 +48,13 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list **env)
 	if (set_command_path(cmd_table, *env) == 0)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
-		crit_exit(cmd_table, env, NULL, 127);
+		crit_exit(save, env, pipex, 127);
 	}
 	env_tab = get_env_tab(*env);
 	if (env_tab == NULL)
 	{
 		print_error("PROBLEM WITH GET_ENV_TAB");
-		crit_exit(cmd_table, env, NULL, 1);
+		crit_exit(save, env, NULL, 1);
 	}
 	while (tmp)
 	{
@@ -64,8 +64,9 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list **env)
 	if (execve(cmd_table->cmd[0], cmd_table->cmd, env_tab) == -1)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
-		crit_exit(cmd_table, env, NULL, 127);
+		crit_exit(save, env, pipex, 127);
 	}
+		
 }
 
 void	do_exec(t_cmd_table *cmd_table, t_env_list **env)

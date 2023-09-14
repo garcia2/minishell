@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_with_pipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 10:52:19 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:06:58 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_env_list **env, t_cmd_table *cmd_table_save)
 		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
 		crit_exit(cmd_table_save, env, pipex, 1);
 	}
-	simple_exec(cmd_tab, env);
+	simple_exec(cmd_tab, env, pipex, cmd_table_save);
 	return (1);
 }
 
