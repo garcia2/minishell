@@ -6,7 +6,7 @@
 /*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:11:56 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/24 12:22:37 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:19:44 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,15 @@ int	change_directory(char *cmd, t_env_list *env)
 	if (chdir(path) == -1)
 	{
 		if (access(path, F_OK) == 0)
+		{
 			printf("Minishell: cd: Not a directory\n");
+			g_error = 1;
+		}
 		else
+		{
 			printf("Minishell: cd: No such file or directory\n");
+			g_error = 1;
+		}
 		return (2);
 	}
 	change_oldpwd(env);

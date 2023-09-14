@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/29 13:21:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:48:10 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 			break ;
 		}
 		write (fd, readed_line, ft_strlen(readed_line));
+		write (fd, "\n", 1);
 		free(readed_line);
 	}
 	return (1);
