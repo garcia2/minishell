@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:11:56 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 16:45:08 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:45:39 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	change_oldpwd(t_env_list *env)
 		env = env->next;
 	while (env_tmp && ft_strcmp(env_tmp->key, "PWD"))
 		env_tmp = env_tmp->next;
+	if (env == NULL || env_tmp == NULL)
+		return (0);
 	if (env->value)
 		free(env->value);
 	env->value = ft_strdup(env_tmp->value);

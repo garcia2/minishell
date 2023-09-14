@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 17:09:56 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:25:51 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	minishell(t_env_list **env)
 		return (2);
 	if (g_error != 42)
 		do_exec(cmd_table, env);
+	else
+		g_error = 130;
 	clear_lst(&cmd_table);
 	delete_file();
 	return (0);

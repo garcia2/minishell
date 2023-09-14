@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 13:48:10 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:28:05 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 	{
 		readed_line = readline(">");
 		if (check_signal(readed_line, fd_dup, fd) == 0)
-			return (close(fd_dup), 0);
+			return (init_signal(), close(fd_dup), 0);
 		if (!readed_line)
 			break ;
 		if (ft_strcmp(readed_line, limiter) == 0)
@@ -59,6 +59,13 @@ void	fd_gestion(t_cmd_table *cmd_table, int fd, char *temp_file_name)
 	free(temp_file_name);
 }
 
+int	here_doc_ctrlc(char *temp_file_name)
+{
+	free(temp_file_name);
+	printf("\n");
+	return (0);
+}
+
 int	here_doc_logic(t_cmd_table *cmd_table, char *limiter)
 {
 	int		i;
@@ -77,12 +84,12 @@ int	here_doc_logic(t_cmd_table *cmd_table, char *limiter)
 		nb = ft_itoa(i++);
 		temp_file_name = ft_strjoin(".temp_file_tmp", nb);
 		if (temp_file_name == NULL)
-			return (write(1, "Error : can't create file\n", 27), 0);
+			return (free(nb), write(1, "Error : can't create file\n", 27), 0);
 		free(nb);
 	}
 	fd = open(temp_file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (write_in_file(limiter, fd, readed_line) == 0)
-		return (0);
+		return (here_doc_ctrlc(temp_file_name));
 	fd_gestion(cmd_table, fd, temp_file_name);
 	return (1);
 }

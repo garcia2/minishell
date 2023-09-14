@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:13:25 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 12:39:25 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 19:00:10 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	unset(t_env_list **env, char	**args)
 	while (args[i] != NULL)
 	{
 		pop = env_lst_pop(env, args[i]);
-		env_lst_print(pop);
 		env_lst_clear(&pop);
 		i++;
 	}
