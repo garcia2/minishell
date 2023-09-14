@@ -58,7 +58,7 @@ int	exit_value(char **lex)
 	int		err_code;
 
 	err_code = ft_atoi(lex[1]);
-	printf("ft_atoi : %d\n", err_code);
+	printf("atoi : %d\n", err_code);
 	if (!lex[1])
 		return (free(lex), 2);
 	else if (lex[1] && lex[2])

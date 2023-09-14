@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_delete_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:15:20 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/13 23:04:43 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/14 16:59:47 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	get_size_copy_checker(char *str)
 	quote = 0;
 	if (is_quote(str[0]))
 		quote++;
-	if (is_quote(str[strlen(str) - 1]))
+	if (is_quote(str[ft_strlen(str) - 1]))
 		quote++;
-	size = (strlen(str) - quote);
+	size = (ft_strlen(str) - quote);
 	return (size);
 }
 

@@ -41,12 +41,16 @@ int	change_directory(char *cmd, t_env_list *env)
 	{
 		if (access(path, F_OK) == 0)
 		{
-			print_error("Minishell: cd: Not a directory\n");
+			print_error("Minishell: cd: ");
+			print_error(path);
+			print_error(": Not a directory\n");
 			g_error = 1;
 		}
 		else
 		{
-			print_error("Minishell: cd: No such file or directory\n");
+			print_error("Minishell: cd: ");
+			print_error(path);
+			print_error(": No such file or directory\n");
 			g_error = 1;
 		}
 		return (2);
