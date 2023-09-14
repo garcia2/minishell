@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:32:27 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 17:09:48 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:34:57 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	check_pipe(char **lex)
 	}
 	return (1);
 }
-
 
 static int	check_delimiters(char **lex)
 {

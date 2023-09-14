@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:08:41 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 14:39:04 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:33:55 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	f_expand_command_table(t_cmd_table *cmd_table, t_env_list *env)
 			free_lexer(cmd_table->cmd);
 			cmd_table->cmd = expanded_cmd;
 		}
-		cmd_table = cmd_table->next;	
+		cmd_table = cmd_table->next;
 	}
 }
 

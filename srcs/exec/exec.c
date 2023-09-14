@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 15:23:21 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:32:58 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_pipex *pipex, t_cmd_table *cmd_table_save)
 	return (1);
 }
 
-void	simple_exec(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd_table *save)
+void	simple_exec(t_cmd_table *cmd_table, t_env_list **env,
+t_pipex *pipex, t_cmd_table *save)
 {
 	char		**env_tab;
 	t_cmd_table	*tmp;
@@ -65,8 +66,7 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);
 		crit_exit(save, env, pipex, 127);
-	}
-		
+	}		
 }
 
 void	do_exec(t_cmd_table *cmd_table, t_env_list **env)
