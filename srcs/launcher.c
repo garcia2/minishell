@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launcher.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 13:02:58 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 14:45:01 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:09:56 by jileroux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_cmd(char *command)
 		write (1, "exit\n", 5);
 		return (2);
 	}
-	if (strcmp(command, "\0") == 0)
+	if (ft_strcmp(command, "\0") == 0)
 		return (1);
 	add_history(command);
 	return (0);
@@ -59,7 +59,6 @@ int	launcher(t_env_list **env)
 	init_signal();
 	while (1)
 	{
-		//g_error = 0;
 		if (minishell(env) == 2)
 			return (1);
 	}
