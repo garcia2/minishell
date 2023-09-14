@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 22:25:31 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/13 22:43:19 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:51:29 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	fork_without_pipe(t_cmd_table *cmd_table, t_env_list **env, int cnt)
 			crit_exit(cmd_table, env, NULL, 1);
 		}
 		init_signal2();
-		simple_exec(cmd_table, env);
+		simple_exec(cmd_table, env, NULL, cmd_table);
 	}
 	else
 	{
