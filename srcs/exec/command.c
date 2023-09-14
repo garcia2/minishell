@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:57:37 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/04/21 16:47:09 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:08:23 by nicolas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	set_command_path(t_cmd_table *cmd_table, t_env_list *env)
 	char	*command_path;
 	char	**paths;
 
+	if (access(cmd_table->cmd[0], X_OK) == 0)
+		return (1);
 	paths = get_paths(env);
 	if (paths == NULL)
 		return (0);

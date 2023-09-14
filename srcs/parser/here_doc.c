@@ -34,7 +34,7 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 	{
 		readed_line = readline(">");
 		if (check_signal(readed_line, fd_dup, fd) == 0)
-			return (0);
+			return (close(fd_dup), 0);
 		if (!readed_line)
 			break ;
 		if (ft_strcmp(readed_line, limiter) == 0)
@@ -46,6 +46,7 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 		write (fd, "\n", 1);
 		free(readed_line);
 	}
+	close(fd_dup);
 	return (1);
 }
 
