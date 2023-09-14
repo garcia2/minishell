@@ -6,7 +6,7 @@
 /*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 15:52:50 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:23:21 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd
 		print_command_not_found_error(cmd_table->cmd[0]);
 		crit_exit(save, env, pipex, 127);
 	}
+		
 }
 
 // void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env)
