@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 22:25:31 by nicolas           #+#    #+#             */
-/*   Updated: 2023/09/14 23:37:25 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:49:25 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env)
 	if (cmd_table->infile_fd < 0 || cmd_table->outfile_fd < 0)
 	{
 		perror("minishell");
+		g_error = 1;
 		return ;
 	}
 	if (cmd_table->cmd == NULL || cmd_table->cmd[0] == NULL)
