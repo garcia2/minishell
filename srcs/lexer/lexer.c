@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/06/16 14:20:46 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:33:24 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ char	**lexer(char *str)
 			free_lexer(lex), NULL);
 	if (check_lexer(lex) == 0)
 		return (free_lexer(lex), get_empty_lexer());
+		//return (free_lexer(lex), NULL);
 	return (lex);
 }

@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/29 13:21:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 13:47:16 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 	{
 		readed_line = readline(">");
 		if (check_signal(readed_line, fd_dup, fd) == 0)
-			return (0);
+			return (close(fd_dup), 0);
 		if (!readed_line)
 			break ;
 		if (ft_strcmp(readed_line, limiter) == 0)
@@ -45,6 +45,7 @@ int	write_in_file(char *limiter, int fd, char *readed_line)
 		write (fd, readed_line, ft_strlen(readed_line));
 		free(readed_line);
 	}
+	close(fd_dup);
 	return (1);
 }
 
