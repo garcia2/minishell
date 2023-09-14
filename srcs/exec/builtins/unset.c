@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:13:25 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 22:35:33 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/14 12:39:25 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	unset(t_env_list **env, char	**args)
 		env_lst_clear(&pop);
 		i++;
 	}
+	g_error = 0;
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 23:35:38 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/14 12:41:35 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int			is_builtin(char *str);
 int			get_pwd(void);
 int			change_directory(char *cmd, t_env_list *env);
 int			export(t_env_list **env, char **args);
+int			export_check_args(char	*args);
 void		print_export_wrong_arg_error(char *arg);
 int			unset(t_env_list **env, char	**args);
 void		do_echo(t_cmd_table *cmd_table);

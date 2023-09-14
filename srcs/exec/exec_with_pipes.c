@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_with_pipes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:34:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 22:21:24 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/14 10:52:19 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list **env)
 	pipex = get_pipex(count_pipe(cmd_table));
 	if (pipex == NULL)
 		return ;
-	pipex_process(pipex, cmd_table, env);
+	g_error = pipex_process(pipex, cmd_table, env);
 	free_pipex(pipex);
 }

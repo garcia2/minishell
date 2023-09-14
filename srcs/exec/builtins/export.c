@@ -6,13 +6,13 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:34:23 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 18:22:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:06:15 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	export_check_args(char	*args)
+int	export_check_args(char	*args)
 {
 	int	i;
 

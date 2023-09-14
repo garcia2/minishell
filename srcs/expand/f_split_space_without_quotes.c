@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_split_space_without_quotes.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:01:50 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 23:18:49 by nicolas          ###   ########.fr       */
+/*   Updated: 2023/09/14 09:56:54 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	get_nb_spaces_without_quotes(char *str)
 	int	quote;
 	int	nb_spaces;
 
+	quote = 'o';
 	if (ft_strlen(str) == 0)
 		return (0);
 	is_in_quote = 0;
@@ -88,6 +89,7 @@ int	get_len_next_word(char *str, int i)
 
 	if (str[i] == '\0')
 		return (0);
+	quote = 'o';
 	is_in_quote = 0;
 	if (is_quote(str[i]))
 	{
