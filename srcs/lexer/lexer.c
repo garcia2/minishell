@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:06:56 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 14:33:24 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:01:04 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,15 @@ char	**lexer(char *str)
 
 	nb_token = count_token(str);
 	if (nb_token < 0)
-		return (print_error("ERROR : PROBLEM WITH COUNT_TOKEN\n")
-			, NULL);
+		return (get_empty_lexer());
 	lex = ft_calloc(nb_token + 1, sizeof(char *));
-	if (lex == NULL)
+	if (lex == get_empty_lexer())
 		return (print_error("ERROR : PROBLEM WITH MALLOC OF LEX\n")
 			, NULL);
 	if (split_lexer(lex, str) == 0)
 		return (print_error("ERROR : PROBLEM WITH SPLIT_LEXER\n"),
-			free_lexer(lex), NULL);
+			free_lexer(lex), get_empty_lexer());
 	if (check_lexer(lex) == 0)
 		return (free_lexer(lex), get_empty_lexer());
-		//return (free_lexer(lex), NULL);
 	return (lex);
 }

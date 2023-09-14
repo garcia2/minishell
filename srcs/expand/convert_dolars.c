@@ -6,15 +6,12 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:52:16 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 10:48:56 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:56:26 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Jai supr le ft_strlen==0 dans le deuxieme. je sais plus si ca servait
-*/
 static int	convert_dolars_process(char **lex, int i, t_env_list *env)
 {
 	char	*temp_str;

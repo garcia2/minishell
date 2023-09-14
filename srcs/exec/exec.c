@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 11:25:52 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:56:06 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,45 +67,6 @@ void	simple_exec(t_cmd_table *cmd_table, t_env_list **env)
 		crit_exit(cmd_table, env, NULL, 127);
 	}
 }
-
-// void	do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env)
-// {
-// 	int	pid;
-// 	int	cnt;
-
-// 	cnt = 0;
-// 	if (cmd_table->infile_fd < 0 || cmd_table->outfile_fd < 0)
-// 	{
-// 		print_error("ERROR: PROBLEM WITH DUP_FILES\n");
-// 		perror(NULL);
-// 		return ;
-// 	}
-// 	if (cmd_table->cmd == NULL || cmd_table->cmd[0] == NULL)
-// 		return ;
-// 	if (is_builtin(cmd_table->cmd[0]))
-// 	{
-// 		exec_builtin(cmd_table, env, NULL, cmd_table);
-// 		return ;
-// 	}
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		if (dup_files(cmd_table) == 0)
-// 		{
-// 			print_error("ERROR: PROBLEM WITH DUP_FILES\n");
-// 			perror(NULL);
-// 			crit_exit(cmd_table, env, NULL, 1);
-// 		}
-// 		init_signal2();
-// 		simple_exec(cmd_table, env);
-// 	}
-// 	else
-// 	{
-// 		signal(SIGINT, SIG_IGN);
-// 		child_exit(pid, &cnt);
-// 		init_signal();
-// 	}
-// }
 
 void	do_exec(t_cmd_table *cmd_table, t_env_list **env)
 {

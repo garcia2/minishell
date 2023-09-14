@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:39:13 by jileroux          #+#    #+#             */
-/*   Updated: 2023/04/26 16:45:41 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:04:59 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_args(char **lex)
 {
-	if (lex[1][0] != '0' && atoi(lex[1]) == 0)
+	if (lex[1][0] != '0' && ft_atoi(lex[1]) == 0)
 	{
 		print_error("minishell: exit: ");
 		print_error(lex[1]);
@@ -26,7 +26,7 @@ int	check_args(char **lex)
 
 int	check_digit(char **lex)
 {
-	if (lex[1][0] != '0' && atoi(lex[1]) == 0)
+	if (lex[1][0] != '0' && ft_atoi(lex[1]) == 0)
 	{
 		print_error("minishell: exit: ");
 		print_error(lex[1]);
@@ -57,8 +57,8 @@ int	exit_value(char **lex)
 {
 	int		err_code;
 
-	err_code = atoi(lex[1]);
-	printf("atoi : %d\n", err_code);
+	err_code = ft_atoi(lex[1]);
+	printf("ft_atoi : %d\n", err_code);
 	if (!lex[1])
 		return (free(lex), 2);
 	else if (lex[1] && lex[2])
@@ -72,7 +72,7 @@ int	exit_value(char **lex)
 		if (err_code == 2)
 			return (err_code);
 	}
-	err_code = atoi(lex[1]);
+	err_code = ft_atoi(lex[1]);
 	err_code = exit_calcul(err_code);
 	return (err_code);
 }

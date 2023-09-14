@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:48:56 by nicolas           #+#    #+#             */
-/*   Updated: 2023/03/15 16:11:58 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:02:13 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,3 @@ void	skip_token(char *str, int *i)
 		&& str[*i] != '\0')
 			(*i)++;
 }
-
-// void	skip_token(char *str, int *i)
-// {
-// 	while (!is_white_space(str[*i])
-// 		&& str[*i] != '\''
-// 		&& str[*i] != '"'
-// 		&& str[*i] != '|'
-// 		&& str[*i] != '\0')
-// 			(*i)++;
-// }

@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:32:27 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 14:48:21 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:09:48 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	print_delimiter_error(char *delimiter)
 	print_error("minishell: syntax error near unexpected token `");
 	print_error(delimiter);
 	print_error("'\n");
+	g_error = 2;
 }
 
 static int	check_pipe(char **lex)
