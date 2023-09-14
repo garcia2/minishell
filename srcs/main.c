@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:00:04 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 23:31:19 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/15 00:19:13 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	shlvl_increment(t_env_list *env)
 
 	while (env && ft_strcmp(env->key, "SHLVL"))
 		env = env->next;
+	if (env == NULL)
+		return (1);
 	value = ft_atoi(env->value);
 	free(env->value);
 	value++;
