@@ -26,7 +26,7 @@ static void	fork_without_pipe(t_cmd_table *cmd_table, t_env_list **env, int cnt)
 			crit_exit(cmd_table, env, NULL, 1);
 		}
 		init_signal2();
-		simple_exec(cmd_table, env, NULL);
+		simple_exec(cmd_table, env, NULL, cmd_table);
 	}
 	else
 	{

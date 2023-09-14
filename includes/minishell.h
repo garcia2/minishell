@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nicolas <nicolas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
 /*   Updated: 2023/09/14 15:07:41 by nigarcia         ###   ########.fr       */
@@ -116,7 +116,7 @@ int			exec_builtin(t_cmd_table *cmd_table, t_env_list **env,
 				t_pipex *pipex, t_cmd_table *cmd_table_save);
 void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list **env);
 void		do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env);
-void		simple_exec(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex);
+void		simple_exec(t_cmd_table *cmd_table, t_env_list **env, t_pipex *pipex, t_cmd_table *save);
 int			exec_ppx_cmd(t_pipex *pipex, t_cmd_table *cmd_tab,
 				t_env_list **env, t_cmd_table *cmd_table_save);
 void		crit_exit(t_cmd_table *cmd_tab, t_env_list **env,
