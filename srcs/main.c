@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:00:04 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 12:30:54 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:08:56 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	shlvl_increment(t_env_list *env)
 
 	while (env && ft_strcmp(env->key, "SHLVL"))
 		env = env->next;
-	value = atoi(env->value);
+	value = ft_atoi(env->value);
 	free(env->value);
 	value++;
 	env->value = ft_itoa(value);
@@ -38,7 +38,6 @@ int	main(int argc, char **argv, char **envp)
 	if (env == NULL)
 		return (print_error("ERROR: PROBLEM WITH ENV PARSING\n"), 2);
 	shlvl_increment(env);
-	add_history("cat .gitignore > infile | cat .gitignore > f1");
 	launcher(&env);
 	env_lst_clear(&env);
 	return (0);

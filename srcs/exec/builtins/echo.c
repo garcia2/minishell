@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 13:51:32 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 12:39:48 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:47:58 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	do_echo(t_cmd_table *cmd_table)
 				write(cmd_table->outfile_fd, &cmd_table->cmd[i][j], 1);
 				j++;
 			}
-			// write(cmd_table->outfile_fd, " ", 1);
 			i++;
 		}
 		write(cmd_table->outfile_fd, "\n", 1);

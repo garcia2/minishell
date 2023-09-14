@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:33:22 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 13:22:53 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:46:10 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	pwd_cd(t_cmd_table *cmd_table, t_env_list *env)
 	}
 	else if (ft_strcmp(cmd_table->cmd[0], "cd") == 0 && cmd_table->cmd[2])
 	{
-		printf("Minishell: cd: too many arguments\n");
+		print_error("Minishell: cd: too many arguments\n");
 		g_error = 1;
 	}
 	else if (!cmd_table->cmd[2] && ft_strcmp(cmd_table->cmd[0], "cd") == 0)
