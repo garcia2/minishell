@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 23:30:58 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/15 00:03:05 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ t_pipex *pipex, t_cmd_table *save)
 	check_command_path(cmd_table, env, pipex, save);
 	env_tab = get_env_tab(*env);
 	if (env_tab == NULL)
-	{
 		crit_exit(save, env, NULL, 1);
-	}
 	while (tmp)
 	{
 		check_fd_closed(tmp->outfile_fd);
@@ -70,6 +68,7 @@ t_pipex *pipex, t_cmd_table *save)
 	exec_check_fd_close();
 	if (execve(cmd_table->cmd[0], cmd_table->cmd, env_tab) == -1)
 	{
+		free_lexer(env_tab);
 		print_command_not_found_error(cmd_table->cmd[0]);
 		crit_exit(save, env, pipex, 127);
 	}		
