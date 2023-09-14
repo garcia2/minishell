@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:42:02 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 16:37:20 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:22:02 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	print_command_not_found_error(char *cmd)
 	print_error("minishell: ");
 	print_error(cmd);
 	print_error(": command not found\n");
+}
+
+void	print_no_such_file(char *cmd)
+{
+	print_error("minishell: ");
+	print_error(cmd);
+	print_error(": No such file or directory\n");
 }
 
 void	crit_exit(t_cmd_table *cmd_tab,

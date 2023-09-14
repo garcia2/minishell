@@ -26,6 +26,7 @@ EXEC_FILES = pwd_cd.c \
 			exec_without_pipe.c \
 			command.c \
 			dup_files.c \
+			exutil.c \
 			exec_error.c\
 			exec_end.c
 

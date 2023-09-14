@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 16:33:16 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 19:28:05 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:35:47 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	here_doc_logic(t_cmd_table *cmd_table, char *limiter)
 	}
 	fd = open(temp_file_name, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (write_in_file(limiter, fd, readed_line) == 0)
-		return (here_doc_ctrlc(temp_file_name));
+		return (close(fd), here_doc_ctrlc(temp_file_name));
 	fd_gestion(cmd_table, fd, temp_file_name);
 	return (1);
 }

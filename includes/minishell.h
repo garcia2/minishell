@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/03 15:25:26 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 17:35:38 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:22:52 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,13 @@ int			check_lexer(char **lex);
 void		child_exit(int pid, int *cnt);
 int			dup_files(t_cmd_table *cmd_table);
 int			pwd_cd(t_cmd_table *cmd_table, t_env_list *env);
+void		print_no_such_file(char *cmd);
 int			set_command_path(t_cmd_table *cmd_table, t_env_list *env);
 int			dup_files(t_cmd_table *cmd_table);
 int			exec_builtin(t_cmd_table *cmd_table, t_env_list **env,
 				t_pipex *pipex, t_cmd_table *cmd_table_save);
 void		do_exec_with_pipes(t_cmd_table *cmd_table, t_env_list **env);
+void		exec_check_fd_close(void);
 void		do_exec_without_pipe(t_cmd_table *cmd_table, t_env_list **env);
 void		simple_exec(t_cmd_table *cmd_table, t_env_list **env,
 				t_pipex *pipex, t_cmd_table *save);

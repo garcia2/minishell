@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:31:13 by nicolas           #+#    #+#             */
-/*   Updated: 2023/04/24 12:33:15 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 20:26:26 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ int	increment_shlvl(t_env_list *env)
 	return (set_env_by_key(env, "SHLVL", shlvl_str));
 }
 
+t_env_list	*basic_env(void)
+{
+	t_env_list	*env;
+
+	env = env_lstnew(ft_strdup("PATH"), ft_strdup("/bin"));
+	env_lst_add_back(&env, env_lstnew(ft_strdup("SHLVL"), ft_strdup("1")));
+	return (env);
+}
+
 t_env_list	*parse_env(char **envp)
 {
 	t_env_list	*env_lst;
@@ -63,6 +72,8 @@ t_env_list	*parse_env(char **envp)
 
 	env_lst = NULL;
 	i = 0;
+	if (envp[0] == NULL)
+		return (basic_env());
 	while (envp[i] != NULL)
 	{
 		cur = split_env(envp[i]);

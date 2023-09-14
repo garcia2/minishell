@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 19:17:25 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:31:45 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ t_pipex *pipex, t_cmd_table *cmd_table_save)
 	return (1);
 }
 
+void	check_command_path(t_cmd_table *cmd_table, t_env_list **env,
+	t_pipex *pipex, t_cmd_table *save)
+{
+	int	error;
+
+	error = set_command_path(cmd_table, *env);
+	if (error == 0)
+	{
+		print_command_not_found_error(cmd_table->cmd[0]);
+		crit_exit(save, env, pipex, 127);
+	}
+	else if (error == -1)
+	{
+		print_no_such_file(cmd_table->cmd[0]);
+		crit_exit(save, env, pipex, 127);
+	}
+}
+
 void	simple_exec(t_cmd_table *cmd_table, t_env_list **env,
 t_pipex *pipex, t_cmd_table *save)
 {
@@ -46,11 +64,7 @@ t_pipex *pipex, t_cmd_table *save)
 	t_cmd_table	*tmp;
 
 	tmp = cmd_table;
-	if (set_command_path(cmd_table, *env) == 0)
-	{
-		print_command_not_found_error(cmd_table->cmd[0]);
-		crit_exit(save, env, pipex, 127);
-	}
+	check_command_path(cmd_table, env, pipex, save);
 	env_tab = get_env_tab(*env);
 	if (env_tab == NULL)
 	{
@@ -62,6 +76,7 @@ t_pipex *pipex, t_cmd_table *save)
 		check_fd_closed(tmp->outfile_fd);
 		tmp = tmp->next;
 	}
+	exec_check_fd_close();
 	if (execve(cmd_table->cmd[0], cmd_table->cmd, env_tab) == -1)
 	{
 		print_command_not_found_error(cmd_table->cmd[0]);

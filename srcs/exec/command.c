@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 13:57:37 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 18:59:41 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:31:04 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int	set_command_path(t_cmd_table *cmd_table, t_env_list *env)
 	char	*command_path;
 	char	**paths;
 
+	if (cmd_table->cmd[0][ft_strlen(cmd_table->cmd[0]) - 1] == '.'
+		|| cmd_table->cmd[0][ft_strlen(cmd_table->cmd[0]) - 1] == '/')
+		return (-1);
 	if (access(cmd_table->cmd[0], X_OK) == 0)
 		return (1);
 	paths = get_paths(env);
