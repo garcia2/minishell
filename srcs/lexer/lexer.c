@@ -59,7 +59,7 @@ char	**lexer(char *str)
 	if (nb_token < 0)
 		return (get_empty_lexer());
 	lex = ft_calloc(nb_token + 1, sizeof(char *));
-	if (lex == NULL)
+	if (lex == get_empty_lexer())
 		return (print_error("ERROR : PROBLEM WITH MALLOC OF LEX\n")
 			, get_empty_lexer());
 	if (split_lexer(lex, str) == 0)
@@ -67,6 +67,5 @@ char	**lexer(char *str)
 			free_lexer(lex), get_empty_lexer());
 	if (check_lexer(lex) == 0)
 		return (free_lexer(lex), get_empty_lexer());
-		//return (free_lexer(lex), NULL);
 	return (lex);
 }

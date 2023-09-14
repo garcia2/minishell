@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 12:11:56 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 16:52:35 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:45:08 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	change_directory(char *cmd, t_env_list *env)
 {
 	char	*path;
 
-	(void)env;
 	path = cmd;
 	if (chdir(path) == -1)
 	{

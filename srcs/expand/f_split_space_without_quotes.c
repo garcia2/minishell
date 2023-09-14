@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 11:01:50 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 09:56:54 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:57:21 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,40 +99,6 @@ int	get_len_next_word(char *str, int i)
 	len = get_len_process(str, i, is_in_quote, quote);
 	return (len);
 }
-
-// int	get_len_next_word(char *str, int i)
-// {
-// 	int		is_in_quote;
-// 	char	quote;
-// 	int		j;
-
-// 	if (str[i] == '\0')
-// 		return (0);
-// 	is_in_quote = 0;
-// 	if (is_quote(str[i]))
-// 	{
-// 		is_in_quote = 1;
-// 		quote = str[i];
-// 	}
-// 	j = 1;
-// 	while (str[i + j] != '\0')
-// 	{
-// 		if (str[i + j] == ' ' && !is_in_quote)
-// 			return (j);
-// 		else if (is_quote(str[i + j]))
-// 		{
-// 			if (is_in_quote && str[i + j] == quote)
-// 				is_in_quote = 0;
-// 			else if (!is_in_quote)
-// 			{
-// 				is_in_quote = 1;
-// 				quote = str[i];
-// 			}
-// 		}
-// 		j++;
-// 	}
-// 	return (j);
-// }
 
 char	**split_spaces_witout_quotes(char *str)
 {

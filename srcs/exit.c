@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jileroux <jileroux@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:39:13 by jileroux          #+#    #+#             */
-/*   Updated: 2023/09/14 17:04:11 by jileroux         ###   ########.fr       */
+/*   Updated: 2023/09/14 17:04:59 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_args(char **lex)
 {
-	if (lex[1][0] != '0' && atoi(lex[1]) == 0)
+	if (lex[1][0] != '0' && ft_atoi(lex[1]) == 0)
 	{
 		print_error("minishell: exit: ");
 		print_error(lex[1]);
@@ -26,7 +26,7 @@ int	check_args(char **lex)
 
 int	check_digit(char **lex)
 {
-	if (lex[1][0] != '0' && atoi(lex[1]) == 0)
+	if (lex[1][0] != '0' && ft_atoi(lex[1]) == 0)
 	{
 		print_error("minishell: exit: ");
 		print_error(lex[1]);
