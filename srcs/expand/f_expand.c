@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 17:08:41 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/13 14:27:09 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:39:04 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,13 @@ void	f_expand_command_table(t_cmd_table *cmd_table, t_env_list *env)
 
 	while (cmd_table != NULL)
 	{
-		expanded_cmd = expands(cmd_table->cmd, env);
-		free_lexer(cmd_table->cmd);
-		cmd_table->cmd = expanded_cmd;
-		cmd_table = cmd_table->next;
+		if (cmd_table->cmd != NULL)
+		{
+			expanded_cmd = expands(cmd_table->cmd, env);
+			free_lexer(cmd_table->cmd);
+			cmd_table->cmd = expanded_cmd;
+		}
+		cmd_table = cmd_table->next;	
 	}
 }
 
@@ -77,6 +80,8 @@ char	**expands(char **tab, t_env_list *env)
 	char	**t_tab;
 	char	**new_tab;
 
+	if (tab == NULL)
+		return (NULL);
 	i = -1;
 	k = 0;
 	new_tab = malloc(sizeof(char *) * (sizer(tab, env) + 1));
@@ -87,10 +92,7 @@ char	**expands(char **tab, t_env_list *env)
 		t_tab = expand_process(tab[i], env);
 		j = -1;
 		while (t_tab[++j])
-		{
-			new_tab[k] = strdup(t_tab[j]);
-			k++;
-		}
+			new_tab[k++] = strdup(t_tab[j]);
 		free_lexer(t_tab);
 	}
 	new_tab[k] = NULL;
