@@ -6,7 +6,7 @@
 /*   By: nigarcia <nigarcia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 12:45:09 by nigarcia          #+#    #+#             */
-/*   Updated: 2023/09/14 21:31:45 by nigarcia         ###   ########.fr       */
+/*   Updated: 2023/09/14 23:01:31 by nigarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,7 @@ t_pipex *pipex, t_cmd_table *cmd_table_save)
 	else if (ft_strcmp(cmd_table->cmd[0], "env") == 0)
 		env_lst_print(*env);
 	else if (ft_strcmp(cmd_table->cmd[0], "exit") == 0)
-	{
-		if (pipex != NULL)
-			free_pipex(pipex);
-		else
-			write (1, "exit\n", 5);
-		env_lst_clear(env);
-		clear_lst(&cmd_table_save);
-		exit (g_error);
-	}
+		mini_exit(cmd_table, env, pipex, cmd_table_save);
 	return (1);
 }
 

@@ -36,7 +36,8 @@ BUILTINS_FILES = cd.c\
 				export.c\
 				export_error.c\
 				builtin_util.c\
-				unset.c
+				unset.c\
+				exit.c
 
 SRCS_FILES = main.c\
 			exit.c\
